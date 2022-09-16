@@ -26,4 +26,22 @@ public class ArraysPractice {
         }
         return max - min + 1;
     }
+
+    public static void modifyArray(int[] arr) {
+        int move = arr[0];
+        for (int i = 1; i < arr.length; i++) {
+            arr[i - 1] = arr[i];
+        }
+        arr[arr.length - 1] = move;
+    }
+
+    public static void reverseArray(int[] arr) {
+        // length / 2 is truncated (integer division).
+        for (int i = 0; i < arr.length / 2; i++) {
+            int a = arr[i];
+            arr[i] = arr[arr.length - 1 - i];
+            arr[arr.length - 1 - i] = a;
+        }
+    }
+
 }
