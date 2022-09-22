@@ -2,3 +2,5 @@
 for GA's 2022-23 honors CS seminar
 
 ## Authors
+
+Kathryn Xia
