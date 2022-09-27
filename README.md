@@ -12,5 +12,6 @@ for GA's 2022-23 honors CS seminar
 - emma 
 - Patricia von Oiste
 - Kathryn Xia
+- cass
 
 >>>>>>> 95363572c71c61b70c625799792cfaeccf3aee59
