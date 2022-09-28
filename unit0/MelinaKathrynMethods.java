@@ -53,6 +53,16 @@ return -1;
  
 }
  
+
+     public int melinaIndexOf(String s){
+        for(int i = 0; i < mainArray.length; i++){
+            if (mainArray[i] != null && mainArray[i].equals(s)){
+                return i;
+            }
+        }
+        // if that string does not exist within main array, return -1
+        return -1;
+    }
  
 
  
