@@ -70,6 +70,10 @@ public class ourList {
         return "invalid index";
     }
 
+    public int size(){
+        return mainArray.length;
+    }
+
     public static void main(String[] args){
         String[] arr = {"a", "b", "c", "d", "e"};
         arr.add("g");
