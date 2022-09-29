@@ -7,7 +7,7 @@ public class MelinaKathrynMethods{
 
 public static void main (String[] args){
  
-MelinaKathrynGetMethod list = new MelinaKathrynGetMethod();
+MelinaKathrynMethods list = new MelinaKathrynMethods();
  
 list.add("rat");
 list.add("bat");
@@ -24,11 +24,18 @@ System.out.println(list.get(0));
  
 System.out.println(list.get(6));
  
-System.out.println(list.indexOf("at"));
+System.out.println(list.kathrynIndexOf("at"));
  
-System.out.println(list.indexOf("rat"));
+System.out.println(list.melinaIndexOf("rat"));
  
-System.out.println(list.indexOf("not in array"));
+System.out.println(list.melinaIndexOf("not in array"));
+
+list.add(0, "cat");
+
+list.add(8, "rat");//this index does not exist
+
+System.out.println(Arrays.toString(list.mainArray));
+
  
 }
   
@@ -38,7 +45,7 @@ return mainArray[i]; //will have an out of bounds error if i is too large
    
 }
  
-public int indexOf (String s){
+public int kathrynIndexOf (String s){
  
 for (int i = 0; i < mainArray.length; i++){
   
@@ -89,6 +96,39 @@ else{//no space in main array
   
  
 }
+
+public boolean add (int i, String s){//assuming used doesn't insert it into an index that doesn't exist
+       // just creating a new array with one greater each time
+       int increase = 0;
+ 
+       String [] holderArray = new String[mainArray.length + 1];
+       for(int j = 0; j < mainArray.length; j++){
+            if (j == i){
+                 holderArray[j] = s;
+                 increase = 1;
+                 //continue;
+            }
+
+            //currI = j; 
+
+            // if (j > i){
+
+            //     currI = j++;
+              
+            // }
+
+             holderArray[j + increase] = mainArray[j];
+        
+           }
+           mainArray = holderArray;
+    logicalSize++;
+     return true;
+
 }
+  
+ 
+}
+
+
  
 
