@@ -78,7 +78,7 @@ public class MelinaKathrynMethods {
     return true;
   }
 
-  public boolean add(int i, String s) { //assuming used doesn't insert it into an index that doesn't exist
+  public boolean add(int i, String s) { //assuming user doesn't insert it into an index that doesn't exist
     // just creating a new array with one greater each time
     int increase = 0;
 
