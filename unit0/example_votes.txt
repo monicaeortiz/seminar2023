@@ -1,0 +1,11 @@
+// Example vote where plurality, IR, and Borda give different results.
+// "Ballot" format: 
+// Each row is an individual ballot, listed in order of preference from favorite to least favorite.
+// Each entry in each row is the name of a candidate.
+{
+    {"A", "B", "C"},
+    {"C", "A", "B"},
+    {"B", "A", "C"},
+    {"C", "A", "B"},
+    {"B", "A", "C"},
+}
