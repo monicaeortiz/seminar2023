@@ -9,3 +9,20 @@
     {"C", "A", "B"},
     {"B", "A", "C"},
 }
+
+//robyn and patricia test cases
+1. simple cases
+    int[][] rankings = {{3,2,4,1}, {1,4,3,2},{4,1,2,3}};
+    String [][] ballots = {{"C", "B","D","A"}, {"A", "D", "C","B"}, {"D","A", "B", "C"}};
+    for both of the rankings and ballots arrays, D will win for Borda Count and Instant Runoff.
+
+
+2. borda/IR give different winners
+    int[][] rankings = {{3,2,4,1},{1,4,2,3},{2,3,4,1}};
+    String [][] ballots = {{"C","B","D", "A"},{"A","D","B","C"},{"B","C","D","A"}}
+    in this case, for borda count which takes in rankings as the parameter, D wins since it has the lesat number of votes in the column. But, for IR B wins due to the elimination method
+
+3. tie
+    int[][] rankings = { {1,2}, {2,1}};
+    String [][] ballot = { {"A", "B"}, {"B","A"}};
+    in this case, the array is the ranking of the candidates, both the Borda Count and Instant runoff winners will be a tie. to get rid of this issue, we can create using a math.random() method to randomly choose a winner
