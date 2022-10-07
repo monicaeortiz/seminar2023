@@ -26,3 +26,82 @@
     int[][] rankings = { {1,2}, {2,1}};
     String [][] ballot = { {"A", "B"}, {"B","A"}};
     in this case, the array is the ranking of the candidates, both the Borda Count and Instant runoff winners will be a tie. to get rid of this issue, we can create using a math.random() method to randomly choose a winner
+
+//cass and emma's examples
+//one simple case (each row is one person's ballot with the candidates in order of preference)
+// borda count winner: c
+//IR winnner: c
+{
+    {"A","B,"C"},
+    {"C","B","A"},
+    {"C","A","B"},
+    {"B","C","A"}
+}
+//borda count != IR
+//each row is one person's ballot with the candidates in order of preference
+//borda count winner: B
+//IR winner: A
+{
+    {"A","B","C"},
+    {"A","B","C"},
+    {"A","B","C"},
+    {"B","C","A"},
+    {"B","C","A"}
+}
+// exact tie!
+//borda count winner: tie and randomly selected winner
+//IR winner: tie and randomly selected winner
+{
+    {"A","B","C"},
+    {"A","B","C"},
+    {"B","C","A"},
+    {"B","C","A"},
+    {"C","A","B"},
+    {"C","A","B"}
+}
+
+//TEK
+1. 
+//C is winner for instant runoff, C would win for borda count
+{
+{"B", "C", "A"},
+{"A", "C", "B"},
+{"C", "A", "B"},
+{"C", "B", "A"},
+
+};
+
+2. 
+//A would win for instant runoff, B for borda count
+//A would win immediately without any elimination
+{
+    {"A", "B", "C"},
+    {"A", "B", "C"},
+    {"B", "C", "A"},
+    {"B", "C", "A"},
+    {"A", "C", "A"},
+
+}
+
+{
+    //B would win for instant Runoff, requires elimination step
+    {"A", "C", "B"},
+    {"C", "B", "A"},
+    {"B", "C", "A"},
+    {"A", "B", "C"},
+    {"B", "C", "A"},
+
+}
+
+
+3. 
+//A and B would tie
+
+{
+    {"A", "B", "C"},
+    {"A", "B", "C"},
+    {"B", "A", "C"},
+    {"B", "A", "C"},
+
+}
+

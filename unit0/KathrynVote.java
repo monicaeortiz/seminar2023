@@ -54,7 +54,7 @@ public class KathrynVote{
 
     System.out.println(bordaCount(ts, tsSongs));
   }
-
+//work on this
   public static String bordaCount (int[][] votes, String[] categories) { //add up sum of each column
     int[] sums = new int[votes[1].length];
 
@@ -119,14 +119,16 @@ add completed row AL to my final AL<Al<String>>
 use both arrays maybe
 
 
-
+Have a Tally object for each
+take the ballot array, and add place to each tally object
  
   */
 
-  public static int[] countRankings (String[][] ballots, int ranking){
+  public static Tally instantRunoff (String[][] ballots, int ranking){
 
     //should i make a new object
-
+    //array list of student objects
+    //iterate through objects and add numbers to array
 
 
   }
