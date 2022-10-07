@@ -42,3 +42,48 @@
     {"C","A","B"},
     {"C","A","B"}
 }
+
+//TEK
+1. 
+//C is winner for instant runoff, C would win for borda count
+{
+{"B", "C", "A"},
+{"A", "C", "B"},
+{"C", "A", "B"},
+{"C", "B", "A"},
+
+};
+
+2. 
+//A would win for instant runoff, B for borda count
+//A would win immediately without any elimination
+{
+    {"A", "B", "C"},
+    {"A", "B", "C"},
+    {"B", "C", "A"},
+    {"B", "C", "A"},
+    {"A", "C", "A"},
+
+}
+
+{
+    //B would win for instant Runoff, requires elimination step
+    {"A", "C", "B"},
+    {"C", "B", "A"},
+    {"B", "C", "A"},
+    {"A", "B", "C"},
+    {"B", "C", "A"},
+
+}
+
+
+3. 
+//A and B would tie
+
+{
+    {"A", "B", "C"},
+    {"A", "B", "C"},
+    {"B", "A", "C"},
+    {"B", "A", "C"},
+
+}
