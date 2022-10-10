@@ -150,11 +150,15 @@ public static void convertArrays(String[][] ballots){
 
   }
 
-    //System.out.println(ballotTallies.get(i));
-
     for (int j = 0; j < ballots.length; j++){
 
       for (int k = 0; k < ballots[j].length; k ++){
+
+        // if((j == 0)&&(k==0)){
+
+        //   ballotTallies.add(new Tally(ballots[0][k], ballots[0].length));
+
+        // }
 
       for (int l = 0; l < ballotTallies.size(); l++){
 

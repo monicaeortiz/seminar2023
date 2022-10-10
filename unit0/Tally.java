@@ -15,7 +15,7 @@ ranks = new int[numOptions];
 
 }
 
-private int getNumRank(int place){
+public int getNumRank(int place){
 
     return ranks[place-1];
 }
@@ -28,7 +28,17 @@ return toString;
 
 }
 
-x
+public void raiseTally(int i){
+
+    ranks[i] ++;
+}
 
 
+
+// public Tally get(String name){
+
+//     return 
+
+
+// }
 }
