@@ -12,27 +12,27 @@ public class KathrynVote{
 
 
   public static void main(String[] args) {
-    int[][] votes = { { 2, 2, 2 }, { 1, 3, 3 }, { 0, 0, 4 } };
-    int[][] ts = {
-      { 3, 4, 2, 1 },
-      { 3, 1, 4, 2 },
-      { 1, 4, 2, 3 },
-      { 3, 2, 1, 4 },
-      { 2, 1, 3, 4 },
-      { 2, 1, 3, 4 },
-      { 1, 4, 2, 3 },
-      { 2, 3, 1, 4 },
-      { 1, 3, 2, 4 },
-    };
+  //   int[][] votes = { { 2, 2, 2 }, { 1, 3, 3 }, { 0, 0, 4 } };
+  //   int[][] ts = {
+  //     { 3, 4, 2, 1 },
+  //     { 3, 1, 4, 2 },
+  //     { 1, 4, 2, 3 },
+  //     { 3, 2, 1, 4 },
+  //     { 2, 1, 3, 4 },
+  //     { 2, 1, 3, 4 },
+  //     { 1, 4, 2, 3 },
+  //     { 2, 3, 1, 4 },
+  //     { 1, 3, 2, 4 },
+  //   };
 
-    String[] tsSongs = {
-    "You Belong With Me",
-    "All Too Well",
-    "Love Story",
-    "Fifteen",
-  };
+  //   String[] tsSongs = {
+  //   "You Belong With Me",
+  //   "All Too Well",
+  //   "Love Story",
+  //   "Fifteen",
+  // };
 
-  String[] tsBallots = {
+  String[][] tsBallots = {
     {"Fifteen", "Love Story", "You Belong With Me", "All Too Well (10 Minute Version)"}, 
     {"All Too Well (10 Minute Version)", "Fifteen", "You Belong With Me", "Love Story"}, 
     {"You Belong With Me", "Love Story", "Fifteen", "All Too Well (10 Minute Version)"}, 
@@ -43,6 +43,9 @@ public class KathrynVote{
     {"Love Story", "You Belong With Me", "All Too Well (10 Minute Version)", "Fifteen"}, 
     {"You Belong With Me", "Love Story", "All Too Well (10 Minute Version)", "Fifteen"}
 };
+
+
+convertArrays(tsBallots);
     /*
 
 222
@@ -52,7 +55,7 @@ public class KathrynVote{
 
 */
 
-    System.out.println(bordaCount(ts, tsSongs));
+    // System.out.println(bordaCount(ts, tsSongs));
   }
 //work on this
   public static String bordaCount (int[][] votes, String[] categories) { //add up sum of each column
@@ -124,15 +127,54 @@ take the ballot array, and add place to each tally object
  
   */
 
-  public static Tally instantRunoff (String[][] ballots, int ranking){
+//   public static Tally instantRunoff (String[][] ballots, int ranking){
 
-    //should i make a new object
-    //array list of student objects
-    //iterate through objects and add numbers to array
+//     ArrayList<Tally> ballotTallies = new
+
+//     //should i make a new object
+//     //array list of student objects
+//     //iterate through objects and add numbers to array
+
+
+//   }
+// }
+
+//find min for ballot object
+public static void convertArrays(String[][] ballots){
+
+  ArrayList<Tally> ballotTallies = new ArrayList<>();
+
+  for (int i = 0; i < ballots[0].length; i ++){
+
+    ballotTallies.add(new Tally(ballots[1][i], ballots[1].length));
+
+  }
+
+    //System.out.println(ballotTallies.get(i));
+
+    for (int j = 0; j < ballots.length; j++){
+
+      for (int k = 0; k < ballots[j].length; k ++){
+
+      for (int l = 0; l < ballotTallies.size(); l++){
+
+        if (ballots[j][k].equals((ballotTallies.get(l).name))){
+
+          ballotTallies.get(l).raiseTally(k);
+          
+        }
+
+      }
+    }
 
 
   }
+
+
+    System.out.println(ballotTallies);
+
+
+}
 }
 
-//find min for ballot object
-
+//don't want to write out all the ballots
