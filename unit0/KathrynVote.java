@@ -136,10 +136,10 @@ public class KathrynVote {
     System.out.println(instantRunoff(ballots3));
     System.out.println(instantRunoff(convertArrays(rankings3, categories1)));
 
-    cass and emma's examples
-    one simple case (each row is one person's ballot with the candidates in order of preference)
-    borda count winner: c
-    IR winnner: c
+    // cass and emma's examples
+    // one simple case (each row is one person's ballot with the candidates in order of preference)
+    // borda count winner: c
+    // IR winnner: c
     String[][] rankings4 = {
       { "A", "B", "C" },
       { "C", "B", "A" },
@@ -151,10 +151,10 @@ public class KathrynVote {
     System.out.println(instantRunoff(rankings4));
     System.out.println(recursiveInstantRunoff(rankings4));
 
-    borda count != IR
-    each row is one person's ballot with the candidates in order of preference
-    borda count winner: B
-    IR winner: A
+    // borda count != IR
+    // each row is one person's ballot with the candidates in order of preference
+    // borda count winner: B
+    // IR winner: A
     String[][] rankings5 = {
       { "A", "B", "C" },
       { "A", "B", "C" },
@@ -234,7 +234,7 @@ public class KathrynVote {
     System.out.println(bordaCount(rankings10));
     System.out.println(instantRunoff(rankings10));
   }
-  }
+  
 
   public static String bordaCount(int[][] votes, String[] categories) { //with int 2d array
     //technically don't need this method because I can convert the array, bur it is still goot to have around to double check
