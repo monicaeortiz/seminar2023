@@ -2,22 +2,25 @@ import java.util.*;
 
 public class Tally{
 
-public String name;
-public static int numItems = 0; 
-int[] ranks; 
-public int sum;
+private String name;
+private static int numItems = 0; 
+private int[] ranks; 
+private int sumRanks;
+private int votes;
+private static int totalVotes;
 
 
 public Tally (String name, int numOptions){
 
 this.name = name; 
 ranks = new int[numOptions];
+numItems++;
 
 }
 
 public int getNumRank(int place){
 
-    return ranks[place-1];
+    return ranks[place];
 }
 
 public String toString(){
@@ -31,14 +34,35 @@ return toString;
 public void raiseTally(int i){
 
     ranks[i] ++;
+   sumRanks += (i+1);
+   votes ++;
+   totalVotes++;
+}
+
+public int getSumRanks(){
+
+    return sumRanks;
 }
 
 
+public String getName(){
 
-// public Tally get(String name){
+return name;
 
-//     return 
+}
+
+public int getTotalVotes(){
+
+return totalVotes;
+
+}
 
 
-// }
+public int getVotes(){
+
+return votes;
+
+}
+
+
 }
