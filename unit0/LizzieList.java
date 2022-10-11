@@ -1,17 +1,21 @@
 import java.util.Arrays;
-public class ourList {
+public class LizzieList {
     //public so client can check datatype
     public String datatype = "String";
     //engineering component of course --> pros and cons of having big array
         //too big --> costly and takes up memory
         //too small --> not enough space
     //main array HAS to be private
-    private String[] mainArray = new String[5];
+    private String[] mainArray;
     //physcial size --> 20 (20 slots available)
     //logical size --> 0 (nothing is there)
     //private
     private int logicalSize = 0; 
     
+    public LizzieList(){
+        mainArray = new String[5];
+    }
+
     public boolean add(String s){
         //check if there is space in mainArray
             // add s to the end of mainArray
@@ -43,10 +47,14 @@ public class ourList {
         } else {
             String[] arr = new String[(int)((mainArray.length)*1.5)];
             for(int i = 0; i<mainArray.length; i++){
+                String temp = arr[i];
                 arr[i] = mainArray[i];
+                arr[i+1] = temp;
             }
+            String temp = mainArray[index];
             mainArray = arr;
             mainArray[index] = s;
+            mainArray[index+1] = temp;
         }
         logicalSize++;
         return true; 
@@ -70,15 +78,15 @@ public class ourList {
         return "invalid index";
     }
 
-<<<<<<< HEAD
     public int size(){
         return mainArray.length;
-=======
-    public String remove(int index) {
+    }
+
+     public String remove(int index) {
         // check if the given index is a valid index in the array (not larger than the length or negative)
         if (index>logicalSize||index<0) {
             // if not, return "-1"
-            return "-1";
+            return "invalid";
         }
         else {
             // saves the item that is to be removed in a String variable
@@ -90,20 +98,30 @@ public class ourList {
             // decrements the logical size of the array by one to signal that an item has been removed
             logicalSize--;
             // returns the item that was removed
-            return toeRemove;
+            return toRemove;
         }
->>>>>>> 57bb331b7b29e8e995d86416ba1314895eaf8dbd
+
+    }
+
+    public String toString(){
+        String toRet = Arrays.toString(mainArray);
+
+        return toRet;
     }
 
     public static void main(String[] args){
-        String[] arr = {"a", "b", "c", "d", "e"};
-        arr.add("g");
-        System.out.println(Arrays.toString(arr));
-        arr.add(5, "f");
-        System.out.println(Arrays.toString(arr));
+        LizzieList arr = new LizzieList();
+        arr.add("a");
+        arr.add("b");
+        arr.add("c");
+        arr.add("e");
+        System.out.println(arr);
+        
+        arr.add(3, "d");
+        System.out.println(arr);
 
-        arr.get(5);
-        System.out.println(Arrays.toString(arr));
+        arr.get(2);
+        System.out.println(arr);
     }
 
 }

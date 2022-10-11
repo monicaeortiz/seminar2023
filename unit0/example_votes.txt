@@ -1,0 +1,107 @@
+// Example vote where plurality, IR, and Borda give different results.
+// "Ballot" format: 
+// Each row is an individual ballot, listed in order of preference from favorite to least favorite.
+// Each entry in each row is the name of a candidate.
+{
+    {"A", "B", "C"},
+    {"C", "A", "B"},
+    {"B", "A", "C"},
+    {"C", "A", "B"},
+    {"B", "A", "C"},
+}
+
+//robyn and patricia test cases
+1. simple cases
+    int[][] rankings = {{3,2,4,1}, {1,4,3,2},{4,1,2,3}};
+    String [][] ballots = {{"C", "B","D","A"}, {"A", "D", "C","B"}, {"D","A", "B", "C"}};
+    for both of the rankings and ballots arrays, D will win for Borda Count and Instant Runoff.
+
+
+2. borda/IR give different winners
+    int[][] rankings = {{3,2,4,1},{1,4,2,3},{2,3,4,1}};
+    String [][] ballots = {{"C","B","D", "A"},{"A","D","B","C"},{"B","C","D","A"}}
+    in this case, for borda count which takes in rankings as the parameter, D wins since it has the lesat number of votes in the column. But, for IR B wins due to the elimination method
+
+3. tie
+    int[][] rankings = { {1,2}, {2,1}};
+    String [][] ballot = { {"A", "B"}, {"B","A"}};
+    in this case, the array is the ranking of the candidates, both the Borda Count and Instant runoff winners will be a tie. to get rid of this issue, we can create using a math.random() method to randomly choose a winner
+
+//cass and emma's examples
+//one simple case (each row is one person's ballot with the candidates in order of preference)
+// borda count winner: c
+//IR winnner: c
+{
+    {"A","B,"C"},
+    {"C","B","A"},
+    {"C","A","B"},
+    {"B","C","A"}
+}
+//borda count != IR
+//each row is one person's ballot with the candidates in order of preference
+//borda count winner: B
+//IR winner: A
+{
+    {"A","B","C"},
+    {"A","B","C"},
+    {"A","B","C"},
+    {"B","C","A"},
+    {"B","C","A"}
+}
+// exact tie!
+//borda count winner: tie and randomly selected winner
+//IR winner: tie and randomly selected winner
+{
+    {"A","B","C"},
+    {"A","B","C"},
+    {"B","C","A"},
+    {"B","C","A"},
+    {"C","A","B"},
+    {"C","A","B"}
+}
+
+//TEK
+1. 
+//C is winner for instant runoff, C would win for borda count
+{
+{"B", "C", "A"},
+{"A", "C", "B"},
+{"C", "A", "B"},
+{"C", "B", "A"},
+
+};
+
+2. 
+//A would win for instant runoff, B for borda count
+//A would win immediately without any elimination
+{
+    {"A", "B", "C"},
+    {"A", "B", "C"},
+    {"B", "C", "A"},
+    {"B", "C", "A"},
+    {"A", "C", "A"},
+
+}
+
+{
+    //B would win for instant Runoff, requires elimination step
+    {"A", "C", "B"},
+    {"C", "B", "A"},
+    {"B", "C", "A"},
+    {"A", "B", "C"},
+    {"B", "C", "A"},
+
+}
+
+
+3. 
+//A and B would tie
+
+{
+    {"A", "B", "C"},
+    {"A", "B", "C"},
+    {"B", "A", "C"},
+    {"B", "A", "C"},
+
+}
+
