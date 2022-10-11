@@ -136,10 +136,10 @@ public class KathrynVote {
     System.out.println(instantRunoff(ballots3));
     System.out.println(instantRunoff(convertArrays(rankings3, categories1)));
 
-    //cass and emma's examples
-    //one simple case (each row is one person's ballot with the candidates in order of preference)
-    // borda count winner: c
-    //IR winnner: c
+    cass and emma's examples
+    one simple case (each row is one person's ballot with the candidates in order of preference)
+    borda count winner: c
+    IR winnner: c
     String[][] rankings4 = {
       { "A", "B", "C" },
       { "C", "B", "A" },
@@ -149,11 +149,12 @@ public class KathrynVote {
 
     System.out.println(bordaCount(rankings4));
     System.out.println(instantRunoff(rankings4));
+    System.out.println(recursiveInstantRunoff(rankings4));
 
-    //borda count != IR
-    //each row is one person's ballot with the candidates in order of preference
-    //borda count winner: B
-    //IR winner: A
+    borda count != IR
+    each row is one person's ballot with the candidates in order of preference
+    borda count winner: B
+    IR winner: A
     String[][] rankings5 = {
       { "A", "B", "C" },
       { "A", "B", "C" },
@@ -232,6 +233,7 @@ public class KathrynVote {
 
     System.out.println(bordaCount(rankings10));
     System.out.println(instantRunoff(rankings10));
+  }
   }
 
   public static String bordaCount(int[][] votes, String[] categories) { //with int 2d array
@@ -322,7 +324,6 @@ take the ballot array, and add place to each tally object
 
       for (int i = 0; i < ranks.size(); i++) { //if any of the elements have the majority
         if (ranks.get(i).getNumRank(0) >= threshold) {
-          majority = true;
 
           return ranks.get(i).getName();
         }
@@ -339,6 +340,9 @@ take the ballot array, and add place to each tally object
     return ranks.get(0).getName(); //the last candidate left is the one who eins (elimination)
   }
 
+
+
+
   public static int findSmallest(int[] arr) { //returns index of the smallest number
     int index = 0; //
     int smallest = arr[0];
@@ -351,6 +355,37 @@ take the ballot array, and add place to each tally object
 
     return index;
   }
+
+  public static String recursiveInstantRunoff(String[][] arr) {
+
+    ArrayList<Tally> ranks = convertArrays(arr);
+    int[] sum = new int[ranks.size()];
+
+  if (ranks.size() == 1){
+
+    return ranks.get(0).getName();
+
+  }
+
+    int threshold = (arr.length + 1) / 2;;
+      for (int i = 0; i < ranks.size(); i++) { //if any of the elements have the majority
+      sum[i] = ranks.get(i).getNumRank(0);
+        if (ranks.get(i).getNumRank(0) >= threshold) {
+          return ranks.get(i).getName();
+        }
+
+      }
+
+      arr = remove(arr, ranks.get(findSmallest(sum)).getName()); //removing all occurences of the candidate with the least first place finishes
+      return (recursiveInstantRunoff(arr));
+
+  }
+
+
+
+
+
+  
 
   public static ArrayList<Tally> convertArrays(String[][] ballots) { //converting a 2d array to an array list of Tally objects.As said before, I want to try this again with a 2d array list
     ArrayList<Tally> ballotTallies = new ArrayList<>();
@@ -379,8 +414,9 @@ take the ballot array, and add place to each tally object
         alteredArr[i][j] = categories[options[i][j] - 1]; //each element of opstions corresponds to a category, but I had to add one because array indexes start at 0
       }
 
-      return alteredArr;
+    
     }
+      return alteredArr;
   }
 
   public static String[][] remove(String[][] ballots, String remove) { //was originally trying to make convertArrays an overloaded method that would ignore a particular candidate. I gave up after 2 hours, will try again in the future if I have the chance.
@@ -388,8 +424,8 @@ take the ballot array, and add place to each tally object
 
     ArrayList<ArrayList<String>> votes = new ArrayList<>(); //making a 2d String ArrayList
 
-    for (int i = 0; i < ballots.length; i++) {
-      ArrayList<String> temp = new ArrayList<String>(Arrays.asList(ballots[i])); //sinitializing an array list and setting the elements to those of an index of ballots
+    for (int k = 0; k < ballots.length; k++) {
+      ArrayList<String> temp = new ArrayList<String>(Arrays.asList(ballots[k])); //sinitializing an array list and setting the elements to those of an index of ballots
       temp.remove(remove); //remove all occurences (assuming one, no repeats) of the candidate to be removed
       votes.add(temp); //adding it to the array list of array lists
     }
@@ -398,8 +434,12 @@ take the ballot array, and add place to each tally object
       for (int j = 0; j < votes.get(i).size(); j++) {
         alteredArr[i][j] = votes.get(i).get(j);
       }
+        
     }
-
-    return alteredArr;
+  return alteredArr;
+ 
   }
 }
+  
+
+

@@ -9,7 +9,7 @@ private int sumRanks;
 private int votes;
 private static int totalVotes;
 
-//some of these instance variables are not used, I was going to use them fore additional methods, edge cases, etc. but ran out of time. 
+//some of these instance variables are not used, I was going to use them for additional methods, edge cases, etc. but ran out of time. 
 //Will add this to the long list of things I will do if I ever come back to modify this
 
 
