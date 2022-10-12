@@ -12,6 +12,7 @@ public class rankedChoiceElectionKET {
         //initial tests
             //borda count
         //array of arraylists; 4 canidates
+        System.out.println("initial tests: ");
         int[][] arr = {
                         {3, 4, 2, 1}, //
                         {3, 1, 4, 2},
@@ -28,6 +29,8 @@ public class rankedChoiceElectionKET {
 
         ArrayList<ArrayList<Integer>> votes = arrToAL(arr);
         System.out.print(votes);
+
+        System.out.println();
 
         System.out.println(bordaCount(votes, names));
             //instant runoff
@@ -46,11 +49,13 @@ public class rankedChoiceElectionKET {
         System.out.println(instantRunOff(rankings, letters));
         
 
-       String[] lettersBC = {"A", "B", "C"};
-
+        System.out.println("testing methods: ");
+        System.out.println("#1 borda count");
         //tests --> 
             //#1 (both have same winner) --> C is winner for instant runoff, C would win for borda count
         
+        String[] lettersBC = {"A", "B", "C"};
+
         String[][] forBothIR = {
                     {"B", "C", "A"},
                     {"A", "C", "B"},
@@ -60,9 +65,9 @@ public class rankedChoiceElectionKET {
         
         //borda count --> (didnt have time to make conversion method)
         int[][] forBothBC = {
-            {2, 3, 1},
-            {1, 3, 2},
             {3, 1, 2},
+            {1, 3, 2},
+            {2, 3, 1},
             {3, 2, 1}
         };
 
@@ -71,32 +76,36 @@ public class rankedChoiceElectionKET {
 
         System.out.println(bordaCount(forBothBCAL, lettersBC));
 
-        
+        System.out.println("#1 instant runoff");
+
         //instant runoff --> 
+        ArrayList<String> letters2 = new ArrayList<>(Arrays.asList("A", "B", "C"));
+
         ArrayList<ArrayList<String>> forBothIRAL = arrToALStrings(forBothIR);
         System.out.print(forBothIRAL);
 
-        System.out.println(instantRunOff(forBothIRAL, letters));
+        System.out.println(instantRunOff(forBothIRAL, letters2));
 
+        System.out.println("#2a borda count");
             //#2 -->A would win for instant runoff, B for borda count
                      
                 //A would win immediately (without any elimination)
 
         String[][] test2IR = {
-                    {"A", "B", "C"},
-                    {"A", "B", "C"},
-                    {"B", "C", "A"},
-                    {"B", "C", "A"},
-                    {"A", "C", "B"}
+                    {"A","B","C"},
+                    {"A","B","C"},
+                    {"A","B","C"},
+                    {"B","C","A"},
+                    {"B","C","A"}
                     };
         
         //borda count --> (didnt have time to make conversion method)
         int[][] test2BC = {
             {1, 2, 3},
             {1, 2, 3},
-            {2, 3, 1},
-            {2, 3, 1},
-            {1, 3, 2}
+            {1, 2, 3},
+            {3, 1, 2},
+            {3, 1, 2}
         };
 
         ArrayList<ArrayList<Integer>> test2BCAL = arrToAL(test2BC);
@@ -104,15 +113,20 @@ public class rankedChoiceElectionKET {
 
         System.out.println(bordaCount(test2BCAL, lettersBC));
 
-        
+        System.out.println("#2a instant runoff");
+
         //instant runoff --> 
+        ArrayList<String> letters3 = new ArrayList<>(Arrays.asList("A", "B", "C"));
+
         ArrayList<ArrayList<String>> test2IRAL = arrToALStrings(test2IR);
         System.out.print(test2IRAL);
 
-        System.out.println(instantRunOff(test2IRAL, letters));
+        System.out.println(instantRunOff(test2IRAL, letters3));
 
-            //B would win for instant Runoff, requires elimination step
+            //B would win for instant Runoff, requires elimination step, b win for borda
         
+        System.out.println("#2b borda count");
+
         String[][] test2BIR = {
                             {"A", "C", "B"},
                             {"C", "B", "A"},
@@ -125,9 +139,9 @@ public class rankedChoiceElectionKET {
         int[][] test2BBC = {
             {1, 3, 2},
             {3, 2, 1},
-            {2, 3, 1},
+            {3, 1, 2},
             {1, 2, 3},
-            {2, 3, 1}
+            {3, 1, 2}
         };
 
         ArrayList<ArrayList<Integer>> test2BBCAL = arrToAL(test2BBC);
@@ -135,15 +149,20 @@ public class rankedChoiceElectionKET {
 
         System.out.println(bordaCount(test2BBCAL, lettersBC));
 
-        
+        System.out.println("#2b instant runoff");
+
         //instant runoff --> 
+        ArrayList<String> letters4 = new ArrayList<>(Arrays.asList("A", "B", "C"));
+
         ArrayList<ArrayList<String>> test2BIRAL = arrToALStrings(test2BIR);
         System.out.print(test2BIRAL);
 
-        System.out.println(instantRunOff(test2BIRAL, letters));        
+        System.out.println(instantRunOff(test2BIRAL, letters4));        
 
-            //#3 --> tie
+            //#3 --> tie for instant runoff (picks b)
         
+        System.out.println("#3 borda count");
+
         String[][] tieIR = {
                     {"A", "B", "C"},
                     {"A", "B", "C"},
@@ -164,12 +183,15 @@ public class rankedChoiceElectionKET {
 
         System.out.println(bordaCount(tieBCAL, lettersBC));
 
+        System.out.println("#3 instant runoff");
         
         //instant runoff --> 
+        ArrayList<String> letters5 = new ArrayList<>(Arrays.asList("A", "B", "C"));
+
         ArrayList<ArrayList<String>> tieIRAL = arrToALStrings(tieIR);
         System.out.print(tieIRAL);
 
-        System.out.println(instantRunOff(tieIRAL, letters));
+        System.out.println(instantRunOff(tieIRAL, letters5));
 
 
     }
@@ -259,37 +281,53 @@ public class rankedChoiceElectionKET {
      
     public static String instantRunOff(ArrayList<ArrayList<String>> rankings, ArrayList<String> canidates){
         int majorityTheshold = (rankings.size()/2) +1;
+        //System.out.println(majorityTheshold);
         
         boolean notReach = true;
         String winner = "";
         while(notReach == true){
-        //array holding how many times each canidate is said
-        int[] count = new int[canidates.size()];
-        //set initial canidate with occuring least
-        int least = count[0];
-        //canidate least occuring (default)
-        String leastCanidate = "";
-            for(int i = 0; i<rankings.get(i).size(); i++){
+            //System.out.println("running through while loop");
+            //array holding how many times each canidate is said
+            int[] count = new int[canidates.size()];
+            //set initial canidate with occuring least
+            for(int i = 0; i<rankings.size(); i++){
+                //System.out.println("running through for loop");
+                //System.out.println(i);
                 //temp variable for canidate said to compare to canidate list; gets canidate in first column
                 String temp = rankings.get(i).get(0); 
+                //System.out.println(temp);
                 //increments the count of that canidate by 1
                 count[canidates.indexOf(temp)]++;
+                
             }
+            int least = count[0];
+            System.out.println(Arrays.toString(count));
+            //canidate least occuring (default)
+            String leastCanidate = canidates.get(0);
+            //looping through first column, but by row
+            //System.out.println("outside for loop");
             //compares all values in count
             for(int i = 0; i<canidates.size(); i++){
-                if(count[i]>=majorityTheshold){
-                    winner += canidates.get(i);
-                    notReach = false;
-                    break;
+                //System.out.println(count[i]);
+                if(count[i] >= majorityTheshold){
+                    //System.out.println("return");
+                    return canidates.get(i);
+                    //notReach = false;
+                    //break;
                 }
                 else{
+                    //System.out.println("else statement");
                     if(count[i]<least){
                         //sets the canidate with least votes
                         least = count[i];
-                        leastCanidate += canidates.get(i);
+                        //System.out.println(least);
+                        leastCanidate = canidates.get(i);
+                        //System.out.println(leastCanidate);
                     }
                 }
             }
+            //System.out.println("existed 2nd for loop");
+            //System.out.println(leastCanidate);
             //nested for loop removing least occuring canidate
             for(int i = 0; i<rankings.size(); i++){
                 for(int j = 0; j<rankings.get(i).size(); j++){
@@ -298,7 +336,9 @@ public class rankedChoiceElectionKET {
                     }
                 }
             }
+            //System.out.println(Arrays.asList(rankings));
             canidates.remove(leastCanidate);
+            //System.out.println(Arrays.asList(canidates));
             //break/return out of the while loop
         }
         return winner;
