@@ -1,0 +1,5 @@
+Bella 7.5 8.5 10.25 8 8.5
+Edward 10.5 11.5 12 11 10.75
+Jacob 8 8 8
+Jasper 6.5 8 9.25 8
+Rosalie 2.5 3
