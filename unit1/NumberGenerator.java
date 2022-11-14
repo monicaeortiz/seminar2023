@@ -12,7 +12,7 @@ public class NumberGenerator {
                     int startRow: the number you want your rows to start at (difference of firstInt and startRow CANNOT be greater than the row length)
                     int rowLength: length of Rrow
                     int[] bases: bases you want to conver to, 16 (hexadecimal) is the highest number, also bases obviously cannot be negative or 0, or 1
-                    String name: name of file you want to write to, relative or absolute, whatever works 
+                    String name: name of file you want to write to, relative or absolute, whatever works . Please include the file type in the name
                     )
 
     createNumVersion1CSV(
