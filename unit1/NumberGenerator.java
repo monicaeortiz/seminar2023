@@ -52,7 +52,6 @@ public class NumberGenerator {
     } else {
       int length = convertDec(lastInt, bases[findSmallest(bases)]).length();
       int rowValue = startRow - firstInt;
-      //int limit = (lastInt - startRow) / rowLength;
 
       for (int i = firstInt; i < lastInt; i += rowValue) {
         if (i == firstInt + rowValue) {
@@ -60,7 +59,6 @@ public class NumberGenerator {
         }
         for (int k = 0; k < bases.length; k++) {
           p.print(formatNicely(bases[k] + "", length));
-          //p.print(bases[k]);
           for (int j = i; j < i + rowValue; j++) {
             if (j > lastInt) {
               break;
@@ -142,7 +140,6 @@ public class NumberGenerator {
     } else {
       int length = convertDec(lastInt, bases[findSmallest(bases)]).length();
       String delimit = delimiter;
-      //int limit = (lastInt - startRow) / rowLength;
 
       for (int j = 0; j < bases.length; j++) {
         if (j == bases.length - 1) {
@@ -170,46 +167,6 @@ public class NumberGenerator {
       p.println();
     }
   }
-
-  //  public static void createNumVersion1CSV(int start, int end, int[] bases) throws FileNotFoundException{
-  //         PrintStream p = new PrintStream("generateNums2.csv");
-  //         String delimiter = "";
-
-  //         for (int i = start; i < end; i+=10){
-  //             for (int k = 0; k < bases.length; k++){
-  //             for (int j = i; j < i+10; j++){
-
-  //                     p.print(convertDec(j, bases[k]) + "  ");
-
-  //                 }
-  //                 p.println();
-
-  //             }
-  //             p.println();
-
-  //         }
-
-  //       p.close();
-
-  // }
-
-  // public static void ascendingNums(File f){
-
-  // }
-
-  // public static void checkAscendingDec(int dec){
-  //     Arraylist<Integer> digits = new ArrayList<>();
-  //     //int ones = dec%10;
-
-  //     while (dec > 0){
-  //         digits.add(0, num%10);
-  //         num = num / 10;
-  //     }
-  //     //hundreds, ten to the first, ten to the 2nd
-
-  // }
-
-  //public static void isAscending()
 
   public static String formatNicely(String s, int length) {
     int numSpaces = length - s.length();
@@ -266,7 +223,7 @@ public class NumberGenerator {
 
   public static int findSmallest(int[] arr) { //returns index of the smallest number
     int index = 0; //
-    int smallest = arr[0]; //starting eith the largest possible number
+    int smallest = arr[0]; //starting with the largest possible number
 
     for (int i = 0; i < arr.length; i++) {
       if (arr[i] < smallest) { //checking it element does not equal -1
