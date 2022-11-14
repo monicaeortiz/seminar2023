@@ -5,7 +5,6 @@ public class NumberGenerator {
 
   public static void main(String[] args) throws FileNotFoundException {
 
-
     /*
     all parameter values are decimal
     createNums(both Versions) ( 
@@ -105,7 +104,7 @@ public class NumberGenerator {
         int length = convertDec(lastInt, bases[k]).length();
 
         for (int i = firstInt; i < lastInt; i += rowValue) {
-          p.print(formatNicely(bases[k] + "", length));
+          p.print(formatNicely(bases[k] + "", (bases[k] + "").length() + 2));
 
           for (int j = i; j < i + rowValue; j++) {
             if (j > lastInt) {
@@ -233,6 +232,22 @@ public class NumberGenerator {
     for (int i = 0; i < arr.length; i++) {
       if (arr[i] < smallest) { //checking it element does not equal -1
         smallest = arr[i]; //updates each time a smaller number is found
+        index = i; //records index of smallest number
+      }
+    }
+
+    return index;
+  }
+
+
+  //didn't end up using this method, but I'm keeping it here
+    public static int findLargest(int[] arr) { //returns index of the smallest number
+    int index = 0; //
+    int largest = arr[0]; //starting with the largest possible number
+
+    for (int i = 0; i < arr.length; i++) {
+      if (arr[i] > largest) { //checking it element does not equal -1
+        largest = arr[i]; //updates each time a smaller number is found
         index = i; //records index of smallest number
       }
     }
