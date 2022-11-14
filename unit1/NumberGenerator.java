@@ -140,7 +140,6 @@ public class NumberGenerator {
     ) {
       p.print("You did not follow the instructions. How dare you");
     } else {
-      int length = convertDec(lastInt, bases[findSmallest(bases)]).length();
       String delimit = delimiter;
 
       for (int j = 0; j < bases.length; j++) {
