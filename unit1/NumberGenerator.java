@@ -17,7 +17,7 @@ public class NumberGenerator {
                     String name: name of file you want to write to, relative or absolute, whatever works . Please include the file type in the name
                     )
 
-    createNumVersion1CSV(
+    createNumCSVFormat(
                         int firstInt: see above
                         int lastInt: see above
                         int[] bases: see above
@@ -126,7 +126,7 @@ public class NumberGenerator {
     p.close();
   }
 
-  public static void createNumVersion1CSV(
+  public static void createNumCSVFormat(
     int firstInt,
     int lastInt,
     int[] bases,
