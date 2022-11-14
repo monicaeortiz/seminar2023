@@ -126,7 +126,7 @@ public class NumberGenerator {
     p.close();
   }
 
-  public static void createNumCSVFormat(
+  public static void createNumsCSVFormat(
     int firstInt,
     int lastInt,
     int[] bases,
