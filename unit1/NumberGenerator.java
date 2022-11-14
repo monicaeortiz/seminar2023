@@ -4,6 +4,8 @@ import java.util.*;
 public class NumberGenerator {
 
   public static void main(String[] args) throws FileNotFoundException {
+
+
     /*
     all parameter values are decimal
     createNums(both Versions) ( 
@@ -161,13 +163,15 @@ public class NumberGenerator {
           p.print(convertDec(i, bases[k]) + delimit);
         }
 
+        if (i == lastInt){
+          break;
+        }
+
         p.println();
       }
 
-      p.println();
     }
 
-    p.close();
   }
 
   public static String formatNicely(String s, int length) {
