@@ -166,6 +166,8 @@ public class NumberGenerator {
 
       p.println();
     }
+
+    p.close();
   }
 
   public static String formatNicely(String s, int length) {
