@@ -1,7 +1,10 @@
+import java.util.*;
+import java.io.*;
+
+
 public class WordCounterStarter {
 
   public static void main(String[] args) throws FileNotFoundException {
-    Scanner sc = new Scanner(new File("twilightTest.txt"));
   }
 
   /* Returns lowercase version of original word with all punctuation removed. */
