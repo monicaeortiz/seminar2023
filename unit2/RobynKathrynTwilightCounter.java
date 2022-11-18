@@ -17,6 +17,7 @@ public class RobynKathrynTwilightCounter {
             String line = fileScan.nextLine();
             Scanner lineScan = new Scanner(line);
             while (lineScan.hasNext()) {
+            
                 String curWord = lineScan.next(); //gets each word as a token
                 curWord = cleanUp(curWord); //removes punctuation from token
                 if (uniqueWords.indexOf(curWord) == -1) { //if the current word is unique
@@ -24,12 +25,14 @@ public class RobynKathrynTwilightCounter {
                     wordsCount.add(1); 
                 }
                 else {
-                    //find index of the word in wordsCount
-                    int index = uniqueWords.indexOf(curWord); 
-                    //get item at that index
-                    int currWordCount = wordsCount.get(index); 
-                    //increment that item 
-                    wordsCount.set(index, currWordCount+1); 
+                    // //find index of the word in wordsCount
+                    // int index = uniqueWords.indexOf(curWord); 
+                    // //get item at that index
+                    // int currWordCount = wordsCount.get(index); 
+                    // //increment that item 
+                    // wordsCount.set(index, currWordCount+1); 
+
+                    wordsCount.set(uniqueWords.indexOf(curWord), wordsCount.get(uniqueWords.indexOf(curWord))+1); 
                 }
             }
             lineScan.close(); 
@@ -39,23 +42,16 @@ public class RobynKathrynTwilightCounter {
         ArrayList<String> mostUsedWords = new ArrayList<String>();
         ArrayList<Integer> mostUsedWordsCounts = new ArrayList<Integer>();
 
-        for (int i=0; i<numWords; i++) {
-            int high = wordsCount.get(0); 
-            for (int j=0; j<wordsCount.size(); j++) {
-                int temp = wordsCount.get(j); 
-                if (temp>high) {
-                    high = temp;
-                }
-            }
+        for (int i = 0; i < numWords; i++) {
 
-            mostUsedWords.add(uniqueWords.get(wordsCount.indexOf(high))); 
-            mostUsedWordsCounts.add(high); 
-            uniqueWords.remove(wordsCount.indexOf(wordsCount.indexOf(high)));
-            wordsCount.remove(wordsCount.indexOf(high));
+            mostUsedWords.add(uniqueWords.get(findLargest(wordsCount)));
+            mostUsedWordsCounts.add(wordsCount.get(findLargest(wordsCount))); 
+            uniqueWords.remove(uniqueWords.get(findLargest(wordsCount)));
+            wordsCount.remove(wordsCount.get(findLargest(wordsCount)));
         }
-
         System.out.println("Top " + numWords + " most used words: " + mostUsedWords);
         System.out.println("  Their counts: " + mostUsedWordsCounts);
+    
     
     }
 
@@ -66,5 +62,18 @@ public class RobynKathrynTwilightCounter {
     }
 
 
-}
+    public static int findLargest(ArrayList<Integer> arr) { //returns index of the smallest number
+    int index = 0; //
+    int largest = arr.get(0); //starting with the largest possible number
 
+    for (int i = 0; i < arr.size(); i++) {
+      if (arr.get(i) > largest) { //checking it element does not equal -1
+        largest = arr.get(i); //updates each time a smaller number is found
+        index = i; //records index of smallest number
+      }
+    
+  }
+
+    return index;
+}
+}
