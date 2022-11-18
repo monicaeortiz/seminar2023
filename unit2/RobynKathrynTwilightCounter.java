@@ -49,7 +49,7 @@ public class RobynKathrynTwilightCounter {
             }
 
             mostUsedWords.add(uniqueWords.get(wordsCount.indexOf(high))); 
-            mostUsedWordsCounts.add(wordsCount.get(wordsCount.indexOf(high))); 
+            mostUsedWordsCounts.add(high); 
             uniqueWords.remove(wordsCount.indexOf(wordsCount.indexOf(high)));
             wordsCount.remove(wordsCount.indexOf(high));
         }
