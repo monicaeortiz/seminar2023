@@ -11,25 +11,25 @@ import java.util.*;
 public class KathrynVote {
 
   public static void main(String[] args) {
-    //   int[][] votes = { { 2, 2, 2 }, { 1, 3, 3 }, { 0, 0, 4 } };
-    int[][] ts = {
-      { 3, 4, 2, 1 },
-      { 3, 1, 4, 2 },
-      { 1, 4, 2, 3 },
-      { 3, 2, 1, 4 },
-      { 2, 1, 3, 4 },
-      { 2, 1, 3, 4 },
-      { 1, 4, 2, 3 },
-      { 2, 3, 1, 4 },
-      { 1, 3, 2, 4 },
-    };
+    // //   int[][] votes = { { 2, 2, 2 }, { 1, 3, 3 }, { 0, 0, 4 } };
+    // int[][] ts = {
+    //   { 3, 4, 2, 1 },
+    //   { 3, 1, 4, 2 },
+    //   { 1, 4, 2, 3 },
+    //   { 3, 2, 1, 4 },
+    //   { 2, 1, 3, 4 },
+    //   { 2, 1, 3, 4 },
+    //   { 1, 4, 2, 3 },
+    //   { 2, 3, 1, 4 },
+    //   { 1, 3, 2, 4 },
+    // };
 
-    String[] tsSongs = {
-      "You Belong With Me",
-      "All Too Well",
-      "Love Story",
-      "Fifteen",
-    };
+    // String[] tsSongs = {
+    //   "You Belong With Me",
+    //   "All Too Well",
+    //   "Love Story",
+    //   "Fifteen",
+    // };
 
     String[][] tsBallots = {
       {
@@ -88,53 +88,53 @@ public class KathrynVote {
       },
     };
 
-    //test cases
+    // //test cases
 
-    //robyn and patricia test cases
+    // //robyn and patricia test cases
 
-    //all tests had predicted output except foer #2 of Robyn and Patricia's
+    // //all tests had predicted output except foer #2 of Robyn and Patricia's
 
-    //1. simple cases
+    // //1. simple cases
 
-    int[][] rankings1 = { { 3, 2, 4, 1 }, { 1, 4, 3, 2 }, { 4, 1, 2, 3 } };
-    String[][] ballots1 = {
-      { "C", "B", "D", "A" },
-      { "A", "D", "C", "B" },
-      { "D", "A", "B", "C" },
-    };
-    String[] categories1 = { "A", "B", "C", "D" };
+    // int[][] rankings1 = { { 3, 2, 4, 1 }, { 1, 4, 3, 2 }, { 4, 1, 2, 3 } };
+    // String[][] ballots1 = {
+    //   { "C", "B", "D", "A" },
+    //   { "A", "D", "C", "B" },
+    //   { "D", "A", "B", "C" },
+    // };
+    // String[] categories1 = { "A", "B", "C", "D" };
 
-    System.out.println(bordaCount(rankings1, categories1));
-    System.out.println(bordaCount(convertArrays(rankings1, categories1)));
-    System.out.println(bordaCount(ballots1));
-    System.out.println(instantRunoff(ballots1));
-    System.out.println(instantRunoff(convertArrays(rankings1, categories1)));
+    // System.out.println(bordaCount(rankings1, categories1));
+    // System.out.println(bordaCount(convertArrays(rankings1, categories1)));
+    // System.out.println(bordaCount(ballots1));
+    // System.out.println(instantRunoff(ballots1));
+    // System.out.println(instantRunoff(convertArrays(rankings1, categories1)));
 
-    //2. borda/IR give different winners
-    //I got the same winners for both...
-    int[][] rankings2 = { { 3, 2, 4, 1 }, { 1, 4, 2, 3 }, { 2, 3, 4, 1 } };
-    String[][] ballots2 = {
-      { "C", "B", "D", "A" },
-      { "A", "D", "B", "C" },
-      { "B", "C", "D", "A" },
-    };
+    // //2. borda/IR give different winners
+    // //I got the same winners for both...
+    // int[][] rankings2 = { { 3, 2, 4, 1 }, { 1, 4, 2, 3 }, { 2, 3, 4, 1 } };
+    // String[][] ballots2 = {
+    //   { "C", "B", "D", "A" },
+    //   { "A", "D", "B", "C" },
+    //   { "B", "C", "D", "A" },
+    // };
 
-    System.out.println(bordaCount(rankings2, categories1));
-    System.out.println(bordaCount(convertArrays(rankings2, categories1)));
-    System.out.println(bordaCount(ballots2));
-    System.out.println(instantRunoff(ballots2));
-    System.out.println(instantRunoff(convertArrays(rankings2, categories1)));
+    // System.out.println(bordaCount(rankings2, categories1));
+    // System.out.println(bordaCount(convertArrays(rankings2, categories1)));
+    // System.out.println(bordaCount(ballots2));
+    // System.out.println(instantRunoff(ballots2));
+    // System.out.println(instantRunoff(convertArrays(rankings2, categories1)));
 
-    //3. tie
-    //both methods choose different winners, winner is selected by the order of the array
-    int[][] rankings3 = { { 1, 2 }, { 2, 1 } };
-    String[][] ballots3 = { { "A", "B" }, { "B", "A" } };
+    // //3. tie
+    // //both methods choose different winners, winner is selected by the order of the array
+    // int[][] rankings3 = { { 1, 2 }, { 2, 1 } };
+    // String[][] ballots3 = { { "A", "B" }, { "B", "A" } };
 
-    System.out.println(bordaCount(rankings3, categories1));
-    System.out.println(bordaCount(convertArrays(rankings3, categories1)));
-    System.out.println(bordaCount(ballots3));
-    System.out.println(instantRunoff(ballots3));
-    System.out.println(instantRunoff(convertArrays(rankings3, categories1)));
+    // System.out.println(bordaCount(rankings3, categories1));
+    // System.out.println(bordaCount(convertArrays(rankings3, categories1)));
+    // System.out.println(bordaCount(ballots3));
+    // System.out.println(instantRunoff(ballots3));
+    // System.out.println(instantRunoff(convertArrays(rankings3, categories1)));
 
     // cass and emma's examples
     // one simple case (each row is one person's ballot with the candidates in order of preference)
@@ -151,90 +151,91 @@ public class KathrynVote {
     System.out.println(instantRunoff(rankings4));
     System.out.println(recursiveInstantRunoff(rankings4));
 
-    // borda count != IR
-    // each row is one person's ballot with the candidates in order of preference
-    // borda count winner: B
-    // IR winner: A
-    String[][] rankings5 = {
-      { "A", "B", "C" },
-      { "A", "B", "C" },
-      { "A", "B", "C" },
-      { "B", "C", "A" },
-      { "B", "C", "A" },
-    };
+    // // borda count != IR
+    // // each row is one person's ballot with the candidates in order of preference
+    // // borda count winner: B
+    // // IR winner: A
+    // String[][] rankings5 = {
+    //   { "A", "B", "C" },
+    //   { "A", "B", "C" },
+    //   { "A", "B", "C" },
+    //   { "B", "C", "A" },
+    //   { "B", "C", "A" },
+    // };
 
-    System.out.println(bordaCount(rankings5));
-    System.out.println(instantRunoff(rankings5));
+    // System.out.println(bordaCount(rankings5));
+    // System.out.println(instantRunoff(rankings5));
 
-    // exact tie!
-    //borda count winner: tie and randomly selected winner
-    //IR winner: tie and randomly selected winner
-    String[][] rankings6 = {
-      { "A", "B", "C" },
-      { "A", "B", "C" },
-      { "B", "C", "A" },
-      { "B", "C", "A" },
-      { "C", "A", "B" },
-      { "C", "A", "B" },
-    };
+    // // exact tie!
+    // //borda count winner: tie and randomly selected winner
+    // //IR winner: tie and randomly selected winner
+    // String[][] rankings6 = {
+    //   { "A", "B", "C" },
+    //   { "A", "B", "C" },
+    //   { "B", "C", "A" },
+    //   { "B", "C", "A" },
+    //   { "C", "A", "B" },
+    //   { "C", "A", "B" },
+    // };
 
-    System.out.println(bordaCount(rankings6));
-    System.out.println(instantRunoff(rankings6));
+    // System.out.println(bordaCount(rankings6));
+    // System.out.println(instantRunoff(rankings6));
 
-    //TEK
-    //1.
-    //C is winner for instant runoff, C would win for borda count
+    // //TEK
+    // //1.
+    // //C is winner for instant runoff, C would win for borda count
 
-    String[][] rankings7 = {
-      { "B", "C", "A" },
-      { "A", "C", "B" },
-      { "C", "A", "B" },
-      { "C", "B", "A" },
-    };
+    // String[][] rankings7 = {
+    //   { "B", "C", "A" },
+    //   { "A", "C", "B" },
+    //   { "C", "A", "B" },
+    //   { "C", "B", "A" },
+    // };
 
-    // System.out.println(bordaCount(rankings7));
-    // System.out.println(instantRunoff(rankings7));
+    // // System.out.println(bordaCount(rankings7));
+    // // System.out.println(instantRunoff(rankings7));
 
-    //2.
-    //A would win for instant runoff, B for borda count
-    //A would win immediately without any elimination
-    String[][] rankings8 = {
-      { "A", "B", "C" },
-      { "A", "B", "C" },
-      { "B", "C", "A" },
-      { "B", "C", "A" },
-      { "A", "C", "A" },
-    };
+    // //2.
+    // //A would win for instant runoff, B for borda count
+    // //A would win immediately without any elimination
+    // String[][] rankings8 = {
+    //   { "A", "B", "C" },
+    //   { "A", "B", "C" },
+    //   { "B", "C", "A" },
+    //   { "B", "C", "A" },
+    //   { "A", "C", "A" },
+    // };
 
-    System.out.println(bordaCount(rankings8));
-    System.out.println(instantRunoff(rankings8));
+    // System.out.println(bordaCount(rankings8));
+    // System.out.println(instantRunoff(rankings8));
 
-    String[][] rankings9 = {
-      //     //B would win for instant Runoff, requires elimination step
-      { "A", "C", "B" },
-      { "C", "B", "A" },
-      { "B", "C", "A" },
-      { "A", "B", "C" },
-      { "B", "C", "A" },
-    };
+    // String[][] rankings9 = {
+    //   //     //B would win for instant Runoff, requires elimination step
+    //   { "A", "C", "B" },
+    //   { "C", "B", "A" },
+    //   { "B", "C", "A" },
+    //   { "A", "B", "C" },
+    //   { "B", "C", "A" },
+    // };
 
-    System.out.println(bordaCount(rankings9));
-    System.out.println(instantRunoff(rankings9));
+    // System.out.println(bordaCount(rankings9));
+    // System.out.println(instantRunoff(rankings9));
 
-    //3.
-    //A and B would tie
+    // //3.
+    // //A and B would tie
 
-    String[][] rankings10 = {
-      { "A", "B", "C" },
-      { "A", "B", "C" },
-      { "B", "A", "C" },
-      { "B", "A", "C" },
-    };
+    // String[][] rankings10 = {
+    //   { "A", "B", "C" },
+    //   { "A", "B", "C" },
+    //   { "B", "A", "C" },
+    //   { "B", "A", "C" },
+    // };
 
-    System.out.println(bordaCount(rankings10));
-    System.out.println(instantRunoff(rankings10));
+    // System.out.println(bordaCount(rankings10));
+    // System.out.println(instantRunoff(rankings10));
+
+    
   }
-  
 
   public static String bordaCount(int[][] votes, String[] categories) { //with int 2d array
     //technically don't need this method because I can convert the array, bur it is still goot to have around to double check
@@ -324,7 +325,6 @@ take the ballot array, and add place to each tally object
 
       for (int i = 0; i < ranks.size(); i++) { //if any of the elements have the majority
         if (ranks.get(i).getNumRank(0) >= threshold) {
-
           return ranks.get(i).getName();
         }
       }
@@ -340,9 +340,6 @@ take the ballot array, and add place to each tally object
     return ranks.get(0).getName(); //the last candidate left is the one who eins (elimination)
   }
 
-
-
-
   public static int findSmallest(int[] arr) { //returns index of the smallest number
     int index = 0; //
     int smallest = arr[0];
@@ -357,37 +354,28 @@ take the ballot array, and add place to each tally object
   }
 
   public static String recursiveInstantRunoff(String[][] arr) {
-
     ArrayList<Tally> ranks = convertArrays(arr);
     int[] sum = new int[ranks.size()];
 
-  if (ranks.size() == 1){
+    if (ranks.size() == 1) {
+      return ranks.get(0).getName();
+    }
 
-    return ranks.get(0).getName();
-
-  }
-
-    int threshold = (arr.length + 1) / 2;;
-      for (int i = 0; i < ranks.size(); i++) { //if any of the elements have the majority
+    int threshold = (arr.length + 1) / 2;
+    for (int i = 0; i < ranks.size(); i++) { //if any of the elements have the majority
       sum[i] = ranks.get(i).getNumRank(0);
-        if (ranks.get(i).getNumRank(0) >= threshold) {
-          return ranks.get(i).getName();
-        }
-
+      if (ranks.get(i).getNumRank(0) >= threshold) {
+        return ranks.get(i).getName();
       }
+    }
+    arr = remove(arr, ranks.get(findSmallest(sum)).getName()); //removing all occurences of the candidate with the least first place finishes
 
-      arr = remove(arr, ranks.get(findSmallest(sum)).getName()); //removing all occurences of the candidate with the least first place finishes
-      return (recursiveInstantRunoff(arr));
-
+    return (recursiveInstantRunoff(arr));
   }
-
-
-
-
 
   
 
-  public static ArrayList<Tally> convertArrays(String[][] ballots) { //converting a 2d array to an array list of Tally objects.As said before, I want to try this again with a 2d array list
+  public static ArrayList<Tally> convertArrays(String[][] ballots) { //converting a 2d array to an array list of Tally objects. As said before, I want to try this again with a 2d array list
     ArrayList<Tally> ballotTallies = new ArrayList<>();
 
     for (int i = 0; i < ballots[0].length; i++) { //number of columns aka number of candidates
@@ -406,6 +394,16 @@ take the ballot array, and add place to each tally object
     return ballotTallies;
   }
 
+  public static ArrayList<List<String>> arrayToAL(String[][] array) {
+    ArrayList<List<String>> newList = new ArrayList<>();
+
+    for (int i = 0; i < array.length; i++) {
+      newList.add(Arrays.asList(array[i]));
+    }
+
+    return newList;
+  }
+
   public static String[][] convertArrays(int[][] options, String[] categories) { //taking the integer 2d array lists that correspond to certain dandidates and converting it into a ballot format
     String[][] alteredArr = new String[options.length][options[0].length]; //same dimensions as the int 2d array
 
@@ -413,10 +411,8 @@ take the ballot array, and add place to each tally object
       for (int j = 0; j < options[i].length; j++) {
         alteredArr[i][j] = categories[options[i][j] - 1]; //each element of opstions corresponds to a category, but I had to add one because array indexes start at 0
       }
-
-    
     }
-      return alteredArr;
+    return alteredArr;
   }
 
   public static String[][] remove(String[][] ballots, String remove) { //was originally trying to make convertArrays an overloaded method that would ignore a particular candidate. I gave up after 2 hours, will try again in the future if I have the chance.
@@ -434,12 +430,7 @@ take the ballot array, and add place to each tally object
       for (int j = 0; j < votes.get(i).size(); j++) {
         alteredArr[i][j] = votes.get(i).get(j);
       }
-        
     }
-  return alteredArr;
- 
+    return alteredArr;
   }
 }
-  
-
-
