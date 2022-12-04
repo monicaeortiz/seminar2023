@@ -9,8 +9,7 @@ public static void main(String[] commandLineArgs) throws FileNotFoundException {
     //make sure to take in a file, not just the string of pathname
     File f = new File(fileName);
     System.out.println(countWords(f));
-
-    //findStopWords("stopwords.txt");
+    
 }
 
 public static String cleanUp(String word) {
@@ -20,57 +19,39 @@ public static String cleanUp(String word) {
   }
 
 public static String countWords(File f) throws FileNotFoundException {
+    //make map of strings and integers
+    Map<String, Integer> wordCounts = new HashMap<> ();
     //make an AL with all of the stopwords
     ArrayList<String> stopWords = findStopWords("stopwords.txt");
-    //make AL to hold the words and counts
-    ArrayList<String> words = new ArrayList<> ();
-    ArrayList<Integer> counts = new ArrayList<> ();
-
     //make a scanner to iterate through the file
     Scanner sc = new Scanner(f);
     //iterate through file using a while loop
     while(sc.hasNextLine()){
         //string scanner
-        String current = sc.nextLine();
+        String currentLine = sc.nextLine();
         //iterate through current line with a LineScanner
-        Scanner lineScan = new Scanner(current);
+        Scanner lineScan = new Scanner(currentLine);
         while(lineScan.hasNext()){
             String s = cleanUp(lineScan.next());
-            //if it doesn't exists (meaning the index is -1) and it is not in stop words (index is also equal to -1)
-            if(stopWords.indexOf(s) == -1 || s.equals("")){
-                if(words.indexOf(s) == -1){
-                    words.add(s);
-                    counts.add(1);
-                }
-                int index = words.indexOf(s);
-                counts.set(index, counts.get(index)+1);
-            }
+            wordCounts.put(s, wordCounts.getOrDefault(wordCounts.get(s),0)+1);
         }
     }
-    //find the index of the largest using helper method and return the words
-    int index = findLargest(counts);
-
-    // remove weird character from words and counts.
-    words.remove(index);
-    counts.remove(index);
-
-    //find new index with the changed words and counts
-    index = findLargest(counts);
-    return  words.get(index);
-}
-
-//helper method to find the largest value in the arrayList
-public static int findLargest (ArrayList <Integer> counts ) {
-    int largest = counts.get(0);
-    int index = 0;
-    for (int i = 0; i<counts.size(); i++) {
-        if (counts.get(i) > largest) {
-            largest = counts.get(i);
-            index = i;
+    //iterate through frequencies to find the largest value in the map, and return the key
+    Collection<Integer> values = wordCounts.values();
+    int maxValue = Collections.max(values);
+    //given the max value find the key
+    //makes a set of the keys
+    Set <String> keys = wordCounts.keySet();
+    String toRet = "";
+    // iterate through keys
+    for (String key1 : keys) {
+        if (wordCounts.get(key1) == maxValue) {
+            toRet = key1;
         }
     }
-    return index;
+    return toRet;
 }
+
 
 //creating an arrayList with all of the words in the stopwords.txt
 public static ArrayList<String> findStopWords(String pathname) throws FileNotFoundException{
@@ -82,5 +63,5 @@ public static ArrayList<String> findStopWords(String pathname) throws FileNotFou
         stopWords.add(sc.next());
     }
     return stopWords;
-}
+} 
 }
