@@ -15,15 +15,37 @@ public class RobynKathrynTwilightCounter {
         // ArrayList<Integer> wordsCount = new ArrayList<Integer>();
         Map<String, Integer> wordFreq = new HashMap<>(); 
 
+        Set<String> highestCountWords = new HashSet<>();
+
+        int highestCount = 0;
+
+
+        Set<String> stopWords = new HashSet<>(); //creates set to hold stop words
+        Scanner stopWScanner = new Scanner("/../stopwords.txt"); 
+
+        //fills set of stop words 
+        while (stopWScanner.hasNextLine()) {
+            String line = stopWScanner.nextLine();
+            Scanner stopWLineScan = new Scanner(line);
+            while (stopWLineScan.hasNext()) {
+                String curStopW = stopWLineScan.next(); //gets each word as a token
+                stopWords.add(curStopW); 
+            }
+        }
+
         while (fileScan.hasNextLine()) {
-            String line = fileScan.nextLine();
-            Scanner lineScan = new Scanner(line);
+            String line2 = fileScan.nextLine();
+            Scanner lineScan = new Scanner(line2);
             while (lineScan.hasNext()) {
                 String curWord = lineScan.next(); //gets each word as a token
-                wordFreq.put(curWord, wordFreq.getOrDefault(curWord, 0) + 1); 
+                cleanUp(curWord); 
+                if (!(stopWords.contains(curWord))) { //if the current word is not a stop word, do not add in to the map 
+                    wordFreq.put(curWord, wordFreq.getOrDefault(curWord, 0) + 1);
                 }
+            }
             lineScan.close(); 
         }
+        
         fileScan.close(); 
 
         Collection<String> uniqueWords = wordFreq.keySet(); //Collection holding all unique words
@@ -35,10 +57,13 @@ public class RobynKathrynTwilightCounter {
                 mostFreqWord += curUniqueWord; 
             }
         } 
+        
 
-        System.out.println("The most frequency used word is " + mostFreqWord); 
-        
-        
+        // Map<String, Integer> highestWordCounts = new TreeMap<>();
+        // int largestCount = 0;
+        // for ()
+
+
         // Set<String> mostUsedWords = new HashSet<String>();
         // Set<Integer> mostUsedWordsCounts = new HashSet<Integer>();
 
@@ -61,7 +86,46 @@ public class RobynKathrynTwilightCounter {
         return word;
     }
 
+<<<<<<< HEAD
+    public static String findSmallest(Map <String, Integer> map) {
+=======
+    public static String findSmallest(Map <String, Integer> map){
 
+    Collection<String> words = map.keySet();
+    int highestCount = 0;
+    String highestWord = "";
+    int count = 0;
+
+        for (String word: words){
+            if (count == 0){
+                highestCount = map.get(word);
+                count ++;
+            }
+            if (map.get(word) < highestCount){
+                highestCount = map.get(word);
+                highestWord = word;
+            }
+>>>>>>> 37d0c230f0ca30e92afcf1940f7f4e9d88e3b3f4
+
+        Collection<String> words = map.keySet();
+        int highestCount = 0;
+        String highestWord = "";
+        int count = 0;
+
+            for (String word: words){
+                if (count == 0){
+                    highestCount = map.get(word);
+                    count ++;
+                }
+                if (map.get(word) < highestCount){
+                    highestCount = map.get(word);
+                    highestWord = word;
+                }
+            }
+        return word;
+    }
+
+}
 //     public static int findLargest(ArrayList<Integer> arr) { //returns index of the smallest number
 //     int index = 0; //
 //     int largest = arr.get(0); //starting with the largest possible number
@@ -75,7 +139,6 @@ public class RobynKathrynTwilightCounter {
 //   }
 
    // return index;
-}
 
 
 // Read file 
