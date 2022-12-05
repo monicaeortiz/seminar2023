@@ -86,7 +86,26 @@ public class RobynKathrynTwilightCounter {
         return word;
     }
 
+<<<<<<< HEAD
     public static String findSmallest(Map <String, Integer> map) {
+=======
+    public static String findSmallest(Map <String, Integer> map){
+
+    Collection<String> words = map.keySet();
+    int highestCount = 0;
+    String highestWord = "";
+    int count = 0;
+
+        for (String word: words){
+            if (count == 0){
+                highestCount = map.get(word);
+                count ++;
+            }
+            if (map.get(word) < highestCount){
+                highestCount = map.get(word);
+                highestWord = word;
+            }
+>>>>>>> 37d0c230f0ca30e92afcf1940f7f4e9d88e3b3f4
 
         Collection<String> words = map.keySet();
         int highestCount = 0;
