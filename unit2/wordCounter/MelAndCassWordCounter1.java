@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.io.*;
 import java.util.*;
 
-public class SetsAndMaps{
+public class MelAndCassWordCounter1{
     public static void main (String[] commandLineArgs) throws FileNotFoundException{
         //taking in the filename as a command line argument so that we can run any file we want 
         String fileName = commandLineArgs[0];
@@ -55,6 +55,23 @@ public class SetsAndMaps{
         frequencyMap.remove("");
         frequencyMap.remove(" ");
 
+        //creating a list of the stop words read in from the stopwords.txt file 
+        File stopWordsFile = new File("stopwords.txt");
+        Scanner stopWordsScanner = new Scanner(stopWordsFile);
+        List<String> stopWordsList = new ArrayList<>();
+        while (stopWordsFile.hasNext()){
+            stopWordsList.add(nextLine());
+        }
+
+        //checking if any of the words in the frequency map is a stopword
+        //if any of those words are stop words, we are removing that space in the frequencymap
+        Set<String> wordsInFrequencyMap = frequencyMap.keySet();
+        for (String currWord : wordsInFrequencyMap){
+            if (stopWordsList.indexOf(currWord)!=-1){
+                frequencyMap.remove(currWord);
+            }
+        }
+
         //running the functions that print all of the words and their counts adn the functiont hat prints the most common word and its count
         //printing all of the keys and values assosciated in the map
         System.out.println(frequencyMap);
@@ -62,10 +79,11 @@ public class SetsAndMaps{
     }
 
 //printing out all fo the unique words and the amount of times they appear in the script
-    public static void formattedWords(ArrayList<String> uniqueWords, ArrayList<Integer> counter){
-        //printing out each word and its count in the parrallel arraylist
-        for (int i =0; i<uniqueWords.size();i++){
-            System.out.println("Word: " + uniqueWords.get(i) + " Count: " + counter.get(i));
+    public static void formattedWords(Map<String, Integer> frequencyMap){
+        //printing out each word and its count from the frequencyMap
+        List<String> keyList = frequencyMap.keySet();
+        for (String key : keyList){
+            System.out.println("Word: " + key + " Count: " + frequencyMap.get(key));
         }
     }
 
