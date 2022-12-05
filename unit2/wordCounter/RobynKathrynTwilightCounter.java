@@ -38,7 +38,7 @@ public class RobynKathrynTwilightCounter {
             while (lineScan.hasNext()) {
                 String curWord = lineScan.next(); //gets each word as a token
                 curWord = cleanUp(curWord);
-                if (!(stopWords.contains(curWord))) { //if the current word is not a stop word, do not add in to the map 
+                if (!(stopWords.contains(curWord)) && curWord.length() >0) { //if the current word is not a stop word and not a space, do not add in to the map 
                     wordFreq.put(curWord, wordFreq.getOrDefault(curWord, 0) + 1);
                 }
             }
@@ -47,16 +47,13 @@ public class RobynKathrynTwilightCounter {
         fileScan.close(); 
 
 
-        Set<String> uniqueWords = wordFreq.keySet(); //Collection holding all unique words 
-        String mostFreqWord = ""; 
+        Collection<String> uniqueWords = wordFreq.keySet(); //Collection holding all unique words 
+        String mostFreqWord = "bye"; 
         int largestValue = 0; 
         for (String curUniqueWord: uniqueWords) { //checking values 
-            if (wordFreq.get(curUniqueWord) > largestValue) {
+            if (wordFreq.get(curUniqueWord) > largestValue) { 
                 largestValue = wordFreq.get(curUniqueWord); 
-                
-                System.out.println("HELLO" + curUniqueWord); 
                 mostFreqWord = curUniqueWord; 
-                //System.out.println("Most freq: "+ mostFreqWord); 
             }
         } 
         
