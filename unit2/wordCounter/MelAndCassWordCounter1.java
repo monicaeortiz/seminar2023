@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.io.*;
 import java.util.*;
 
-public class SetsAndMaps{
+public class MelAndCassWordCounter1{
     public static void main (String[] commandLineArgs) throws FileNotFoundException{
         //taking in the filename as a command line argument so that we can run any file we want 
         String fileName = commandLineArgs[0];
@@ -25,9 +25,20 @@ public class SetsAndMaps{
         ArrayList<String> uniqueWords = new ArrayList<>();
         ArrayList<Integer> counter = new ArrayList<>();
 
+        Map<String,Integer> frequencyMap = new HashMap<>();
+
+
+        //creating a list of the stop words read in from the stopwords.txt file 
+        File stopWordsFile = new File("../stopwords.txt");
+        Scanner stopWordsScanner = new Scanner(stopWordsFile);
+        List<String> stopWordsList = new ArrayList<>();
+        while (stopWordsScanner.hasNext()){
+            stopWordsList.add(stopWordsScanner.nextLine());
+        }
+
         //incrementing through each line 
         while(fileScan.hasNextLine()){
-            //loding scanner and splitting our current line up into words in an array
+            //loading scanner and splitting our current line up into words in an array
             String currLine = fileScan.nextLine();
             //making each line into an array so that we can access individual words and splitting it by spaces
             String [] currLineArr = currLine.split(" ");
@@ -43,17 +54,9 @@ public class SetsAndMaps{
             //iterating through the current line array
             for(int i = 0; i < currLineArr.length; i++){
                 //if the word hasnt already been counted/ it's the first occurence of the word, add 
-                if(uniqueWords.indexOf(currLineArr[i]) == -1){
-                    //adding the new word to the list of unique words
-                    uniqueWords.add(currLineArr[i]);
-                    //adding a counter in the arraylist for the new word and setting it to 0- will be incremented after the for loop
-                    counter.add(1);
-                }
-                else {
-                    //incrementing the count if the word already exsits in uniqueWords
-                    int indexOfWord = uniqueWords.indexOf(currLineArr[i]);
-                    Integer newCount = counter.get(indexOfWord) + 1;
-                    counter.set(indexOfWord, newCount);
+                //if the key I'm trying to put onto my map (word) is in stopwords.txt list then dont add it else add
+                if (stopWordsList.indexOf(currLineArr[i])==-1){
+                    frequencyMap.put(currLineArr[i], frequencyMap.getOrDefault(currLineArr[i], 0) +1);
                 }
             }
 
@@ -61,21 +64,22 @@ public class SetsAndMaps{
         fileScan.close(); //closing the scanner
 
         //makign sure that the msot common word is not a blank (we ran into issues with this)
-        int indexOfSpace = uniqueWords.indexOf("");
-        uniqueWords.remove(indexOfSpace);
-        counter.remove(indexOfSpace);
+        frequencyMap.remove("");
+        frequencyMap.remove(" ");
 
         //running the functions that print all of the words and their counts adn the functiont hat prints the most common word and its count
-        formattedWords(uniqueWords, counter);
-        printMostCommonWord(uniqueWords, counter);
+        //printing all of the keys and values assosciated in the map
+        System.out.println(frequencyMap);
+        //formattedWords(frequencyMap);
 
     }
 
 //printing out all fo the unique words and the amount of times they appear in the script
-    public static void formattedWords(ArrayList<String> uniqueWords, ArrayList<Integer> counter){
-        //printing out each word and its count in the parrallel arraylist
-        for (int i =0; i<uniqueWords.size();i++){
-            System.out.println("Word: " + uniqueWords.get(i) + " Count: " + counter.get(i));
+    public static void formattedWords(Map<String, Integer> frequencyMap){
+        //printing out each word and its count from the frequencyMap
+        Set<String> keyList = frequencyMap.keySet();
+        for (String key : keyList){
+            System.out.println("Word: " + key + " Count: " + frequencyMap.get(key));
         }
     }
 
@@ -87,18 +91,15 @@ public class SetsAndMaps{
     }
 
 //finding the most commonly used word
-    public static void printMostCommonWord(ArrayList<String> uniqueWords, ArrayList<Integer> counter){
-            //finding the max of the counter arraylist 
-            int currMax = 0;
-            for (int i=0; i<counter.size();i++){
-                if (currMax<counter.get(i)){
-                    currMax= counter.get(i);
-                }
-            }
-            //getting teh index of the max of the counter arraylist
-            int indexOfCurrMax = counter.indexOf(currMax);
-            //using that index to find the assosciated word in the parallel arraylist 
-            //printing the result
-            System.out.println("The most commonly used word in this file is " + uniqueWords.get(indexOfCurrMax)  + " and it it mentioned " + currMax);
+    public static void writeInTop25(HashMap<String, Integer> frequencyMap){
+            //create a new map for the top 25 most frequent words
+            //find the max in the frequency map 
+            //put it into the file 
+            //take it out of the map 
+            //loop it through 25 times 
+
+            //print out the new map of the top 25 words --> just to check that it is correct
+            //write in the top 25 words into a new file 
+            System.out.println("The most commonly used word in this file is " + frequencyMap.get(currMax)  + " and it it mentioned " + currMa);
     }
 }
