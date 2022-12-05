@@ -93,9 +93,10 @@ public class MelAndCassWordCounter1{
 //finding the most commonly used word
     public static void printTop25(HashMap<String, Integer> frequencyMap){
             //create a new map for the top 25 most frequent words
-            //put only currMax word onto the new map
-            //delete that element in the old map? --> possible concurrent error
-            //continue 25 times
+            //find the max in the frequency map 
+            //put it into the file 
+            //take it out of the map 
+            //loop it through 25 times 
 
             //print out the new map of the top 25 words --> just to check that it is correct
             //write in the top 25 words into a new file 
