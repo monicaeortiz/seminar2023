@@ -36,7 +36,9 @@ public class RobynKathrynTwilightCounter {
             }
         } 
 
-        System.out.println("The most frequency used word is " + mostFreqWord); 
+        System.out.println(mostFreqWord); 
+
+        System.out.println("The most frequently used word is " + mostFreqWord); 
         
         
         // Set<String> mostUsedWords = new HashSet<String>();
