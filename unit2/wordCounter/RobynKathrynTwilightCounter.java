@@ -15,6 +15,10 @@ public class RobynKathrynTwilightCounter {
         // ArrayList<Integer> wordsCount = new ArrayList<Integer>();
         Map<String, Integer> wordFreq = new HashMap<>(); 
 
+        Set<String> highestCountWords = new Set<>();
+
+        int highestCount = 0;
+
         while (fileScan.hasNextLine()) {
             String line = fileScan.nextLine();
             Scanner lineScan = new Scanner(line);
@@ -22,6 +26,18 @@ public class RobynKathrynTwilightCounter {
                 String curWord = lineScan.next(); //gets each word as a token
                 wordFreq.put(curWord, wordFreq.getOrDefault(curWord, 0) + 1); 
                 }
+
+            if (highestCountWords.size() < numWords){
+            if (wordFreq.get(curWord) > highestCount){
+                highestCountWords.add(curWord);
+            }
+            }
+
+
+            else{
+
+                
+            }
             lineScan.close(); 
         }
         fileScan.close(); 
@@ -36,9 +52,17 @@ public class RobynKathrynTwilightCounter {
             }
         } 
 
-        System.out.println("The most frequency used word is " + mostFreqWord); 
+
+
+        // System.out.println("The most frequency used word is " + mostFreqWord); 
         
         
+
+        // Map<String, Integer> highestWordCounts = new TreeMap<>();
+        // int largestCount = 0;
+        // for ()
+
+
         // Set<String> mostUsedWords = new HashSet<String>();
         // Set<Integer> mostUsedWordsCounts = new HashSet<Integer>();
 
@@ -59,6 +83,28 @@ public class RobynKathrynTwilightCounter {
         word = word.toLowerCase();  // Force word to be in lowercase.
         word = word.replaceAll("[^A-Za-z]+", "");  // Remove any non-alphanumeric characters.
         return word;
+    }
+
+    public static String findSmallest(Map <String, Integer> map){
+    int highestCount = 0;
+    String highestWord = "";
+    count = 0;
+
+        for (String word: map){
+            if (count == 0){
+                highestCount = map.get(word);
+                count ++;
+            }
+            if (map.get(word) < highestCount){
+                highestCount = map.get(word);
+                highestWord = word;
+            }
+
+        }
+
+        return word;
+
+
     }
 
 
