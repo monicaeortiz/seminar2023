@@ -5,6 +5,11 @@ public class NumberGenerator {
 
   public static void main(String[] args) throws FileNotFoundException {
 
+  int[] bases = {10, 2,3,4,16};
+  createNumsVersion1(100, 200, 103, 10, bases, "num1.csv");
+  createNumsVersion2(100, 200, 103, 10, bases, "num2.csv");
+  createNumsCSVFormat(100, 200, bases, "num3.csv", ",");
+
     /*
     all parameter values are decimal
     createNums(both Versions) ( 
