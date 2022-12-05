@@ -15,16 +15,42 @@ public class WordCounterEE{
 //return index of largest value in count; overall return word at that index
 
     public static void main(String[] args) throws FileNotFoundException{
+        //file name to be imported 
         String filename = args[0];
+        //parsing through file
         ArrayList<String> allWords = parseList(filename);
+        //make map for file words and counts; (words = keys, counts = values)
         Map<String, Integer> wordCounts = new HashMap<>();
-        Set<String> keys = new HashSet<>(Arrays.asList(allWords));
-        for(String key: keys){
-            wordCounts.put(key, wordCounts.getOrDefault(key, 0)+1);
+        //al with stopwords to compare to allWords
+        ArrayList<String> stopWords = parseList("stopwords.txt");
+        //al that will be printed at the end with 25 of the top words in the file
+        ArrayList<String> topWords = new ArrayList<>();
+
+        for(int i=0; i<allWords.size(); i++){
+            //make current word lowercase in order to match to stopwords
+            String currentWord = cleanUp(allWords.get(i));
+            if(currentWord.length() > 1){
+            //if stopWords does not contain current word then add to wordCounts
+                if(stopWords.indexOf(currentWord) == -1){
+                        //if wordCounts already contains the word, add 1 to current count - if not make default 0 (+1)
+                        wordCounts.put(currentWord, wordCounts.getOrDefault(currentWord, 0)+1);
+                }
+            }
         }
-        
-        System.out.println("The most used word in Twilight is: " + getWord(wordCounts));
+
+        //loop to find top word in wordCounts and add to topWord al - then remove word from wordCounts to get next highest
+        for(int i=0; i<25; i++){
+            //find current topWord
+            String currentWord = getWord(wordCounts);
+            //add current top word to al
+            topWords.add(currentWord);
+            //remove top word from al
+            wordCounts.remove(currentWord);
+        }
+
+        System.out.println("The most used words in Twilight is: " + topWords);
     }
+
 
     public static ArrayList<String> parseList(String pathname) throws FileNotFoundException{
         //create new scanner to read in file
@@ -56,16 +82,28 @@ public class WordCounterEE{
         //comparison variable
         int largestNum = 0;
         //index that will be used to get returned word
-        int place = 0;
-        Set<String> key = counts.keySet();
+        String mostCommonWord = "";
+        //set of the keys from counts map
+        Set<String> keys = counts.keySet();
+        //for loop to find the largest word in counts
         for(String key: keys){
+            //if current word value is greater than current largestNum (default as 0 until changed)...
             if(counts.get(key) > largestNum){
-                largentNum = counts.get(key);
-                place = key;
+                //...make that current word value the new largestNum
+                largestNum = counts.get(key);
+                //...make current word key the to be returned String
+                mostCommonWord = key;
             }
         }
         //word to be returned
         // String word = noDuplicates.get(index);
-        return place;
+        return mostCommonWord;
     }
+
+    //imported function
+    public static String cleanUp(String word) {
+    word = word.toLowerCase();  // Force word to be in lowercase.
+    word = word.replaceAll("[^A-Za-z]+", "");  // Remove any non-alphanumeric characters.
+    return word;
+  }
 }
