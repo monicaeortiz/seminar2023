@@ -15,42 +15,35 @@ public class RobynKathrynTwilightCounter {
         // ArrayList<Integer> wordsCount = new ArrayList<Integer>();
         Map<String, Integer> wordFreq = new HashMap<>(); 
 
-        Set<String> highestCountWords = new Set<>();
-
-        int highestCount = 0;
-
-        while (fileScan.hasNextLine()) {
-            String line = fileScan.nextLine();
-            Scanner lineScan = new Scanner(line);
+    while (fileScan.hasNextLine()) {
+            String line2 = fileScan.nextLine();
+            Scanner lineScan = new Scanner(line2);
             while (lineScan.hasNext()) {
                 String curWord = lineScan.next(); //gets each word as a token
-                wordFreq.put(curWord, wordFreq.getOrDefault(curWord, 0) + 1); 
+                if (!(stopWords.contains(curWord))) { //if the current word is not a stop word, do not add in to the map 
+                    wordFreq.put(curWord, wordFreq.getOrDefault(curWord, 0) + 1);
                 }
-
-            if (highestCountWords.size() < numWords){
-            if (wordFreq.get(curWord) > highestCount){
-                highestCountWords.add(curWord);
             }
-            }
-
-
-            else{
-
-                
-            }
-            lineScan.close(); 
-        }
+        
         fileScan.close(); 
 
+        System.out.println(wordFreq);
+
         Collection<String> uniqueWords = wordFreq.keySet(); //Collection holding all unique words
+
+        //System.out.println(uniqueWords);
+
         String mostFreqWord = ""; 
         int largestValue = 0; 
         for (String curUniqueWord: uniqueWords) { //checking values 
-            if (wordFreq.get(curUniqueWord)>largestValue) {
+        //System.out.print(wordFreq.get(curUniqueWord));
+            if (wordFreq.get(curUniqueWord) > largestValue) {
                 largestValue = wordFreq.get(curUniqueWord); 
-                mostFreqWord += curUniqueWord; 
+                mostFreqWord = curUniqueWord; 
             }
         } 
+
+        System.out.println(mostFreqWord);
 
 
 
@@ -85,27 +78,27 @@ public class RobynKathrynTwilightCounter {
         return word;
     }
 
-    public static String findSmallest(Map <String, Integer> map){
-    int highestCount = 0;
-    String highestWord = "";
-    count = 0;
+    // public static String findSmallest(Map <String, Integer> map){
+    // int highestCount = 0;
+    // String highestWord = "";
+    // count = 0;
 
-        for (String word: map){
-            if (count == 0){
-                highestCount = map.get(word);
-                count ++;
-            }
-            if (map.get(word) < highestCount){
-                highestCount = map.get(word);
-                highestWord = word;
-            }
+    //     for (String word: map){
+    //         if (count == 0){
+    //             highestCount = map.get(word);
+    //             count ++;
+    //         }
+    //         if (map.get(word) < highestCount){
+    //             highestCount = map.get(word);
+    //             highestWord = word;
+    //         }
 
-        }
+    //     }
 
-        return word;
+    //     return word;
 
 
-    }
+    // }
 
 
 //     public static int findLargest(ArrayList<Integer> arr) { //returns index of the smallest number
