@@ -37,8 +37,7 @@ public class RobynKathrynTwilightCounter {
             String line2 = fileScan.nextLine();
             Scanner lineScan = new Scanner(line2);
             while (lineScan.hasNext()) {
-                String curWord = lineScan.next(); //gets each word as a token
-                cleanUp(curWord); 
+                String curWord = cleanUp(lineScan.next()); //gets each word as a token
                 if (!(stopWords.contains(curWord))) { //if the current word is not a stop word, do not add in to the map 
                     wordFreq.put(curWord, wordFreq.getOrDefault(curWord, 0) + 1);
                 }
@@ -48,15 +47,19 @@ public class RobynKathrynTwilightCounter {
         
         fileScan.close(); 
 
+
         Collection<String> uniqueWords = wordFreq.keySet(); //Collection holding all unique words
         String mostFreqWord = ""; 
         int largestValue = 0; 
         for (String curUniqueWord: uniqueWords) { //checking values 
             if (wordFreq.get(curUniqueWord)>largestValue) {
                 largestValue = wordFreq.get(curUniqueWord); 
-                mostFreqWord += curUniqueWord; 
+                mostFreqWord = curUniqueWord; 
             }
         } 
+
+        System.out.println(mostFreqWord);
+        //System.out.println(wordFreq);
         
 
         // Map<String, Integer> highestWordCounts = new TreeMap<>();
@@ -86,27 +89,7 @@ public class RobynKathrynTwilightCounter {
         return word;
     }
 
-<<<<<<< HEAD
     public static String findSmallest(Map <String, Integer> map) {
-=======
-    public static String findSmallest(Map <String, Integer> map){
-
-    Collection<String> words = map.keySet();
-    int highestCount = 0;
-    String highestWord = "";
-    int count = 0;
-
-        for (String word: words){
-            if (count == 0){
-                highestCount = map.get(word);
-                count ++;
-            }
-            if (map.get(word) < highestCount){
-                highestCount = map.get(word);
-                highestWord = word;
-            }
->>>>>>> 37d0c230f0ca30e92afcf1940f7f4e9d88e3b3f4
-
         Collection<String> words = map.keySet();
         int highestCount = 0;
         String highestWord = "";
@@ -122,7 +105,7 @@ public class RobynKathrynTwilightCounter {
                     highestWord = word;
                 }
             }
-        return word;
+        return highestWord;
     }
 
 }
