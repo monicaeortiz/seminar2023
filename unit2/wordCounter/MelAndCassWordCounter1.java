@@ -25,9 +25,11 @@ public class SetsAndMaps{
         ArrayList<String> uniqueWords = new ArrayList<>();
         ArrayList<Integer> counter = new ArrayList<>();
 
+        Map<String,Integer> frequencyMap = new HashMap<>();
+
         //incrementing through each line 
         while(fileScan.hasNextLine()){
-            //loding scanner and splitting our current line up into words in an array
+            //loading scanner and splitting our current line up into words in an array
             String currLine = fileScan.nextLine();
             //making each line into an array so that we can access individual words and splitting it by spaces
             String [] currLineArr = currLine.split(" ");
@@ -43,31 +45,19 @@ public class SetsAndMaps{
             //iterating through the current line array
             for(int i = 0; i < currLineArr.length; i++){
                 //if the word hasnt already been counted/ it's the first occurence of the word, add 
-                if(uniqueWords.indexOf(currLineArr[i]) == -1){
-                    //adding the new word to the list of unique words
-                    uniqueWords.add(currLineArr[i]);
-                    //adding a counter in the arraylist for the new word and setting it to 0- will be incremented after the for loop
-                    counter.add(1);
-                }
-                else {
-                    //incrementing the count if the word already exsits in uniqueWords
-                    int indexOfWord = uniqueWords.indexOf(currLineArr[i]);
-                    Integer newCount = counter.get(indexOfWord) + 1;
-                    counter.set(indexOfWord, newCount);
-                }
+                frequencyMap.put(currLineArr[i], frequencyMap.getOrDefault(currLineArr[i], 0) +1);
             }
 
         }
         fileScan.close(); //closing the scanner
 
         //makign sure that the msot common word is not a blank (we ran into issues with this)
-        int indexOfSpace = uniqueWords.indexOf("");
-        uniqueWords.remove(indexOfSpace);
-        counter.remove(indexOfSpace);
+        frequencyMap.remove("");
+        frequencyMap.remove(" ");
 
         //running the functions that print all of the words and their counts adn the functiont hat prints the most common word and its count
-        formattedWords(uniqueWords, counter);
-        printMostCommonWord(uniqueWords, counter);
+        //printing all of the keys and values assosciated in the map
+        System.out.println(frequencyMap);
 
     }
 
