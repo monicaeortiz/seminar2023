@@ -27,6 +27,15 @@ public class MelAndCassWordCounter1{
 
         Map<String,Integer> frequencyMap = new HashMap<>();
 
+
+        //creating a list of the stop words read in from the stopwords.txt file 
+        File stopWordsFile = new File("../stopwords.txt");
+        Scanner stopWordsScanner = new Scanner(stopWordsFile);
+        List<String> stopWordsList = new ArrayList<>();
+        while (stopWordsScanner.hasNext()){
+            stopWordsList.add(stopWordsScanner.nextLine());
+        }
+
         //incrementing through each line 
         while(fileScan.hasNextLine()){
             //loading scanner and splitting our current line up into words in an array
@@ -45,7 +54,10 @@ public class MelAndCassWordCounter1{
             //iterating through the current line array
             for(int i = 0; i < currLineArr.length; i++){
                 //if the word hasnt already been counted/ it's the first occurence of the word, add 
-                frequencyMap.put(currLineArr[i], frequencyMap.getOrDefault(currLineArr[i], 0) +1);
+                //if the key I'm trying to put onto my map (word) is in stopwords.txt list then dont add it else add
+                if (stopWordList.indexOf(currLineArr[i])==-1){
+                    frequencyMap.put(currLineArr[i], frequencyMap.getOrDefault(currLineArr[i], 0) +1);
+                }
             }
 
         }
@@ -55,33 +67,17 @@ public class MelAndCassWordCounter1{
         frequencyMap.remove("");
         frequencyMap.remove(" ");
 
-        //creating a list of the stop words read in from the stopwords.txt file 
-        File stopWordsFile = new File("stopwords.txt");
-        Scanner stopWordsScanner = new Scanner(stopWordsFile);
-        List<String> stopWordsList = new ArrayList<>();
-        while (stopWordsFile.hasNext()){
-            stopWordsList.add(nextLine());
-        }
-
-        //checking if any of the words in the frequency map is a stopword
-        //if any of those words are stop words, we are removing that space in the frequencymap
-        Set<String> wordsInFrequencyMap = frequencyMap.keySet();
-        for (String currWord : wordsInFrequencyMap){
-            if (stopWordsList.indexOf(currWord)!=-1){
-                frequencyMap.remove(currWord);
-            }
-        }
-
         //running the functions that print all of the words and their counts adn the functiont hat prints the most common word and its count
         //printing all of the keys and values assosciated in the map
         System.out.println(frequencyMap);
+        //formattedWords(frequencyMap);
 
     }
 
 //printing out all fo the unique words and the amount of times they appear in the script
     public static void formattedWords(Map<String, Integer> frequencyMap){
         //printing out each word and its count from the frequencyMap
-        List<String> keyList = frequencyMap.keySet();
+        Set<String> keyList = frequencyMap.keySet();
         for (String key : keyList){
             System.out.println("Word: " + key + " Count: " + frequencyMap.get(key));
         }
