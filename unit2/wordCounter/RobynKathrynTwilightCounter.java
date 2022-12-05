@@ -15,7 +15,7 @@ public class RobynKathrynTwilightCounter {
         // ArrayList<Integer> wordsCount = new ArrayList<Integer>();
         Map<String, Integer> wordFreq = new HashMap<>(); 
 
-        Set<String> highestCountWords = new Set<>();
+        Set<String> highestCountWords = new HashSet<>();
 
         int highestCount = 0;
 
@@ -38,24 +38,14 @@ public class RobynKathrynTwilightCounter {
             Scanner lineScan = new Scanner(line2);
             while (lineScan.hasNext()) {
                 String curWord = lineScan.next(); //gets each word as a token
+                cleanUp(curWord); 
                 if (!(stopWords.contains(curWord))) { //if the current word is not a stop word, do not add in to the map 
                     wordFreq.put(curWord, wordFreq.getOrDefault(curWord, 0) + 1);
                 }
             }
-
-            if (highestCountWords.size() < numWords){
-            if (wordFreq.get(curWord) > highestCount){
-                highestCountWords.add(curWord);
-            }
-            }
-
-
-            else{
-
-                
-            }
             lineScan.close(); 
         }
+        
         fileScan.close(); 
 
         Collection<String> uniqueWords = wordFreq.keySet(); //Collection holding all unique words
@@ -96,29 +86,27 @@ public class RobynKathrynTwilightCounter {
         return word;
     }
 
-    public static String findSmallest(Map <String, Integer> map){
-    int highestCount = 0;
-    String highestWord = "";
-    count = 0;
+    public static String findSmallest(Map <String, Integer> map) {
 
-        for (String word: map){
-            if (count == 0){
-                highestCount = map.get(word);
-                count ++;
+        Collection<String> words = map.keySet();
+        int highestCount = 0;
+        String highestWord = "";
+        int count = 0;
+
+            for (String word: words){
+                if (count == 0){
+                    highestCount = map.get(word);
+                    count ++;
+                }
+                if (map.get(word) < highestCount){
+                    highestCount = map.get(word);
+                    highestWord = word;
+                }
             }
-            if (map.get(word) < highestCount){
-                highestCount = map.get(word);
-                highestWord = word;
-            }
-
-        }
-
         return word;
-
-
     }
 
-
+}
 //     public static int findLargest(ArrayList<Integer> arr) { //returns index of the smallest number
 //     int index = 0; //
 //     int largest = arr.get(0); //starting with the largest possible number
@@ -132,7 +120,6 @@ public class RobynKathrynTwilightCounter {
 //   }
 
    // return index;
-}
 
 
 // Read file 
