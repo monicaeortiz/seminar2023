@@ -17,10 +17,13 @@ public class WordCounterEE{
     public static void main(String[] args) throws FileNotFoundException{
         String filename = args[0];
         ArrayList<String> allWords = parseList(filename);
-        ArrayList<String> noDuplicates = noDuplicates(allWords);
-        ArrayList<Integer> count = counts(allWords);
+        Map<String, Integer> wordCounts = new HashMap<>();
+        Set<String> keys = new HashSet<>(Arrays.asList(allWords));
+        for(String key: keys){
+            wordCounts.put(key, wordCounts.getOrDefault(key, 0)+1);
+        }
         
-        System.out.println("the most used word in Twilight is: " + getWord(count, noDuplicates));
+        System.out.println("The most used word in Twilight is: " + getWord(wordCounts));
     }
 
     public static ArrayList<String> parseList(String pathname) throws FileNotFoundException{
@@ -48,66 +51,21 @@ public class WordCounterEE{
         return words;
     }
 
-    public static ArrayList<String> noDuplicates(ArrayList<String> allWords){
-        ArrayList<String> noDuplicates = new ArrayList<>();
-
-        //goes through the original ArrayList and takes out any instance of repetition
-        for(int i = 0; i < allWords.size(); i++){
-            //if item is not already in the noDuplicates ArrayList...
-            if(noDuplicates.indexOf(allWords.get(i)) == -1){
-                //...add that value to the noDuplicates ArrayList
-                noDuplicates.add(allWords.get(i));
-            }
-        }
-        return noDuplicates;
-    }
-
-    public static ArrayList<Integer> counts(ArrayList<String> allWords){
-        ArrayList<String> noDuplicates = new ArrayList<>(); //to make parallel to and for if/else expression
-
-        //could call getRidOfDuplicates method but for sake of clarity and debugging going to keep same code here
-        for(int i = 0; i < allWords.size(); i++){
-            if(noDuplicates.indexOf(allWords.get(i)) == -1){
-                noDuplicates.add(allWords.get(i));
-            }
-        }
-        //ArrayList<Integer> counts = new ArrayList<>(Arrays.asList(new Integer[noDuplicates.size()]));
-        //commented code above works for making counts AL parallel to noDuplicates, however, values are null (bc Integer is object type, not primitive)
-
-        //for loop so AL are the same size, however values aren't null
-        ArrayList<Integer> counts = new ArrayList<>();
-        for(int i = 0; i<noDuplicates.size(); i++){
-            counts.add(0);
-        }
-
-        for(int i = 0; i<allWords.size(); i++){
-        //finding index of the item in the noDuplicates AL
-            int index = noDuplicates.indexOf(allWords.get(i));
-            //getting value (num times that item has been said in allWords AL) in counts at that same index (bc parallel arrays)
-            Integer value = counts.get(index);
-            //incrementing that value by 1
-            value = value + 1;
-            //setting that value at that same index
-            counts.set(index, value);
-        }
-        return counts;
-    }
-
     //method to go through values in counts AL, get the index, and return the value at that index in noDuplicates AL (the most common word)
-    public static String getWord(ArrayList<Integer> counts, ArrayList<String> noDuplicates){
+    public static String getWord(Map<String, Integer> counts){
         //comparison variable
         int largestNum = 0;
         //index that will be used to get returned word
-        int index = 0;
-        for(int i = 0; i<counts.size(); i++){
-            //compares value in counts to the current largest value
-            if(counts.get(i) > largestNum){
-                largestNum = counts.get(i);
-                index = i;
+        int place = 0;
+        Set<String> key = counts.keySet();
+        for(String key: keys){
+            if(counts.get(key) > largestNum){
+                largentNum = counts.get(key);
+                place = key;
             }
         }
         //word to be returned
-        String word = noDuplicates.get(index);
-        return word;
+        // String word = noDuplicates.get(index);
+        return place;
     }
 }
