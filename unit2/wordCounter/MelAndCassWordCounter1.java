@@ -91,7 +91,7 @@ public class MelAndCassWordCounter1{
     }
 
 //finding the most commonly used word
-    public static void printTop25(HashMap<String, Integer> frequencyMap){
+    public static void writeInTop25(HashMap<String, Integer> frequencyMap){
             //create a new map for the top 25 most frequent words
             //find the max in the frequency map 
             //put it into the file 
