@@ -43,7 +43,7 @@ public static String countWords(File f) throws FileNotFoundException {
     //makes a set of the keys
     Set <String> keys = wordCounts.keySet();
     String toRet = "";
-    // iterate through keys
+    // iterate through keys to find the key to return
     for (String key1 : keys) {
         if (wordCounts.get(key1) == maxValue) {
             toRet = key1;

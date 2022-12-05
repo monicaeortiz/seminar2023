@@ -15,13 +15,45 @@ public class RobynKathrynTwilightCounter {
         // ArrayList<Integer> wordsCount = new ArrayList<Integer>();
         Map<String, Integer> wordFreq = new HashMap<>(); 
 
+        Set<String> highestCountWords = new Set<>();
+
+        int highestCount = 0;
+
+
+        Set<String> stopWords = new HashSet<>(); //creates set to hold stop words
+        Scanner stopWScanner = new Scanner("/../stopwords.txt"); 
+
+        //fills set of stop words 
+        while (stopWScanner.hasNextLine()) {
+            String line = stopWScanner.nextLine();
+            Scanner stopWLineScan = new Scanner(line);
+            while (stopWLineScan.hasNext()) {
+                String curStopW = stopWLineScan.next(); //gets each word as a token
+                stopWords.add(curStopW); 
+            }
+        }
+
         while (fileScan.hasNextLine()) {
-            String line = fileScan.nextLine();
-            Scanner lineScan = new Scanner(line);
+            String line2 = fileScan.nextLine();
+            Scanner lineScan = new Scanner(line2);
             while (lineScan.hasNext()) {
                 String curWord = lineScan.next(); //gets each word as a token
-                wordFreq.put(curWord, wordFreq.getOrDefault(curWord, 0) + 1); 
+                if (!(stopWords.contains(curWord))) { //if the current word is not a stop word, do not add in to the map 
+                    wordFreq.put(curWord, wordFreq.getOrDefault(curWord, 0) + 1);
                 }
+            }
+
+            if (highestCountWords.size() < numWords){
+            if (wordFreq.get(curWord) > highestCount){
+                highestCountWords.add(curWord);
+            }
+            }
+
+
+            else{
+
+                
+            }
             lineScan.close(); 
         }
         fileScan.close(); 
@@ -35,12 +67,13 @@ public class RobynKathrynTwilightCounter {
                 mostFreqWord += curUniqueWord; 
             }
         } 
-
-        System.out.println(mostFreqWord); 
-
-        System.out.println("The most frequently used word is " + mostFreqWord); 
         
-        
+
+        // Map<String, Integer> highestWordCounts = new TreeMap<>();
+        // int largestCount = 0;
+        // for ()
+
+
         // Set<String> mostUsedWords = new HashSet<String>();
         // Set<Integer> mostUsedWordsCounts = new HashSet<Integer>();
 
@@ -61,6 +94,28 @@ public class RobynKathrynTwilightCounter {
         word = word.toLowerCase();  // Force word to be in lowercase.
         word = word.replaceAll("[^A-Za-z]+", "");  // Remove any non-alphanumeric characters.
         return word;
+    }
+
+    public static String findSmallest(Map <String, Integer> map){
+    int highestCount = 0;
+    String highestWord = "";
+    count = 0;
+
+        for (String word: map){
+            if (count == 0){
+                highestCount = map.get(word);
+                count ++;
+            }
+            if (map.get(word) < highestCount){
+                highestCount = map.get(word);
+                highestWord = word;
+            }
+
+        }
+
+        return word;
+
+
     }
 
 
