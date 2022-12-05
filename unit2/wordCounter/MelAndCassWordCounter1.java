@@ -55,7 +55,7 @@ public class MelAndCassWordCounter1{
             for(int i = 0; i < currLineArr.length; i++){
                 //if the word hasnt already been counted/ it's the first occurence of the word, add 
                 //if the key I'm trying to put onto my map (word) is in stopwords.txt list then dont add it else add
-                if (stopWordList.indexOf(currLineArr[i])==-1){
+                if (stopWordsList.indexOf(currLineArr[i])==-1){
                     frequencyMap.put(currLineArr[i], frequencyMap.getOrDefault(currLineArr[i], 0) +1);
                 }
             }
@@ -91,18 +91,14 @@ public class MelAndCassWordCounter1{
     }
 
 //finding the most commonly used word
-    public static void printMostCommonWord(ArrayList<String> uniqueWords, ArrayList<Integer> counter){
-            //finding the max of the counter arraylist 
-            int currMax = 0;
-            for (int i=0; i<counter.size();i++){
-                if (currMax<counter.get(i)){
-                    currMax= counter.get(i);
-                }
-            }
-            //getting teh index of the max of the counter arraylist
-            int indexOfCurrMax = counter.indexOf(currMax);
-            //using that index to find the assosciated word in the parallel arraylist 
-            //printing the result
-            System.out.println("The most commonly used word in this file is " + uniqueWords.get(indexOfCurrMax)  + " and it it mentioned " + currMax);
+    public static void printTop25(HashMap<String, Integer> frequencyMap){
+            //create a new map for the top 25 most frequent words
+            //put only currMax word onto the new map
+            //delete that element in the old map? --> possible concurrent error
+            //continue 25 times
+
+            //print out the new map of the top 25 words --> just to check that it is correct
+            //write in the top 25 words into a new file 
+            System.out.println("The most commonly used word in this file is " + frequencyMap.get(currMax)  + " and it it mentioned " + currMa);
     }
 }
