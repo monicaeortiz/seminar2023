@@ -6,10 +6,10 @@ public class RobynKathrynTwilightCounter {
     public static void main (String[] commandLineArgs) throws FileNotFoundException{  
         String string = commandLineArgs[0]; 
         File filename = new File(string); 
-        findPopWords(filename, 10); 
+        findPopWords(filename, 10, "popWords.txt"); 
     }
 
-    public static void findPopWords(File f, int numWords) throws FileNotFoundException{
+    public static void findPopWords(File f, int numWords, String fileName) throws FileNotFoundException{
         // ArrayList<String> uniqueWords = new ArrayList<String>(); //will hold 
         // ArrayList<Integer> wordsCount = new ArrayList<Integer>();
         Map<String, Integer> wordFreq = new HashMap<>(); 
@@ -46,18 +46,26 @@ public class RobynKathrynTwilightCounter {
         }
         fileScan.close(); 
 
+        List<String> uniqueWords = new ArrayList<>(wordFreq.keySet());
 
-        Collection<String> uniqueWords = wordFreq.keySet(); //Collection holding all unique words 
+        PrintStream p = new PrintStream (fileName);
+
+        for (int l = 0; l < numWords; l++){
         String mostFreqWord = "bye"; 
         int largestValue = 0; 
-        for (String curUniqueWord: uniqueWords) { //checking values 
-            if (wordFreq.get(curUniqueWord) > largestValue) { 
-                largestValue = wordFreq.get(curUniqueWord); 
-                mostFreqWord = curUniqueWord; 
+
+            for (int i = uniqueWords.size() - 1; i >= 0; i--) { //checking values 
+                if (wordFreq.get(uniqueWords.get(i)) > largestValue) { 
+                largestValue = wordFreq.get(uniqueWords.get(i)); 
+                mostFreqWord = uniqueWords.get(i); 
+                
+                }
             }
-        } 
-        
-        System.out.println(mostFreqWord); 
+
+            p.println(mostFreqWord);
+            uniqueWords.remove(mostFreqWord);
+
+        }
 
         // Map<String, Integer> highestWordCounts = new TreeMap<>();
         // int largestCount = 0;
@@ -79,6 +87,8 @@ public class RobynKathrynTwilightCounter {
 
 
     }
+    
+    
 
     public static String cleanUp(String word) {
         word = word.toLowerCase();  // Force word to be in lowercase.
