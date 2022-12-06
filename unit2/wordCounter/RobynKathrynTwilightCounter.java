@@ -51,8 +51,8 @@ public class RobynKathrynTwilightCounter {
         PrintStream p = new PrintStream (fileName);
 
         for (int l = 0; l < numWords; l++){
-        String mostFreqWord = "bye"; 
-        int largestValue = 0; 
+        String mostFreqWord = uniqueWords.get(0); 
+        int largestValue = wordFreq.get(mostFreqWord); 
 
             for (int i = uniqueWords.size() - 1; i >= 0; i--) { //checking values 
                 if (wordFreq.get(uniqueWords.get(i)) > largestValue) { 
