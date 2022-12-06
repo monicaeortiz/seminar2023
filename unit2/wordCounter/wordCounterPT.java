@@ -1,14 +1,18 @@
 import java.util.*;
 import java.io.*;
 public class wordCounterPT {
-public static void main(String[] commandLineArgs) throws FileNotFoundException {
+public static void main(String[] args) throws FileNotFoundException {
     //command Line arguments
    
-   String fileName = commandLineArgs[0];
+   String fileName = "macbeth.txt";
  
     //make sure to take in a file, not just the string of pathname
     File f = new File(fileName);
-    System.out.println(countWords(f));
+    Map<String, Integer> wordCounts = new HashMap<> ();
+    for (int i = 0; i<25; i++) {
+        System.out.println(countWords(f, wordCounts));
+        //System.out.println(wordCounts);
+    }
     
 }
 
@@ -18,9 +22,11 @@ public static String cleanUp(String word) {
     return word;
   }
 
-public static String countWords(File f) throws FileNotFoundException {
-    //make map of strings and integers
-    Map<String, Integer> wordCounts = new HashMap<> ();
+public static String countWords(File f, Map <String, Integer> wordCounts) throws FileNotFoundException {
+    Set <String> keysss = wordCounts.keySet();
+    for (String keys1 : keysss) {
+        wordCounts.put(keys1, 0);
+    }
     //make an AL with all of the stopwords
     ArrayList<String> stopWords = findStopWords("stopwords.txt");
     //make a scanner to iterate through the file
@@ -33,9 +39,15 @@ public static String countWords(File f) throws FileNotFoundException {
         Scanner lineScan = new Scanner(currentLine);
         while(lineScan.hasNext()){
             String s = cleanUp(lineScan.next());
-            wordCounts.put(s, wordCounts.getOrDefault(wordCounts.get(s),0)+1);
+            // check if s is in stopWords
+            if (stopWords.indexOf(s) == -1) {
+                wordCounts.put(s, wordCounts.getOrDefault(s,0)+1);
+            }
+            
+          
         }
     }
+    //System.out.println(wordCounts);
     //iterate through frequencies to find the largest value in the map, and return the key
     Collection<Integer> values = wordCounts.values();
     int maxValue = Collections.max(values);
@@ -45,10 +57,12 @@ public static String countWords(File f) throws FileNotFoundException {
     String toRet = "";
     // iterate through keys to find the key to return
     for (String key1 : keys) {
-        if (wordCounts.get(key1) == maxValue) {
+        if (wordCounts.get(key1) >= maxValue) {
             toRet = key1;
         }
     }
+    wordCounts.remove(toRet);
+    //System.out.println(wordCounts);
     return toRet;
 }
 

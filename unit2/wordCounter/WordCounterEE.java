@@ -48,7 +48,19 @@ public class WordCounterEE{
             wordCounts.remove(currentWord);
         }
 
-        System.out.println("The most used words in Twilight is: " + topWords);
+        //string of new file name
+        String newFileName = "mostUsedWordsInTwlight.txt";
+
+        //printstream to add top words to the new file (named string above)
+        PrintStream p = new PrintStream(new FileOutputStream(newFileName, true));
+        p.println("The top 25 most used words are: ");
+        //loop to rank top 25 most used words in order
+        for(int i=0; i<topWords.size(); i++){
+            p.println(i+1 + ". " + topWords.get(i));
+
+        }
+        //close printstream
+        p.close();
     }
 
 
