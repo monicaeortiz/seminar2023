@@ -26,7 +26,6 @@ public class RobynKathrynTwilightCounter {
         stopWScanner.close(); 
 
 
-
         Scanner fileScan = new Scanner(f);
 
         while (fileScan.hasNextLine()) {
@@ -46,7 +45,6 @@ public class RobynKathrynTwilightCounter {
 
         List<String> uniqueWords = new ArrayList<>(wordFreq.keySet());
 
-        System.out.println(uniqueWords);
 
         PrintStream p = new PrintStream (fileName);//prinstream to print our most frequent words to a file
 
@@ -58,8 +56,6 @@ public class RobynKathrynTwilightCounter {
                 if (wordFreq.get(uniqueWords.get(i)) > largestValue) { //if we find a more frequent word, replace mostFreqWord and largestValue accordingly
                 largestValue = wordFreq.get(uniqueWords.get(i)); 
                 mostFreqWord = uniqueWords.get(i); 
-                //System.out.println(mostFreqWord);
-                
                 }
             }
             System.out.println(mostFreqWord);
@@ -70,7 +66,6 @@ public class RobynKathrynTwilightCounter {
 
     }
     
-    
 
     public static String cleanUp(String word) {
         word = word.toLowerCase();  // Force word to be in lowercase.
@@ -79,10 +74,3 @@ public class RobynKathrynTwilightCounter {
     }
 
 }
-
-
-// Read file 
-// Create Map<Strings, Integers> that holds all unique words and their frequencies & fill it 
-// Create collection of values 
-// Find top 10 values 
-// Find words that correspond to top 10 values  
