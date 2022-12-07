@@ -2,14 +2,9 @@ import java.util.*;
 import java.io.*;
 public class wordCounterPT {
 public static void main(String[] commandLineArgs) throws FileNotFoundException {
-    //command Line arguments
-   
-   String fileName = commandLineArgs[0];
- 
     //make sure to take in a file, not just the string of pathname
-    File f = new File(fileName);
+    File f = new File("twilight.txt");
     System.out.println(countWords(f));
-    
 }
 
 public static String cleanUp(String word) {
@@ -18,11 +13,11 @@ public static String cleanUp(String word) {
     return word;
   }
 
-public static String countWords(File f) throws FileNotFoundException {
+public static File countWords(File f) throws FileNotFoundException {
     //make map of strings and integers
-    Map<String, Integer> wordCounts = new HashMap<> ();
+    Map<String, Integer> wordCounts = new TreeMap<> ();
     //make an AL with all of the stopwords
-    ArrayList<String> stopWords = findStopWords("stopwords.txt");
+    Set<String> stopWords = findStopWords("stopwords.txt");
     //make a scanner to iterate through the file
     Scanner sc = new Scanner(f);
     //iterate through file using a while loop
@@ -33,35 +28,38 @@ public static String countWords(File f) throws FileNotFoundException {
         Scanner lineScan = new Scanner(currentLine);
         while(lineScan.hasNext()){
             String s = cleanUp(lineScan.next());
+            if(!stopWords.contains(s)){
             wordCounts.put(s, wordCounts.getOrDefault(wordCounts.get(s),0)+1);
+            }
         }
     }
-    //iterate through frequencies to find the largest value in the map, and return the key
-    Collection<Integer> values = wordCounts.values();
-    int maxValue = Collections.max(values);
-    //given the max value find the key
-    //makes a set of the keys
-    Set <String> keys = wordCounts.keySet();
-    String toRet = "";
-    // iterate through keys to find the key to return
-    for (String key1 : keys) {
-        if (wordCounts.get(key1) == maxValue) {
-            toRet = key1;
-        }
-    }
-    return toRet;
+    //return n largest values in the wordCounts values
+    return mostCommonAsFile(wordCounts, 25);
 }
 
-
-//creating an arrayList with all of the words in the stopwords.txt
-public static ArrayList<String> findStopWords(String pathname) throws FileNotFoundException{
-    //create an arrayList with all of the words in the file
+//create a set of all of the stop words in 'stopwords.txt'
+public static Set<String> findStopWords(String pathname) throws FileNotFoundException{
     File f = new File(pathname);
-    ArrayList<String> stopWords = new ArrayList <> ();
+    Set<String> stopWords = new HashSet<>();
     Scanner sc = new Scanner(f);
     while(sc.hasNextLine()){
         stopWords.add(sc.next());
     }
     return stopWords;
-} 
+}
+
+public static File f mostCommonAsFile(TreeMap<String, Integer> wordCounts, int n) throws FileNotFoundException{
+    //write to a file of the first n words in the the TreeMap
+    PrintStream p = new PrintStream(new FileOutputStream("mostCommonWords.txt", true));
+    int x = n;
+    Set<String> largestKeys = new HashSet<>();
+    p.println("The top 25 most used words are: ");
+    for(String word: wordCounts.keySet()){
+        if(x>=0){
+            p.println(word);
+        }
+        x--;
+    }
+    return p;
+}
 }
