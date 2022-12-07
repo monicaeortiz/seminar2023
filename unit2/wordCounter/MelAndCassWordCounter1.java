@@ -11,7 +11,7 @@ public class MelAndCassWordCounter1{
         //taking in the filename as a command line argument so that we can run any file we want 
         String fileName = commandLineArgs[0];
         //runnning with the filename entered in the command line 
-        commonWord(fileName);
+        commonWord("myrandomtest.rtf");
     }
 
 //prints out the most commonly used word and all of the words and their counts 
@@ -71,6 +71,8 @@ public class MelAndCassWordCounter1{
         //printing all of the keys and values assosciated in the map
         System.out.println(frequencyMap);
         //formattedWords(frequencyMap);
+        // printing the top 25 most common words to a new file 
+        writeInTop25(frequencyMap);
 
     }
 
@@ -91,15 +93,30 @@ public class MelAndCassWordCounter1{
     }
 
 //finding the most commonly used word
-    public static void writeInTop25(HashMap<String, Integer> frequencyMap){
-            //create a new map for the top 25 most frequent words
-            //find the max in the frequency map 
-            //put it into the file 
-            //take it out of the map 
-            //loop it through 25 times 
-
-            //print out the new map of the top 25 words --> just to check that it is correct
-            //write in the top 25 words into a new file 
-            System.out.println("The most commonly used word in this file is " + frequencyMap.get(currMax)  + " and it it mentioned " + currMa);
+    public static void writeInTop25(Map<String, Integer> frequencyMap)throws FileNotFoundException{
+        // creating a file that can be written to and will contain the list of the most frequently used 25 words
+        PrintStream listOfTop25Words = new PrintStream("top25WordsList.txt");
+        // Creating an arraylist of words that have already been used so they cannot be used again
+        ArrayList <String> wordsAlreadyUsed = new ArrayList <> ();
+        // creaitng a list of the key sin frequency map so it can be iterated through
+        Collection <String> keysOfFrequencyMap = frequencyMap.keySet();
+        // repeating these steps 25 times since we want the 25 most commonly used words
+        for (int i = 0; i < 25; i++){
+            int currMax = 0;
+            String currMaxWord = "";
+            for (String key : keysOfFrequencyMap){
+                // only execute the following statements if the word hasn't already been written into the file
+                if(wordsAlreadyUsed.indexOf(key) ==  -1 ){
+                // if the current key was mentioned more times than current max word, it becomes the new current max word and currMax should be updated with its value
+                    if(frequencyMap.get(key) > currMax){
+                        currMax = frequencyMap.get(key);
+                        currMaxWord = key;
+                    }
+                }
+            }
+                // adding the word to the words already used file so that the frequency map is not altered and the word is also not written to the file multiple times
+                wordsAlreadyUsed.add(currMaxWord);
+                listOfTop25Words.println(i + 1 + ". " + currMaxWord);
+        }
     }
 }
