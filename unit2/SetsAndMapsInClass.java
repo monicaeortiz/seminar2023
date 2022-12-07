@@ -13,24 +13,32 @@ public class SetsAndMapsInClass {
         fruits.add("strawberry");
         System.out.println(fruits);
 
-        Set<Integer> nums = new HashSet<>(Arrays.asList(1, 2, 3, 4));
-        System.out.println(nums);
+        String[] arr = fruits.toArray();
 
-        // How to iterate through a set:
-        Iterator<String> itr = fruits.iterator();
-        while (itr.hasNext()) {  // Still values left in iterator.
-            String word = itr.next();
-            System.out.println(word);
-        }
-        System.out.println();
-        // Second way:
-        for (String word : fruits) {
-            System.out.println(word);
+        for (String wo: arr){
+            System.out.println(wo);
         }
 
-        // Initialize 2 different sets.
-        Set<String> bowl1 = new HashSet<>(Arrays.asList("a", "b", "c"));
-        Set<String> bowl2 = new HashSet<>(Arrays.asList("b", "c", "d"));
+        arr.add("la");
+
+        // Set<Integer> nums = new HashSet<>(Arrays.asList(1, 2, 3, 4));
+        // System.out.println(nums);
+
+        // // How to iterate through a set:
+        // Iterator<String> itr = fruits.iterator();
+        // while (itr.hasNext()) {  // Still values left in iterator.
+        //     String word = itr.next();
+        //     System.out.println(word);
+        // }
+        // System.out.println();
+        // // Second way:
+        // for (String word : fruits) {
+        //     System.out.println(word);
+        // }
+
+        // // Initialize 2 different sets.
+        // Set<String> bowl1 = new HashSet<>(Arrays.asList("a", "b", "c"));
+        // Set<String> bowl2 = new HashSet<>(Arrays.asList("b", "c", "d"));
 
         // Get the union/disjunction/OR of the two.
         // bowl1.addAll(bowl2);
