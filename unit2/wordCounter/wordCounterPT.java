@@ -13,10 +13,8 @@ public static String cleanUp(String word) {
     return word;
   }
 
-public static File countWords(File f) throws FileNotFoundException {
-    //make map of strings and integers
+public static File countWords(File f, Map <String, Integer> wordCounts) throws FileNotFoundException {
     Map<String, Integer> wordCounts = new TreeMap<> ();
-    //make an AL with all of the stopwords
     Set<String> stopWords = findStopWords("stopwords.txt");
     //make a scanner to iterate through the file
     Scanner sc = new Scanner(f);
@@ -33,8 +31,7 @@ public static File countWords(File f) throws FileNotFoundException {
             }
         }
     }
-    //return n largest values in the wordCounts values
-    return mostCommonAsFile(wordCounts, 25);
+    return mostCommonAsFile(wordCounts, 25)
 }
 
 //create a set of all of the stop words in 'stopwords.txt'
