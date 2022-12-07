@@ -1,18 +1,31 @@
 import java.util.*;
 import java.io.*;
+import java.io.IOException; 
 public class wordCounterPT {
 public static void main(String[] args) throws FileNotFoundException {
-    //command Line arguments
    
    String fileName = "macbeth.txt";
- 
-    //make sure to take in a file, not just the string of pathname
     File f = new File(fileName);
+    // makes a new file for top 25 words
+    File top25Words = new File("C:\\Users\\Documents\\csSeminar\\onlineSeminar\\unit2\\wordCounter\\top25Words.txt");
     Map<String, Integer> wordCounts = new HashMap<> ();
+    String popularWord;
     for (int i = 0; i<25; i++) {
-        System.out.println(countWords(f, wordCounts));
-        //System.out.println(wordCounts);
-    }
+        popularWord = countWords(f, wordCounts);
+        System.out.println(popularWord);
+        // removes the most popualr word from the map each round
+        wordCounts.remove(popularWord);
+         // writing top 25 words to file (each round = 1 new word)
+        try {
+            FileWriter writeToFile = new FileWriter("top25Words.txt");
+            writeToFile.write(popularWord);
+            writeToFile.close();
+           } catch (IOException exception) {
+            System.out.println("An error occurred.");
+            exception.printStackTrace();
+           }
+        }
+        System.out.println(wordCounts);
     
 }
 
@@ -23,10 +36,10 @@ public static String cleanUp(String word) {
   }
 
 public static String countWords(File f, Map <String, Integer> wordCounts) throws FileNotFoundException {
-    Set <String> keysss = wordCounts.keySet();
-    for (String keys1 : keysss) {
+    Set <String> keysOfSet = wordCounts.keySet();
+    for (String keys1 : keysOfSet) {
         wordCounts.put(keys1, 0);
-    }
+    } 
     //make an AL with all of the stopwords
     ArrayList<String> stopWords = findStopWords("stopwords.txt");
     //make a scanner to iterate through the file
@@ -43,11 +56,8 @@ public static String countWords(File f, Map <String, Integer> wordCounts) throws
             if (stopWords.indexOf(s) == -1) {
                 wordCounts.put(s, wordCounts.getOrDefault(s,0)+1);
             }
-            
-          
         }
     }
-    //System.out.println(wordCounts);
     //iterate through frequencies to find the largest value in the map, and return the key
     Collection<Integer> values = wordCounts.values();
     int maxValue = Collections.max(values);
@@ -61,8 +71,6 @@ public static String countWords(File f, Map <String, Integer> wordCounts) throws
             toRet = key1;
         }
     }
-    wordCounts.remove(toRet);
-    //System.out.println(wordCounts);
     return toRet;
 }
 
