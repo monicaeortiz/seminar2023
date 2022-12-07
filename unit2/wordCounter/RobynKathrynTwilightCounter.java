@@ -32,11 +32,12 @@ public class RobynKathrynTwilightCounter {
         while (fileScan.hasNextLine()) {
             // String line = fileScan.nextLine();
             // Scanner lineScan = new Scanner(line);
-            String[] row = fileScan.nextLine().split(" "); //takes a line, gets rid of spaces, and puts elements in an array
-            for (int k = 0; k < row.length; k++) {
-                String curWord = row[k]; 
+            ArrayList<String> row = new ArrayList <> (Arrays.asList(fileScan.nextLine().split(" "))); //takes a line, gets rid of spaces, and puts elements in an array
+            for (int k = row.size()-1; k >= 0; k--) {
+                String curWord = row.get(k); 
                 curWord = cleanUp(curWord);//removing punctuation
-                if (!stopWords.contains(curWord)) { //if the current word is a stop word, do not add in to the map 
+                if (!stopWords.contains(curWord) && (curWord.length() > 0)) { //if the current word is a stop word, do not add in to the map 
+                //the frankenstein file had some formatting issues, and random letters ended up in our set, which worked for twilight. Not sure exactly what the problem was, but we coded the length to be greater than 1. A is a stop word anyway, and I feel like that's the only word in the English language that is one letter.
                     wordFreq.put(curWord, wordFreq.getOrDefault(curWord, 0) + 1);//either increase the value of the key by 1, or add the word into the map and set the default value to 1
                 }
             }
@@ -45,20 +46,23 @@ public class RobynKathrynTwilightCounter {
 
         List<String> uniqueWords = new ArrayList<>(wordFreq.keySet());
 
+        System.out.println(uniqueWords);
+
         PrintStream p = new PrintStream (fileName);//prinstream to print our most frequent words to a file
 
         for (int l = 0; l < numWords; l++){
         String mostFreqWord = uniqueWords.get(0); //initializing most frequent word to the first element in our list
         int largestValue = wordFreq.get(mostFreqWord); //largest value intitialized to the value of mostFreqWord
 
-            for (int i = uniqueWords.size() - 1; i >= 0; i--) { //checking values 
+            for (int i = 0; i < uniqueWords.size() - 1; i++) { //checking values 
                 if (wordFreq.get(uniqueWords.get(i)) > largestValue) { //if we find a more frequent word, replace mostFreqWord and largestValue accordingly
                 largestValue = wordFreq.get(uniqueWords.get(i)); 
                 mostFreqWord = uniqueWords.get(i); 
+                //System.out.println(mostFreqWord);
                 
                 }
             }
-
+            System.out.println(mostFreqWord);
             p.println(l + " place: " + mostFreqWord);
             uniqueWords.remove(mostFreqWord);//remove the mostFreqWord from the list, no longer included in comparisons
 
