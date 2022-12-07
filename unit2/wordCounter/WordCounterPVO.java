@@ -49,7 +49,6 @@ public class WordCounterPVO{
     public static void mostCommonInFile(Map<String, Integer> words, int n) throws FileNotFoundException{
         PrintStream p = new PrintStream(new File ("mostCommonWords.txt"));
         p.println("The top " + n + " most used words are: ");
-    
         //make an arraylist that contains all of the words that are already used
         ArrayList<String> usedWords = new ArrayList<>();
 
@@ -75,6 +74,5 @@ public class WordCounterPVO{
             //write to the file of the current max word
             p.println(currentMaxWord);
         }
-
     }
 }
