@@ -8,6 +8,7 @@ public class MelAndCassWordCounter1{
         String fileName = commandLineArgs[0];
         //runnning with the filename entered in the command line 
         commonWord(fileName);
+        //this has been tested with cassMidtermEssay, twilight, twilightBabyTester, and other files 
     }
 
 //prints out the most commonly used word and all of the words and their counts 
@@ -63,9 +64,7 @@ public class MelAndCassWordCounter1{
         frequencyMap.remove("");
         frequencyMap.remove(" ");
 
-        // printing out the frequency map (aka all the words in the file and their counts)
-        System.out.println(frequencyMap);
-        formattedWords(frequencyMap);
+        //formattedWords(frequencyMap);
         // printing the top 25 most common words to a new file 
         writeInTop25(frequencyMap);
 
