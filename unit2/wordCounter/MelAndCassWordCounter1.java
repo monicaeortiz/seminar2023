@@ -11,7 +11,7 @@ public class MelAndCassWordCounter1{
         //taking in the filename as a command line argument so that we can run any file we want 
         String fileName = commandLineArgs[0];
         //runnning with the filename entered in the command line 
-        commonWord("myrandomtest.rtf");
+        commonWord(fileName);
     }
 
 //prints out the most commonly used word and all of the words and their counts 
