@@ -1,7 +1,3 @@
-//shoudl be able to print out all of the words
-//the most frequent word printed out 
-//'n' most frequent words
-
 import java.util.Scanner;
 import java.io.*;
 import java.util.*;
@@ -11,7 +7,8 @@ public class MelAndCassWordCounter1{
         //taking in the filename as a command line argument so that we can run any file we want 
         String fileName = commandLineArgs[0];
         //runnning with the filename entered in the command line 
-        commonWord("myrandomtest.rtf");
+        commonWord(fileName);
+        //this has been tested with cassMidtermEssay, twilight, twilightBabyTester, and other files 
     }
 
 //prints out the most commonly used word and all of the words and their counts 
@@ -67,9 +64,6 @@ public class MelAndCassWordCounter1{
         frequencyMap.remove("");
         frequencyMap.remove(" ");
 
-        //running the functions that print all of the words and their counts adn the functiont hat prints the most common word and its count
-        //printing all of the keys and values assosciated in the map
-        System.out.println(frequencyMap);
         //formattedWords(frequencyMap);
         // printing the top 25 most common words to a new file 
         writeInTop25(frequencyMap);
@@ -92,7 +86,7 @@ public class MelAndCassWordCounter1{
          return word;
     }
 
-//finding the most commonly used word
+//writing the top 25 most commonly words into a new file called top25WordsList.txt
     public static void writeInTop25(Map<String, Integer> frequencyMap)throws FileNotFoundException{
         // creating a file that can be written to and will contain the list of the most frequently used 25 words
         PrintStream listOfTop25Words = new PrintStream("top25WordsList.txt");
