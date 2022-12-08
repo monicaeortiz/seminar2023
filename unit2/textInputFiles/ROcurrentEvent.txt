@@ -1,0 +1,23 @@
+The article I chose is from the New York Times and is titled “Supreme Court Says 10 Burglaries Can Count as One Offense”. 
+
+The article discusses the Supreme Court case Wooden vs. United States for which a ruling was released 3 weeks ago today on March 7th, so I thought this would be a good article to present coming out of our unit on the judiciary. 
+
+I’ll begin with an explanation of the crime and judicial proceedings that landed this case in the Supreme Court. 
+
+In 1997, William Dale Wooden pled guilty to 10 counts of burglary for the 10 storage units he broke into on one night in Georgia. 7 years later, in 2014, during a search of his home that was conducted for reasons unrelated to his 1997 crime, officers find a rifle.
+
+This changes everything, because now Wooden is a felon in possession of a firearm and for this he is convicted in federal district court. In determining his sentence, the court employs The Armed Career Criminal Act, or the ACCA. This act calls for a 15-year minimum sentence for criminals who illegally possessed a gun and were convicted of 3+ felonies “committed on occasions different than each other.” Having been convicted of 10 separate counts of burglary, Wooden qualifies as an armed career criminal and is sentenced by the court to 16 years in prison. Had this statute not been applied, Wooden’s sentence would have only been about 2 years. 
+
+Wooden appeals his sentencing to the US court of appeals on the argument that his felonies were all comitted on one singular occasion, meaning that he should not be sentenced under the ACCA and should receive a much shorter sentencing. The case is then appealed to the Supreme Court which agrees to hear it. 
+
+Over a year after the Supreme Court granted cert, the court released it’s decision in Wooden vs. US, ruling unanimously in favor of Wooden. The court stated that he was not subject to sentencing under the ACCA because the series of burglaries took place on a single occasion.  
+
+In the majority opinion, Justice Elena Kagan used the analogy of a wedding to support the opinion. She explained that a wedding includes a ceremony, cocktail hour, dinner, and dancing, and, though separate, they are all successive and have a shared theme. They do not occur at the same moment, but they make up a single event. In the case of Mr. Wooden, his felonies did not take place at the same moment, but they too made up a single occasion.
+
+This ruling has the effect of setting a new precedent in the interpretation of the word “occasion.” Kagan wrote that the court should consider a “range of circumstances” when deciding if an offense took place on one or more occasion like if the crimes are close in time and are in the same place. 
+
+Though the ruling is unanimous, Justice Gorsuch did write a concurring opinion in which he questioned Kagan’s method of  determining what constitutes one “occasion”. He stated that Kagan’s method of interpretation was still ambiguous.
+
+In his opinion, he raises the question of, if each storage unit had its own number and space, what makes them different locations? He discusses a scenario in which these adjacent storage units were, instead, two adjacent stores in a mall. If Mr. Wooden broke down the walls separating them, would the court say his crime occurred at the same location?
+
+Gorsuch argues, instead, that the rule of lenity should be applied in Wooden’s case. The rule of lenity is a rule of statutory interpretation which says that, in the case of an ambiguous law, a court should resolve the ambiguity in the law in favor of the criminal defendant. 
