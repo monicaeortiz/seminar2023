@@ -40,12 +40,7 @@ public class TaraKathrynAIRobot {
 
     public static String pickBigram(Map <String, ArrayList <String>> bigrams, String key) {
 
-        return (bigrams.get(key)).get((int) (Math.random() * (bigrams.get(key).size() + 1)));
-
-
-
-
-
+        return (bigrams.get(key)).get((int) (Math.random() * (bigrams.get(key).size() + 1)));//get the arraylist associated with the key and generate a random number that returns a random index of that arraylist
 
     }
 
