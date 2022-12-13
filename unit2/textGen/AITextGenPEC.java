@@ -6,20 +6,24 @@ public class AITextGenPec {
 
     //methods
 
-    public static map parseLine(File f){
-        pass;
-    }
-    
-    public static String chooseBigramWord(Map bigrams){
+    public static void generateNewFile(Map<String, List<String>>){
         pass;
     }
 
-    public static String chooseValue(Map bigrams, String word){
+    public static Map<String, List<String>> parseFile(File f){
+        Map<String, String> bigrams = new HashMap<>();
+    }
+    
+    public static String chooseBigramWord(Map<String, List<String>> bigrams){
+        pass;
+    }
+
+    public static String chooseValue(Map<String, List<String>> bigrams, String word){
         pass;
     }
 
     //extra helper methods
-    public static String findPunctuation(Map bigrams){
+    public static String findPunctuation(Map<String, String> bigrams){
         pass;
     }
 
