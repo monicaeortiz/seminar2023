@@ -8,7 +8,7 @@ public class AITextGenPec {
 
     public static void generateNewFile(Map<String, List<String>>){
         PrintStream generatedFile = new PrintStream("GeneratedFilePEC");
-        
+
 
     }
 
@@ -29,7 +29,7 @@ public class AITextGenPec {
         pass;
     }
 
-    public static randomizeLines(){
+    public static void randomizeLines(){
 
     }
 
