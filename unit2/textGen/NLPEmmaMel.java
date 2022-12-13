@@ -1,6 +1,5 @@
 public class NLPEmmaMel{
     public static void main(String[] args){
-
     }
 
     public static void printNewScript(String pathname, int numLines){
