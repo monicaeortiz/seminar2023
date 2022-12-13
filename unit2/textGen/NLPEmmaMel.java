@@ -12,11 +12,18 @@ public class NLPEmmaMel{
         //for loop to randomly pick bigrams from map and runs the numLines, which is amount of lines that are desired in new file
             //use pickBigram method and print it to new file
     }
-
+    // returns a random bigram so that it can be added to the printstream
     public static String pickBigram(Map<String, ArrayList<String>> bigrams){
-        //calls getRandomElement
+        // make a variable to hold the key set of the bigram map
+        // convert this variable to an array list (so that it has indexes, and random picker can be used), call this variable listOfKeys
+        // feed listOfKeys into getRandomElement, save this to a variable chosenKey
+        // save all of the values associated with chosenKey to another arrayList (can call this listOfValues)
+        // use getRandomElement to get a random value from listOfValues (can call this chosenValue)
+        // return a string formatted as follows: chosenKey + " " + chosenValue (this is a bigram)
     }
-
+    // picks a random element from an array list
     public static String getRandomElement(ArrayList<String> list){
+        // use Math.Random to pick a random index (utilize size of list to make sure all elements of list could be chosen)
+        // return the element held at that random index using .get() method
     }
 }
