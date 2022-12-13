@@ -7,7 +7,9 @@ public class AITextGenPec {
     //methods
 
     public static void generateNewFile(Map<String, List<String>>){
-        pass;
+        PrintStream generatedFile = new PrintStream("GeneratedFilePEC");
+        
+
     }
 
     public static Map<String, List<String>> parseFile(File f){
@@ -25,6 +27,10 @@ public class AITextGenPec {
     //extra helper methods
     public static String findPunctuation(Map<String, String> bigrams){
         pass;
+    }
+
+    public static randomizeLines(){
+
     }
 
     
