@@ -94,11 +94,6 @@ public class AITextGenPEC {
     public static String findPunctuation(Map<String, String> bigrams){
         pass;
     }
-
-    public static void randomizeLines(){
-
-    }
-
     
     
 }
