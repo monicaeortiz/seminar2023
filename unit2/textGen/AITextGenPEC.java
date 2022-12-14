@@ -2,7 +2,8 @@ import java.util.*;
 import java.io.*;
 
 public class AITextGenPEC {
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] commandLineArgs) throws FileNotFoundException{
+
         //testing helper methods
         // Map<String, List<String>> testMap = new HashMap<>();
         // List<String> testValues1 = new ArrayList<>(Arrays.asList("hey", "hi", "name."));
@@ -17,8 +18,7 @@ public class AITextGenPEC {
 
         //generateNewFile(testMap, 2);
 
-        File f = new File("/Users/espaulding/Desktop/lyrics.txt");
-        File next = new File("/Users/espaulding/Desktop/beeMovieScript.txt");
+        File f = commandLineArgs[0];
         Map<String, List<String>> bigrams = parseFile(f);
         Map<String, List<String>> nextFile = parseFile(next);
         generateNewFile(bigrams, 3);
