@@ -5,7 +5,7 @@ public class AITextGenPEC {
     public static void main(String[] args) throws FileNotFoundException{
         //testing helper methods
         Map<String, List<String>> testMap = new HashMap<>();
-        List<String> testValues1 = new ArrayList<>(Arrays.asList("bye", "my", "name."));
+        List<String> testValues1 = new ArrayList<>(Arrays.asList("hey", "hi", "name."));
         List<String> testValues2 = new ArrayList<>(Arrays.asList("road", "lane", "lane."));
         List<String> testValues3 = new ArrayList<>(Arrays.asList("love", "love", "thanks."));
         testMap.put("", testValues1);
@@ -29,14 +29,13 @@ public class AITextGenPEC {
 
         //printstream to add words into generated file
         PrintStream p = new PrintStream(new FileOutputStream(newFileName, true));
-        
+        String tester = "";
+
         String firstWord = "";
         String follower = "";
         for(int i = 0; i<numSentences; i++){
-            System.out.println("test1");
             //check that the current Value does not contain punctuation (the last character in follower is not found in punctuation)
-            while(follower.length() == 0 || (punctuation.indexOf(follower.charAt(follower.length()-1)) == -1)){
-                System.out.println("test2");
+            while(follower.length() == 0 || (punctuation.indexOf(follower.substring(follower.length()-1)) == -1)){
                 //if start of sentence...
                 if(firstWord == ""){
                     //...choose random bigram from keys in bigrams
@@ -52,6 +51,7 @@ public class AITextGenPEC {
                 //update the value of word
             }
         }
+        System.out.println(tester);
         //close printstream
         p.close();
 
@@ -88,7 +88,7 @@ public class AITextGenPEC {
     // }
 
     
-    
+    //helper methods
     public static String chooseBigramWord(Map<String, List<String>> bigrams){
         //make key set into arrayList, using the keys as the input into the arrayList
         ArrayList<String> keys = new ArrayList<>(bigrams.keySet());
