@@ -6,9 +6,9 @@ public class AITextGenPEC {
 
         String fileAddress = commandLineArgs[0];
         File f = new File(fileAddress);
-        int numLines = Integer.parseInt(commandLineArgs[1]);
+        //int numLines = Integer.parseInt(commandLineArgs[1]);
         Map<String, List<String>> bigrams = parseFile(f);
-        generateNewFile(bigrams, numLines);
+        generateNewFile(bigrams, 5);
 
         //generateNewFile(nextFile, 4);
 
@@ -34,12 +34,14 @@ public class AITextGenPEC {
                 if(firstWord == ""){
                     //...choose random bigram from keys in bigrams
                     firstWord = chooseBigramWord(bigrams);
+                    //firstWord = firstWord.substring(0,1).toUpperCase() + firstWord.substring(1);
                     if(punctuation.indexOf(firstWord.substring(firstWord.length()-1)) != -1){
                         continue;
                     }
                 } else { 
                     //...else set the last value (follower) as the new firstWord
                     firstWord = follower;
+                    //firstWord = firstWord.toLowerCase();
                 }
                 //find the followers of the word and find values (choose a random one) i.e chooseValue
                 follower = chooseValue(bigrams, firstWord);
