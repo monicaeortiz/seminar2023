@@ -1,9 +1,12 @@
 import java.util.*;
+import java.io.*;
 public class TaraKathrynAIRobot {
 
-    public static void main (String[] args) {
+    public static void main (String[] args) throws FileNotFoundException {
+
+        File test = new File("macbeth.txt");
     
-        ArrayList<String> words = new ArrayList<>(Arrays.asList("a", "b", "c", "d", "e"));
+        ArrayList<String> words = new ArrayList<String>(Arrays.asList("a", "b", "c", "d", "e"));
 
         Map<String, ArrayList<String>> salaries = new HashMap<>();//can't have just Map on left side bc Map is an interface, HashMap implements a map interface
         salaries.put("Ms. Z", words);//keys must be unique
@@ -15,24 +18,25 @@ public class TaraKathrynAIRobot {
         salaries.put("Chandler", words);
         salaries.put("Chandler", words);//will UPDATE the value at Chandler
 
-        System.out.println(pickBigram(salaries, "Person"));
-        System.out.println(pickBigram(salaries, "Janice"));
+        //System.out.println(pickBigram(salaries, "Person"));
+        //System.out.println(pickBigram(salaries, "Janice"));
 
-
+        System.out.println(scanFile(test));
        
 
     }
 
 
-<<<<<<< HEAD
-     public static Map<String, ArrayList<String>> scanFile (File textFile) {
+     public static Map<String, ArrayList<String>> scanFile (File textFile) throws FileNotFoundException {
         Map <String, ArrayList<String>> bigrams = new HashMap<>();//empty map, will be filled with bigrams
         Scanner fileScan = new Scanner(textFile);
         String firstWord = "";
         while(fileScan.hasNext()) { //keep getting strings from file one at a time
             String secondWord = fileScan.next(); //get the String in the file
             if (!bigrams.containsKey(firstWord)) { //if firstWord does not exist, add firstWord as a key to the map
-                bigrams.put(firstWord, secondWord); //add secondWord to the value of firstWord
+                ArrayList <String> values = new ArrayList <String> ();
+                values.add(secondWord);
+                bigrams.put(firstWord, values); //add secondWord to the value of firstWord
                 firstWord = secondWord; //change firstWord to SecondWord
             }
             else {  // if firstWord already exists as a key in the map, get the current value and push the second word to the array list
@@ -41,20 +45,9 @@ public class TaraKathrynAIRobot {
             }
         }
         fileScan.close();
+        return bigrams;
     }
      
-=======
-
-/*
-
-if the word ends with punctiuation, have the value be an empty string
-the sentence starter words will be the values of the empty string key
-
-*/
-    // public static Map scanFile (File textFile) {
-
-    // }
->>>>>>> fe0ad959aebcad0f593a4ed562f91c7c6284d544
 
     /*psuedocode
 
@@ -68,7 +61,7 @@ the sentence starter words will be the values of the empty string key
 
 
 
-    public static void writeNewFile(Map <String, ArrayList<String>> bigrams int numSentences, String fileName) {
+    /*public static void writeNewFile(Map <String, ArrayList<String>> bigrams int numSentences, String fileName) {
 
         ArrayList<String> sentenceEnder = new ArrayList<>(Arrays.asList(".", "?", "!"));
 
@@ -137,6 +130,7 @@ add a value to the previous string, which is the current word
 
 
 */
+
 
 }
 
