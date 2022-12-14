@@ -2,7 +2,7 @@ import java.util.*;
 import java.io.*;
 public class NLPEmmaMel{
     public static void main(String[] args) throws FileNotFoundException{
-        File f = new File("test.txt");
+        File f = new File("../textInputFiles/twilight.txt");
         printNewScript(f, 5);
     }
 
@@ -10,7 +10,7 @@ public class NLPEmmaMel{
         //read in file using a scanner
         Scanner sc = new Scanner(f);
         //create map to keep bigrams
-        Map<String, ArrayList<String>> bigrams = new HashMap<>();
+        Map <String, ArrayList<String>> bigrams = new HashMap<>();
 
         //loop to keep going until there are no more lines in given file
         while(sc.hasNextLine()){
@@ -74,10 +74,23 @@ public class NLPEmmaMel{
         // convert this variable to an array list (so that it has indexes, and random picker can be used), call this variable listOfKeys
         ArrayList <String> listOfKeys = new ArrayList <>(keysOfMap);
         //initalize chosen key as empty - which it will be if firstWord is true
-        String chosenKey = " ";
-        if(!firstWord) {
-            // feed listOfKeys into getRandomElement, save this to a variable chosenKey
-            chosenKey = getRandomElement(listOfKeys);
+        String chosenKey = "";
+        // if it is the first word in a sentence, we want it to be one of the capital-lettered keys, we can ensure this using ASCII
+        int numericalValueOfFirstLetterInWord = 0;
+        if (firstWord){
+            // if numericalValueOfFirstLetterInWord is greater than 90, it is a lowercase letter, 
+            numericalValueOfFirstLetterInWord = 91;
+            while(numericalValueOfFirstLetterInWord > 90 && !chosenKey.equals(" ")){
+                chosenKey = getRandomElement(listOfKeys);
+                numericalValueOfFirstLetterInWord = chosenKey.charAt(0);
+            }
+        }
+        else{
+            // if it is not the first word of a sentence, we want to ensure it is lower case
+            while(numericalValueOfFirstLetterInWord < 97 && !chosenKey.equals(" ")){
+                chosenKey = getRandomElement(listOfKeys);
+                numericalValueOfFirstLetterInWord = chosenKey.charAt(0);
+            }
         }
         // save all of the values associated with chosenKey to another arrayList (can call this listOfValues)
         ArrayList <String> listOfValues = bigrams.get(chosenKey);
@@ -85,7 +98,7 @@ public class NLPEmmaMel{
         String chosenValue = getRandomElement(listOfValues);
         // if chosen key ends a sentence - do not print a value (it will be a space)
         if(chosenKey.indexOf(".") != -1 || chosenKey.indexOf("!") != -1 || chosenKey.indexOf("?") != -1){
-            return chosenKey + " ";
+            return chosenKey + " " + chosenValue + " ";
         //if chosen key is a space - means it will start a sentence so only print value
         } else if(chosenKey == " "){
             return chosenValue + " ";
