@@ -3,7 +3,7 @@ public class TaraKathrynAIRobot {
 
     public static void main (String[] args) {
     
-    ArrayList<String> words = new ArrayList<>(Arrays.asList("a", "b", "c", "d", "e"));
+        ArrayList<String> words = new ArrayList<>(Arrays.asList("a", "b", "c", "d", "e"));
 
         Map<String, ArrayList<String>> salaries = new HashMap<>();//can't have just Map on left side bc Map is an interface, HashMap implements a map interface
         salaries.put("Ms. Z", words);//keys must be unique
@@ -24,18 +24,31 @@ public class TaraKathrynAIRobot {
     }
 
 
-    // public static Map scanFile (File textFile) {
-
-    // }
+     public static Map<String, ArrayList<String>> scanFile (File textFile) {
+        Map <String, ArrayList<String>> bigrams = new HashMap<>();//empty map, will be filled with bigrams
+        Scanner fileScan = new Scanner(textFile);
+        String firstWord = "";
+        while(fileScan.hasNext()) { //keep getting strings from file one at a time
+            String secondWord = fileScan.next(); //get the String in the file
+            if (!bigrams.containsKey(firstWord)) { //if firstWord does not exist, add firstWord as a key to the map
+                bigrams.put(firstWord, secondWord); //add secondWord to the value of firstWord
+                firstWord = secondWord; //change firstWord to SecondWord
+            }
+            else {  // if firstWord already exists as a key in the map, get the current value and push the second word to the array list
+                ArrayList temp = bigrams.get(firstWord);
+                temp.add(secondWord);
+            }
+        }
+        fileScan.close();
+    }
+     
 
     // public static void writeNewLine() {
 
     // }
 
 
-    // public static String getRandomELement(String currentWord, Map <String, ArrayList <String>> bigrams) {
 
-    // }
 
 
     public static String pickBigram(Map <String, ArrayList <String>> bigrams, String key) {
@@ -55,3 +68,5 @@ public class TaraKathrynAIRobot {
 
 
 }
+
+
