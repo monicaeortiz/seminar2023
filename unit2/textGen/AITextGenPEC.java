@@ -5,9 +5,10 @@ public class AITextGenPEC {
     public static void main(String[] commandLineArgs) throws FileNotFoundException{
 
         File f = commandLineArgs[0];
+        int numLines = commandLineArgs[1];
         Map<String, List<String>> bigrams = parseFile(f);
         Map<String, List<String>> nextFile = parseFile(next);
-        generateNewFile(bigrams, 3);
+        generateNewFile(bigrams, numLines);
 
         //generateNewFile(nextFile, 4);
 
