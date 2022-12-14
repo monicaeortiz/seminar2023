@@ -2,30 +2,9 @@ import java.util.*;
 import java.io.*;
 public class TaraKathrynAIRobot {
 
-    public static void main (String[] args) throws FileNotFoundException {
+    public static void main (String[] args) throws FileNotFoundException, NumberFormatException {
 
-        File test = new File("babyTextFile.txt");
-    
-        ArrayList<String> words = new ArrayList<String>(Arrays.asList("a", "b", "c", "d", "e"));
-
-        // Map<String, ArrayList<String>> salaries = new HashMap<>();//can't have just Map on left side bc Map is an interface, HashMap implements a map interface
-        // salaries.put("Ms. Z", words);//keys must be unique
-        // salaries.put("Mr. A", words);
-        // salaries.put("Ms. Sandes", words);
-        // salaries.put("Person", words);
-        // salaries.put("Ross", words);
-        // salaries.put("Janice", words);
-        // salaries.put("Chandler", words);
-        // salaries.put("Chandler", words);//will UPDATE the value at Chandler
-
-        //System.out.println(pickBigram(salaries, "Person"));
-        //System.out.println(pickBigram(salaries, "Janice"));
-
-        System.out.println(scanFile(test));
-
-        writeNewFile(scanFile(test), 4, "test1.txt");
-       
-
+        writeNewFile(scanFile(new File (args[0])), Integer.parseInt(args[1]), args[2]);
     }
 
 //if the first word has punctiation, make the second word an empty string, and get a value from the empty string key
@@ -138,29 +117,6 @@ Elements that appear more often in the arraylist will be more likely to show up
         return (bigrams.get(key)).get((int) (Math.random() * (bigrams.get(key).size())));//get the arraylist associated with the key and generate a random number that returns a random index of that arraylist
 
     }
-
-
-    // public static String checkPunctuation(Map <String, ArrayList <String>> bigrams) {
-
-
-
-    // }
-
-
-/* do while loop
-
-get the first word in the file
-add it to the map
-
-
-
-next loop
-add a value to the previous string, which is the current word
-
-
-
-
-*/
 
 
 }
