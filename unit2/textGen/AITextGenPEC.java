@@ -18,8 +18,12 @@ public class AITextGenPEC {
         //generateNewFile(testMap, 2);
 
         File f = new File("/Users/espaulding/Desktop/lyrics.txt");
+        File next = new File("/Users/espaulding/Desktop/beeMovieScript.txt");
         Map<String, List<String>> bigrams = parseFile(f);
+        Map<String, List<String>> nextFile = parseFile(next);
         generateNewFile(bigrams, 3);
+
+        //generateNewFile(nextFile, 4);
 
 
     }
@@ -43,6 +47,9 @@ public class AITextGenPEC {
                 if(firstWord == ""){
                     //...choose random bigram from keys in bigrams
                     firstWord = chooseBigramWord(bigrams);
+                    if(punctuation.indexOf(firstWord.substring(firstWord.length()-1)) != -1){
+                        continue;
+                    }
                 } else { 
                     //...else set the last value (follower) as the new firstWord
                     firstWord = follower;
