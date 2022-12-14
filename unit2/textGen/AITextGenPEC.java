@@ -1,44 +1,63 @@
 import java.util.*;
+import java.io.*;
 
 public class AITextGenPEC {
-    public static void main(String[] args){
+    public static void main(String[] args) throws FileNotFoundException{
         //testing helper methods
         Map<String, List<String>> testMap = new HashMap<>();
-        List<String> testValues1 = new ArrayList<>(Arrays.asList("bye", "my", "name"));
-        List<String> testValues2 = new ArrayList<>(Arrays.asList("road", "street", "lane"));
-        List<String> testValues3 = new ArrayList<>(Arrays.asList("love", "you", "thanks"));
-        testMap.put("hello", testValues1);
+        List<String> testValues1 = new ArrayList<>(Arrays.asList("bye", "my", "name."));
+        List<String> testValues2 = new ArrayList<>(Arrays.asList("road", "lane", "lane."));
+        List<String> testValues3 = new ArrayList<>(Arrays.asList("love", "love", "thanks."));
+        testMap.put("", testValues1);
         testMap.put("hey", testValues2);
-        testMap.put("my", testValues3);
+        testMap.put("hi", testValues3);
         String key = chooseBigramWord(testMap);
         System.out.println(key);
         System.out.println(chooseValue(testMap, key));
 
+        generateNewFile(testMap, 2);
+
 
     }
 
-    // public static void generateNewFile(Map<String, List<String>> bigrams, int numSentences){
-    //     //make an ArrayList that contains the punctuation
-    //     ArrayList<String> punctation = new ArrayList<>(Arrays.asList("?", ".", "!"));
+    public static void generateNewFile(Map<String, List<String>> bigrams, int numSentences) throws FileNotFoundException{
+        //make an ArrayList that contains the punctuation
+        ArrayList<String> punctuation = new ArrayList<>(Arrays.asList("?", ".", "!"));
 
-    //     //make a prinstream
+        //make a prinstream
+        String newFileName = "generatedFile.txt";
+
+        //printstream to add words into generated file
+        PrintStream p = new PrintStream(new FileOutputStream(newFileName, true));
         
-    //     String firstWord = "";
-    //     String follower = "";
-    //     for(int i = 0; i<numSentences; i++){
-    //         //check that the current Value does not contain punctuation (the last character in follower is not found in punctuation)
-    //         while(punctuation.indexOf(follower.charAt(follower.length-1)) == -1){
-    //             //first, find randomly generated word which is the key i.e chooseBigramWord 
-    //             firstWord = chooseBigramWord(bigrams);
-    //             //find the followers of the word and find values (choose a random one) i.e chooseValue
-                
-    //             //update the value of word
-    //         }
-    //     }
+        String firstWord = "";
+        String follower = "";
+        for(int i = 0; i<numSentences; i++){
+            System.out.println("test1");
+            //check that the current Value does not contain punctuation (the last character in follower is not found in punctuation)
+            while(follower.length() == 0 || (punctuation.indexOf(follower.charAt(follower.length()-1)) == -1)){
+                System.out.println("test2");
+                //if start of sentence...
+                if(firstWord == ""){
+                    //...choose random bigram from keys in bigrams
+                    firstWord = chooseBigramWord(bigrams);
+                } else { 
+                    //...else set the last value (follower) as the new firstWord
+                    firstWord = follower;
+                }
+                //find the followers of the word and find values (choose a random one) i.e chooseValue
+                follower = chooseValue(bigrams, firstWord);
+                //add word to printstream file
+                p.print(firstWord);
+                //update the value of word
+            }
+        }
+        //close printstream
+        p.close();
 
-    // }
+    }
 
-    // public static Map<String, List<String>> parseFile(File f){
+    // public static Map<String, List<String>> parseFile(File f) throws FileNotFoundException{
     //     //creating the map for our file 
     //     Map<String, List<String>> bigrams = new HashMap<>();
     //     String word = "";
