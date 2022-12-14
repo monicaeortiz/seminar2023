@@ -98,14 +98,12 @@ public class NLPEmmaMel{
         String chosenValue = getRandomElement(listOfValues);
         // if chosen key ends a sentence - do not print a value (it will be a space)
         if(chosenKey.indexOf(".") != -1 || chosenKey.indexOf("!") != -1 || chosenKey.indexOf("?") != -1){
-             System.out.println("chosenKey" + chosenKey + " and chosen value " + chosenValue);
-            return chosenKey  + " " + chosenValue + " ";
+            return chosenKey + " " + chosenValue + " ";
         //if chosen key is a space - means it will start a sentence so only print value
         } else if(chosenKey == " "){
             return chosenValue + " ";
         } 
         //in all other cases print key and value
-        System.out.println("chosenKey" + chosenKey + " and chosen value " + chosenValue);
         return chosenKey + " " + chosenValue + " ";
     }
 

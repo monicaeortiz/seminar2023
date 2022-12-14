@@ -4,18 +4,22 @@ import java.io.*;
 public class AITextGenPEC {
     public static void main(String[] args) throws FileNotFoundException{
         //testing helper methods
-        Map<String, List<String>> testMap = new HashMap<>();
-        List<String> testValues1 = new ArrayList<>(Arrays.asList("hey", "hi", "name."));
-        List<String> testValues2 = new ArrayList<>(Arrays.asList("road", "lane", "lane."));
-        List<String> testValues3 = new ArrayList<>(Arrays.asList("love", "love", "thanks."));
-        testMap.put("", testValues1);
-        testMap.put("hey", testValues2);
-        testMap.put("hi", testValues3);
-        String key = chooseBigramWord(testMap);
-        System.out.println(key);
-        System.out.println(chooseValue(testMap, key));
+        // Map<String, List<String>> testMap = new HashMap<>();
+        // List<String> testValues1 = new ArrayList<>(Arrays.asList("hey", "hi", "name."));
+        // List<String> testValues2 = new ArrayList<>(Arrays.asList("road", "lane", "lane."));
+        // List<String> testValues3 = new ArrayList<>(Arrays.asList("love", "love", "thanks."));
+        // testMap.put("", testValues1);
+        // testMap.put("hey", testValues2);
+        // testMap.put("hi", testValues3);
+        // String key = chooseBigramWord(testMap);
+        // System.out.println(key);
+        // System.out.println(chooseValue(testMap, key));
 
-        generateNewFile(testMap, 2);
+        //generateNewFile(testMap, 2);
+
+        File f = new File("/Users/espaulding/Desktop/lyrics.txt");
+        Map<String, List<String>> bigrams = parseFile(f);
+        generateNewFile(bigrams, 3);
 
 
     }
@@ -29,11 +33,10 @@ public class AITextGenPEC {
 
         //printstream to add words into generated file
         PrintStream p = new PrintStream(new FileOutputStream(newFileName, true));
-        String tester = "";
 
-        String firstWord = "";
-        String follower = "";
         for(int i = 0; i<numSentences; i++){
+            String firstWord = "";
+            String follower = "";
             //check that the current Value does not contain punctuation (the last character in follower is not found in punctuation)
             while(follower.length() == 0 || (punctuation.indexOf(follower.substring(follower.length()-1)) == -1)){
                 //if start of sentence...
@@ -47,45 +50,47 @@ public class AITextGenPEC {
                 //find the followers of the word and find values (choose a random one) i.e chooseValue
                 follower = chooseValue(bigrams, firstWord);
                 //add word to printstream file
-                p.print(firstWord);
-                //update the value of word
+                p.print(firstWord + " ");
+            }
+            if(punctuation.indexOf(follower.substring(follower.length()-1)) != -1){
+                p.print(follower + " ");
+                p.println();
             }
         }
-        System.out.println(tester);
         //close printstream
         p.close();
 
     }
 
-    // public static Map<String, List<String>> parseFile(File f) throws FileNotFoundException{
-    //     //creating the map for our file 
-    //     Map<String, List<String>> bigrams = new HashMap<>();
-    //     String word = "";
-    //     //create new scanner to read in file
-    //     Scanner sc = new Scanner(f);
-    //     //creating a list that will hold the current value (list) for each o the keys 
-    //     ArrayList<String> currList = new ArrayList<>();
-    //     while(sc.hasNext()){
-    //         //creating the current word we're on to store as a key
-    //         String currWord= sc.next();
-    //         //gettnig the list that already exists for our key and setting it to currList
-    //         if(bigrams.contains(word) == false){
-    //             bigrams.put(word, currWord);
-    //         } else {
-    //             currList = bigrams.get(word);
-    //             //adding the second word to the list of words (vlue) for the key 
-    //             currList.add(currWord);
-    //             //putting the current word as a key and the updated list as the value
-    //             bigrams.put(word, currList);
-    //         }
-    //         //reassigning word to the next word
-    //         word = currWord;
+    public static Map<String, List<String>> parseFile(File f) throws FileNotFoundException{
+        //creating the map for our file 
+        Map<String, List<String>> bigrams = new HashMap<>();
+        String word = "";
+        //create new scanner to read in file
+        Scanner sc = new Scanner(f);
+        //creating a list that will hold the current value (list) for each o the keys 
+        List<String> currList = new ArrayList<>();
+        while(sc.hasNext()){
+            //creating the current word we're on to store as a key
+            String currWord= sc.next();
+            //gettnig the list that already exists for our key and setting it to currList
+            if(bigrams.containsKey(word) == false){
+                bigrams.put(word, new ArrayList<String>(Arrays.asList(currWord)));
+            } else {
+                currList = bigrams.get(word);
+                //adding the second word to the list of words (vlue) for the key 
+                currList.add(currWord);
+                //putting the current word as a key and the updated list as the value
+                bigrams.put(word, currList);
+            }
+            //reassigning word to the next word
+            word = currWord;
             
-    //     }
-    //     sc.close(); //closing our scanner
+        }
+        sc.close(); //closing our scanner
         
-    //     return bigrams; //returning the results of our map 
-    // }
+        return bigrams; //returning the results of our map 
+    }
 
     
     //helper methods
