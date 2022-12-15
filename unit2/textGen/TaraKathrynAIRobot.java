@@ -2,6 +2,7 @@ import java.util.*;
 import java.io.*;
 public class TaraKathrynAIRobot {
 
+<<<<<<< HEAD
     public static void main (String[] args) throws FileNotFoundException {
 
         File test = new File("AITest.txt");
@@ -23,30 +24,64 @@ public class TaraKathrynAIRobot {
 
         System.out.println(scanFile(test));
        
+=======
+    public static void main (String[] args) throws FileNotFoundException, NumberFormatException {
+>>>>>>> 8de0fee10fae73b58499cb90bd9103bb6d332d64
 
+        writeNewFile(scanFile(new File (args[0])), Integer.parseInt(args[1]), args[2]);
     }
 
-
+//if the first word has punctiation, make the second word an empty string, and get a value from the empty string key
      public static Map<String, ArrayList<String>> scanFile (File textFile) throws FileNotFoundException {
         Map <String, ArrayList<String>> bigrams = new HashMap<>();//empty map, will be filled with bigrams
+        ArrayList<String> starterWords = new ArrayList<String>();
+        bigrams.put("", starterWords);
         Scanner fileScan = new Scanner(textFile);
         String firstWord = "";
         while(fileScan.hasNext()) { //keep getting strings from file one at a time
+<<<<<<< HEAD
             String secondWord = fileScan.next(); //get the String in the file
             if (!bigrams.containsKey(firstWord)) { //if firstWord does not exist, add firstWord as a key to the map
                 ArrayList <String> values = new ArrayList <String> (); // makes array list for the values
                 values.add(secondWord); // adds secondWord to the arraylist
                 bigrams.put(firstWord, values); //add the new arraylist to the value of firstWord
+=======
+        String secondWord = fileScan.next(); //get the String in the file
+
+            if (hasPunctiation(firstWord)){
+
+                starterWords.add(secondWord);
+
+                bigrams.put("", starterWords);
+
             }
+
+
+            else if (!bigrams.containsKey(firstWord)) { //if firstWord does not exist, add firstWord as a key to the map
+                ArrayList <String> values = new ArrayList <String> ();
+                values.add(secondWord);
+                bigrams.put(firstWord, values); //add secondWord to the value of firstWord
+>>>>>>> 8de0fee10fae73b58499cb90bd9103bb6d332d64
+            }
+
+
             else {  // if firstWord already exists as a key in the map, get the current value and push the second word to the array list
-                ArrayList temp = bigrams.get(firstWord);
-                temp.add(secondWord);
+                (bigrams.get(firstWord)).add(secondWord);
+                //temp.add(secondWord);
             }
+<<<<<<< HEAD
             firstWord = secondWord; //change firstWord to SecondWord
+=======
+
+            firstWord = secondWord;//change firstWord to SecondWord
+>>>>>>> 8de0fee10fae73b58499cb90bd9103bb6d332d64
         }
         fileScan.close();
         return bigrams;
     }
+
+
+
      
 
     /*psuedocode
@@ -61,7 +96,7 @@ public class TaraKathrynAIRobot {
 
 
 
-    /*public static void writeNewFile(Map <String, ArrayList<String>> bigrams int numSentences, String fileName) {
+    public static void writeNewFile(Map <String, ArrayList<String>> bigrams, int numSentences, String fileName) throws FileNotFoundException{
 
         ArrayList<String> sentenceEnder = new ArrayList<>(Arrays.asList(".", "?", "!"));
 
@@ -73,19 +108,17 @@ public class TaraKathrynAIRobot {
 
         int curNumSentences = 0;
 
-        while (curNumSentences <= numSentences){
+        while (curNumSentences < numSentences){
 
             newWord = pickBigram(bigrams, curWord);
-            newText += newWord;
+            newText += newWord + " ";
             curWord = newWord;
 
-            for (int i = 0; i < 3; i ++){
-                 if (curWord.indexOf(sentenceEnder.get(i)) != -1){
+                 if (hasPunctiation(curWord)){
                     curWord = "";
                     curNumSentences ++;
                  }
 
-            }
         }
 
         p.print(newText);
@@ -99,9 +132,9 @@ public class TaraKathrynAIRobot {
 1. use .get to get the arraylist(value) of a specific String (key)
 2. Use Math.random to randomely generate a number (withing the indeices of the arrayList). 
 Elements that appear more often in the arraylist will be more likely to show up
-
 */
 
+<<<<<<< HEAD
     public static String pickBigram(Map <String, ArrayList <String>> bigrams, String key) {
 
         return (bigrams.get(key)).get((int) (Math.random() * (bigrams.get(key).size() + 1)));//get the arraylist associated with the key and generate a random number that returns a random index of that arraylist
@@ -120,16 +153,27 @@ Elements that appear more often in the arraylist will be more likely to show up
 
 get the first word in the file
 add it to the map
+=======
+    public static boolean hasPunctiation(String word){
+>>>>>>> 8de0fee10fae73b58499cb90bd9103bb6d332d64
 
+         ArrayList<String> sentenceEnder = new ArrayList<>(Arrays.asList(".", "?", "!"));
 
+          for (int i = 0; i < 3; i ++){
+                 if (word.indexOf(sentenceEnder.get(i)) != -1){
+                    return true;
+                 }
 
-next loop
-add a value to the previous string, which is the current word
+          }
 
+        return false;
+    }
 
+    public static String pickBigram(Map <String, ArrayList <String>> bigrams, String key) {
 
+        return (bigrams.get(key)).get((int) (Math.random() * (bigrams.get(key).size())));//get the arraylist associated with the key and generate a random number that returns a random index of that arraylist
 
-*/
+    }
 
 
 }

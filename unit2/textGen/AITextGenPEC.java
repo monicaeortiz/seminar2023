@@ -2,24 +2,15 @@ import java.util.*;
 import java.io.*;
 
 public class AITextGenPEC {
-    public static void main(String[] args) throws FileNotFoundException{
-        //testing helper methods
-        // Map<String, List<String>> testMap = new HashMap<>();
-        // List<String> testValues1 = new ArrayList<>(Arrays.asList("hey", "hi", "name."));
-        // List<String> testValues2 = new ArrayList<>(Arrays.asList("road", "lane", "lane."));
-        // List<String> testValues3 = new ArrayList<>(Arrays.asList("love", "love", "thanks."));
-        // testMap.put("", testValues1);
-        // testMap.put("hey", testValues2);
-        // testMap.put("hi", testValues3);
-        // String key = chooseBigramWord(testMap);
-        // System.out.println(key);
-        // System.out.println(chooseValue(testMap, key));
+    public static void main(String[] commandLineArgs) throws FileNotFoundException{
 
-        //generateNewFile(testMap, 2);
-
-        File f = new File("/Users/espaulding/Desktop/lyrics.txt");
+        String fileAddress = commandLineArgs[0];
+        File f = new File(fileAddress);
+        //int numLines = Integer.parseInt(commandLineArgs[1]);
         Map<String, List<String>> bigrams = parseFile(f);
-        generateNewFile(bigrams, 3);
+        generateNewFile(bigrams, 5);
+
+        //generateNewFile(nextFile, 4);
 
 
     }
@@ -43,9 +34,14 @@ public class AITextGenPEC {
                 if(firstWord == ""){
                     //...choose random bigram from keys in bigrams
                     firstWord = chooseBigramWord(bigrams);
+                    //firstWord = firstWord.substring(0,1).toUpperCase() + firstWord.substring(1);
+                    if(punctuation.indexOf(firstWord.substring(firstWord.length()-1)) != -1){
+                        continue;
+                    }
                 } else { 
                     //...else set the last value (follower) as the new firstWord
                     firstWord = follower;
+                    //firstWord = firstWord.toLowerCase();
                 }
                 //find the followers of the word and find values (choose a random one) i.e chooseValue
                 follower = chooseValue(bigrams, firstWord);
