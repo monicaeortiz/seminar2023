@@ -6,13 +6,9 @@ public class AITextGenPEC {
 
         String fileAddress = commandLineArgs[0];
         File f = new File(fileAddress);
-        //int numLines = Integer.parseInt(commandLineArgs[1]);
+        int numLines = Integer.parseInt(commandLineArgs[1]);
         Map<String, List<String>> bigrams = parseFile(f);
-        generateNewFile(bigrams, 5);
-
-        //generateNewFile(nextFile, 4);
-
-
+        generateNewFile(bigrams, numLines);
     }
 
     public static void generateNewFile(Map<String, List<String>> bigrams, int numSentences) throws FileNotFoundException{
@@ -34,22 +30,24 @@ public class AITextGenPEC {
                 if(firstWord == ""){
                     //...choose random bigram from keys in bigrams
                     firstWord = chooseBigramWord(bigrams);
-                    //firstWord = firstWord.substring(0,1).toUpperCase() + firstWord.substring(1);
+                    //if that word (that came after start), now has puncuation, continue to print/next sentence
                     if(punctuation.indexOf(firstWord.substring(firstWord.length()-1)) != -1){
                         continue;
                     }
                 } else { 
                     //...else set the last value (follower) as the new firstWord
                     firstWord = follower;
-                    //firstWord = firstWord.toLowerCase();
                 }
                 //find the followers of the word and find values (choose a random one) i.e chooseValue
                 follower = chooseValue(bigrams, firstWord);
                 //add word to printstream file
                 p.print(firstWord + " ");
             }
+            //if follower does have puncuation...
             if(punctuation.indexOf(follower.substring(follower.length()-1)) != -1){
+                //...print it with space
                 p.print(follower + " ");
+                //skip to next line to indicate new sentence
                 p.println();
             }
         }
