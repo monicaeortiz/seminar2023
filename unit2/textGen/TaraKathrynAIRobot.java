@@ -4,7 +4,7 @@ public class TaraKathrynAIRobot {
 
     public static void main (String[] args) throws FileNotFoundException {
 
-        File test = new File("macbeth.txt");
+        File test = new File("AITest.txt");
     
         ArrayList<String> words = new ArrayList<String>(Arrays.asList("a", "b", "c", "d", "e"));
 
@@ -34,15 +34,15 @@ public class TaraKathrynAIRobot {
         while(fileScan.hasNext()) { //keep getting strings from file one at a time
             String secondWord = fileScan.next(); //get the String in the file
             if (!bigrams.containsKey(firstWord)) { //if firstWord does not exist, add firstWord as a key to the map
-                ArrayList <String> values = new ArrayList <String> ();
-                values.add(secondWord);
-                bigrams.put(firstWord, values); //add secondWord to the value of firstWord
-                firstWord = secondWord; //change firstWord to SecondWord
+                ArrayList <String> values = new ArrayList <String> (); // makes array list for the values
+                values.add(secondWord); // adds secondWord to the arraylist
+                bigrams.put(firstWord, values); //add the new arraylist to the value of firstWord
             }
             else {  // if firstWord already exists as a key in the map, get the current value and push the second word to the array list
                 ArrayList temp = bigrams.get(firstWord);
                 temp.add(secondWord);
             }
+            firstWord = secondWord; //change firstWord to SecondWord
         }
         fileScan.close();
         return bigrams;
@@ -105,7 +105,7 @@ Elements that appear more often in the arraylist will be more likely to show up
     public static String pickBigram(Map <String, ArrayList <String>> bigrams, String key) {
 
         return (bigrams.get(key)).get((int) (Math.random() * (bigrams.get(key).size() + 1)));//get the arraylist associated with the key and generate a random number that returns a random index of that arraylist
-
+        // if it has punctuation, get word from the empty string key
     }
 
 
