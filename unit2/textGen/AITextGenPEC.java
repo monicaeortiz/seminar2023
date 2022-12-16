@@ -4,15 +4,11 @@ import java.io.*;
 public class AITextGenPEC {
     public static void main(String[] commandLineArgs) throws FileNotFoundException{
 
-        File f = commandLineArgs[0];
-        int numLines = commandLineArgs[1];
+        String fileAddress = commandLineArgs[0];
+        File f = new File(fileAddress);
+        int numLines = Integer.parseInt(commandLineArgs[1]);
         Map<String, List<String>> bigrams = parseFile(f);
-        Map<String, List<String>> nextFile = parseFile(next);
         generateNewFile(bigrams, numLines);
-
-        //generateNewFile(nextFile, 4);
-
-
     }
 
     public static void generateNewFile(Map<String, List<String>> bigrams, int numSentences) throws FileNotFoundException{
@@ -34,6 +30,7 @@ public class AITextGenPEC {
                 if(firstWord == ""){
                     //...choose random bigram from keys in bigrams
                     firstWord = chooseBigramWord(bigrams);
+                    //if that word (that came after start), now has puncuation, continue to print/next sentence
                     if(punctuation.indexOf(firstWord.substring(firstWord.length()-1)) != -1){
                         continue;
                     }
@@ -46,8 +43,11 @@ public class AITextGenPEC {
                 //add word to printstream file
                 p.print(firstWord + " ");
             }
+            //if follower does have puncuation...
             if(punctuation.indexOf(follower.substring(follower.length()-1)) != -1){
+                //...print it with space
                 p.print(follower + " ");
+                //skip to next line to indicate new sentence
                 p.println();
             }
         }
