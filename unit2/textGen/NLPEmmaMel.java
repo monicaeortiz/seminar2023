@@ -2,8 +2,9 @@ import java.util.*;
 import java.io.*;
 public class NLPEmmaMel{
     public static void main(String[] args) throws FileNotFoundException{
-        File f = new File("../textInputFiles/twilight.txt");
-        printNewScript(f, 5);
+        String pathname = args[0];
+        File f = new File(pathname);
+        printNewScript(f, 10);
     }
 
     public static void printNewScript(File f, int numSentences) throws FileNotFoundException{
@@ -53,6 +54,11 @@ public class NLPEmmaMel{
         while(amountOfSentences < numSentences){
             //orginal string of bigram - flag starts as true because first bigram should be the start of a sentence
             String bigram = pickBigram(bigrams, flag);
+            // if this is the last sentence, get rid of the second word in the bigram becasue we want to end with puncuation
+            if (amountOfSentences == numSentences -1){
+                bigram = bigram.substring(0, bigram.indexOf(" "));
+            }
+            // print the bigram 
             p.print(bigram);
             // if there is a period, question mark, or exclamation point in the bigram, the sentence is over, add one to sentence count and make flag true to start a new sentence with the bigram
             if(bigram.indexOf(".") != -1 || bigram.indexOf("!") != -1 || bigram.indexOf("?") != -1){
@@ -78,15 +84,16 @@ public class NLPEmmaMel{
         // if it is the first word in a sentence, we want it to be one of the capital-lettered keys, we can ensure this using ASCII
         int numericalValueOfFirstLetterInWord = 0;
         if (firstWord){
-            // if numericalValueOfFirstLetterInWord is greater than 90, it is a lowercase letter, 
-            numericalValueOfFirstLetterInWord = 91;
+            // if numericalValueOfFirstLetterInWord is greater than 90, the word begins with a lowercase letter, we do not want this word to begin with a lowercase letter
+            numericalValueOfFirstLetterInWord = 91; // setting numericalValueOfFirstLetterInWord to 91 so the loop will start
+            // choose a key until you get an uppercase letter as the key
             while(numericalValueOfFirstLetterInWord > 90 && !chosenKey.equals(" ")){
                 chosenKey = getRandomElement(listOfKeys);
                 numericalValueOfFirstLetterInWord = chosenKey.charAt(0);
             }
         }
         else{
-            // if it is not the first word of a sentence, we want to ensure it is lower case
+            // if it is not the first word of a sentence, we want to ensure it is lower case, choose a key until you get a lower case letter
             while(numericalValueOfFirstLetterInWord < 97 && !chosenKey.equals(" ")){
                 chosenKey = getRandomElement(listOfKeys);
                 numericalValueOfFirstLetterInWord = chosenKey.charAt(0);
