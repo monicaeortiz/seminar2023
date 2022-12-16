@@ -55,7 +55,7 @@ public class NLPEmmaMel{
             //orginal string of bigram - flag starts as true because first bigram should be the start of a sentence
             String bigram = pickBigram(bigrams, flag);
             // if this is the last sentence, get rid of the second word in the bigram becasue we want to end with puncuation
-            if (amountOfSentences == numSentences -1){
+            if (amountOfSentences == numSentences){
                 bigram = bigram.substring(0, bigram.indexOf(" "));
             }
             // print the bigram 
