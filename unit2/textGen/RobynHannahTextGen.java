@@ -4,19 +4,24 @@ import java.io.*;
 public class RobynHannahTextGen {
     public static void main (String [] args) throws FileNotFoundException{
         File f = new File("smallTest.txt");
-        populateMap(f);
+        System.out.println(populateMap(f));
         
     }
 
     public static String sentenceBuilder (Map<String, List> bigrams) {
     //will print output text to prinstream
     //build a string by using getRandomElement 
+    //make a printStream to print to a new file 
+    //pick a starter word by getting a random follower of empty space
+    //take the previous word and get its value list 
+    //pick a random value from the array list 
+    //repeat for number of 
     return "";
     }
 
-    public static Map<String, List> populateMap (File f) throws FileNotFoundException{
+    public static Map<String, List<String>> populateMap (File f) throws FileNotFoundException{
         //will take input text and create bigrams map 
-        Map<String, List> bigrams = new HashMap<>(); 
+        Map<String, List<String>> bigrams = new HashMap<>(); 
         //make a new map
 
         //make scanners to read file and lines
@@ -31,15 +36,17 @@ public class RobynHannahTextGen {
             System.out.println(currentKey);
             System.out.println(currentValue);
             // check if current Key is in dictionary 
-            if(bigrams.containsKey(currentKey) == false){//if it is, currentKey.get.add(currentValue)
+            if(bigrams.containsKey(currentKey) == false){//if key is not already in the list
                 
-                
-                bigrams.put(currentKey, new ArrayList<String>(Arrays.asList(currentValue)));
-            }
-                
-            else{
                 
                 bigrams.put(currentKey,  new ArrayList<String>(Arrays.asList(currentValue)));
+            }
+                //bigrams.get(currentKey)
+            else{//if key is in the list 
+            //change the list first, then add the new list as the value
+                List<String> updatedValueList =bigrams.get(currentKey);
+                updatedValueList.add(currentValue);
+                bigrams.put(currentKey,  updatedValueList);
             
             //else, add currentKey as key and make a new arrya list and put in value 
 
