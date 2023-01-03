@@ -28,13 +28,17 @@ public class RobynHannahTextGen {
             //dont' call next twice 
             String currentKey = firstWord;
             String currentValue = scanner.next();
+            System.out.println(currentKey);
+            System.out.println(currentValue);
             // check if current Key is in dictionary 
-            if(bigrams.containsKey(currentKey)){
-                bigrams.put(currentKey, (bigrams.get(currentKey)).add(currentValue));
+            if(bigrams.containsKey(currentKey) == false){//if it is, currentKey.get.add(currentValue)
+                
+                
+                bigrams.put(currentKey, new ArrayList<String>(Arrays.asList(currentValue)));
             }
-                //if it is, currentKey.get.add(currentValue)
-
+                
             else{
+                
                 bigrams.put(currentKey,  new ArrayList<String>(Arrays.asList(currentValue)));
             
             //else, add currentKey as key and make a new arrya list and put in value 
@@ -43,11 +47,11 @@ public class RobynHannahTextGen {
             System.out.println((bigrams.get(currentKey)).length());
             bigrams.put(currentKey, bigrams.getOrDefault(currentKey, (bigrams.get(currentKey)).add(currentValue)));*/
             //update first word to value that was just added to old key 
-        }
+            
             firstWord = currentValue;
         }
-        System.out.println(bigrams);
-        return bigrams; 
+        //System.out.println(bigrams);
+        //return bigrams; 
         
     
         //for each word the scanner gets, add it to the map as a key unless it already exists getOrDefault and then add the second part of the bigram
@@ -55,22 +59,24 @@ public class RobynHannahTextGen {
 
         //map returned by method to be used in sentenceBuilder and getRandomElement
 
-    /*public static String getRandomElement (List<String> strings) {
+        /*public static String getRandomElement (List<String> strings) {
         //helper method to be used in sentenceBuilder
         //will choose a random value from a list of values (that corresponds to a key in bigrams) 
         return "";
-    }
+        }
 
-
-    //helper method for punctuation 
-    public static boolean endsSentence(String word){
+        //helper method for punctuation 
+        public static boolean endsSentence(String word){
         //returns true if the word marks the end of a sentence 
         if(word.substring(word.length() -1).equals(".") || word.substring(word.length() -1).equals("!") || word.substring(word.length()-1).equals("?")){
             return true;
         }
         return false; 
-    }*/
-}
+        }*/
+        //return bigrams;
+        }
+        return bigrams;
+    }
 }
 
     
