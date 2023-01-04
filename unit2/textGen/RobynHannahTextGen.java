@@ -5,20 +5,43 @@ public class RobynHannahTextGen {
     public static void main (String [] args) throws FileNotFoundException{
         File f = new File("smallTest.txt");
         System.out.println(populateMap(f));
+        Map<String, List<String>> bigrams = populateMap(f); 
         
+        sentenceBuilder(bigrams, "textGenTestOutput.txt"); 
+
+    
     }
 
-    public static String sentenceBuilder (Map<String, List> bigrams) {
-    //will print output text to prinstream
-    //build a string by using getRandomElement 
-    //make a printStream to print to a new file 
-    //pick a starter word by getting a random follower of empty space
-    //take the previous word and get its value list 
-    //pick a random value from the array list 
-    //repeat for number of 
-    return "";
+    //method to print output text to prinstream
+    public static void sentenceBuilder (Map<String, List<String>> bigrams, String fileName) throws FileNotFoundException {
+        String sentence = "";
+        
+        //gets a starter word by getting random word from list of words that follow an empty space 
+        String word = getRandomElement(bigrams.get("")); 
+        sentence += word + " "; 
+
+        Set<String> keySet = bigrams.keySet(); 
+        List<String> keys = new ArrayList<String>(keySet); //list of all keys 
+
+        while (!endsSentence(word)) {
+            word = getRandomElement(bigrams.get(word)); 
+            sentence += word + " "; 
+        }
+
+        System.out.println(sentence); 
+        
+        // PrintStream p = new PrintStream(fileName);
+        // p.print(sentence);
+      
+        //build a string by using getRandomElement 
+        //make a printStream to print to a new file 
+        //pick a starter word by getting a random follower of empty space
+        //take the previous word and get its value list 
+        //pick a random value from the array list 
+        //repeat for number of 
     }
     
+    //method to fill bigram map from input file
     public static Map<String, List<String>> populateMap (File f) throws FileNotFoundException{
         //will take input text and create bigrams map 
         Map<String, List<String>> bigrams = new HashMap<>(); 
@@ -55,9 +78,10 @@ public class RobynHannahTextGen {
         return bigrams;
     }
 
+    //helper method for punctuation
     public static boolean endsSentence(String word) {
         //checks if a word has sentence ending punctuation, and returns true or false
-        if(word.indexOf(".") == -1|| word.indexOf("!") == -1 || word.indexOf("?") == -1) {//if the word does not have punctuation
+        if(word.indexOf(".") == -1 && word.indexOf("!") == -1 && word.indexOf("?") == -1) {//if the word does not have punctuation
             return false;
         }
         //System.out.println(bigrams);
@@ -65,17 +89,8 @@ public class RobynHannahTextGen {
         return true;
     }
 
-    //helper method to get a random string from a list (to be used in sentenceBuilder) corresponding to a key in bigrams
+    //helper method to get a random string from a list (to be used in sentenceBuilder) 
     public static String getRandomElement (List<String> strings) {
-        return strings.get((int)* Math.random()*(strings.length)); 
-    }
-
-    //helper method for punctuation
-    public static boolean endsSentence(String word) {
-        //returns true if the word marks the end of a sentence 
-        if(word.substring(word.length() -1).equals(".") || word.substring(word.length() -1).equals("!") || word.substring(word.length()-1).equals("?")) {
-            return true;
-        }
-        return false;  
+        return strings.get((int)(Math.random()*(strings.size()))); 
     }
 }
