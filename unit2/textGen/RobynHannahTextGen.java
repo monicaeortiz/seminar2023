@@ -36,48 +36,36 @@ public class RobynHannahTextGen {
             
             // check if current Key is in dictionary 
             if(bigrams.containsKey(word) == false){//if key is not already in the list
-                
-                
                 bigrams.put(word,  new ArrayList<String>(Arrays.asList(currentKey)));
             }
-                //bigrams.get(currentKey)
+
             else{//if key is in the list 
-            //change the list first, then add the new list as the value
+                //change the list first, then add the new list as the value
                 valueList = bigrams.get(word);
                 valueList.add(currentKey);
                 bigrams.put(word,  valueList);
             
             }
             
-            word = currentKey;
-        }
-        //System.out.println(bigrams);
-        //return bigrams; 
+                word = currentKey;
+            }
         
-    
-        //for each word the scanner gets, add it to the map as a key unless it already exists getOrDefault and then add the second part of the bigram
-        //do next twice 
-
-        //map returned by method to be used in sentenceBuilder and getRandomElement
-
-        /*public static String getRandomElement (List<String> strings) {
-        //helper method to be used in sentenceBuilder
-        //will choose a random value from a list of values (that corresponds to a key in bigrams) 
-        return "";
-        }
-
-        //helper method for punctuation 
-        public static boolean endsSentence(String word){
-        //returns true if the word marks the end of a sentence 
-        if(word.substring(word.length() -1).equals(".") || word.substring(word.length() -1).equals("!") || word.substring(word.length()-1).equals("?")){
-            return true;
-        }
-        return false; 
-        }*/
-        return bigrams;
-        }
-        
+            return bigrams;
     }
+
+    public static boolean endsSentence(String word){
+        //checks if a word has sentence ending punctuation, and returns true or false
+        if(word.indexOf(".") == -1|| word.indexOf("!") == -1 || word.indexOf("?") == -1){//if the word does not have punctuation
+            return false;
+        }
+        return true;
+    }
+        
+}
+
+//need a get random element method, and something to check for punctuation 
+
+
 
 
     
