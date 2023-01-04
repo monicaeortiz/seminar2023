@@ -27,35 +27,29 @@ public class RobynHannahTextGen {
         //make scanners to read file and lines
         //make var called first word andmake empty string 
         //in the loop, put key and then values
-        String firstWord = "";
+        String word = "";
         Scanner scanner = new Scanner(f); 
+        List<String> valueList = new ArrayList<>();
         while(scanner.hasNext()){
             //dont' call next twice 
-            String currentKey = firstWord;
-            String currentValue = scanner.next();
-            System.out.println(currentKey);
-            System.out.println(currentValue);
+            String currentKey = scanner.next();
+            
             // check if current Key is in dictionary 
-            if(bigrams.containsKey(currentKey) == false){//if key is not already in the list
+            if(bigrams.containsKey(word) == false){//if key is not already in the list
                 
                 
-                bigrams.put(currentKey,  new ArrayList<String>(Arrays.asList(currentValue)));
+                bigrams.put(word,  new ArrayList<String>(Arrays.asList(currentKey)));
             }
                 //bigrams.get(currentKey)
             else{//if key is in the list 
             //change the list first, then add the new list as the value
-                List<String> updatedValueList =bigrams.get(currentKey);
-                updatedValueList.add(currentValue);
-                bigrams.put(currentKey,  updatedValueList);
+                valueList = bigrams.get(word);
+                valueList.add(currentKey);
+                bigrams.put(word,  valueList);
             
-            //else, add currentKey as key and make a new arrya list and put in value 
-
-            /*System.out.println("current key is: " + currentKey + " and current value is: " + currentValue);
-            System.out.println((bigrams.get(currentKey)).length());
-            bigrams.put(currentKey, bigrams.getOrDefault(currentKey, (bigrams.get(currentKey)).add(currentValue)));*/
-            //update first word to value that was just added to old key 
+            }
             
-            firstWord = currentValue;
+            word = currentKey;
         }
         //System.out.println(bigrams);
         //return bigrams; 
@@ -80,11 +74,11 @@ public class RobynHannahTextGen {
         }
         return false; 
         }*/
-        //return bigrams;
-        }
         return bigrams;
+        }
+        
     }
-}
+
 
     
     
