@@ -55,14 +55,15 @@ public class RobynHannahTextGen {
 
         //map returned by method to be used in sentenceBuilder and getRandomElement
 
-    /*public static String getRandomElement (List<String> strings) {
+    public static String getRandomElement (List<String> strings) {
+        return strings.get((int)* Math.random()*(strings.length)); 
         //helper method to be used in sentenceBuilder
         //will choose a random value from a list of values (that corresponds to a key in bigrams) 
         return "";
     }
 
 
-    //helper method for punctuation 
+    /*//helper method for punctuation 
     public static boolean endsSentence(String word){
         //returns true if the word marks the end of a sentence 
         if(word.substring(word.length() -1).equals(".") || word.substring(word.length() -1).equals("!") || word.substring(word.length()-1).equals("?")){
