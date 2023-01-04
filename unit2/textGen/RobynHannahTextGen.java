@@ -7,29 +7,45 @@ public class RobynHannahTextGen {
         System.out.println(populateMap(f));
         Map<String, List<String>> bigrams = populateMap(f); 
         
-        sentenceBuilder(bigrams, "textGenTestOutput.txt"); 
+        sentenceBuilder(bigrams, "smallTest.txt", 4); 
 
     
     }
 
     //method to print output text to prinstream
-    public static void sentenceBuilder (Map<String, List<String>> bigrams, String fileName) throws FileNotFoundException {
+    public static void sentenceBuilder (Map<String, List<String>> bigrams, String fileName, int numSentences) throws FileNotFoundException {
         String sentence = "";
-        
-        //gets a starter word by getting random word from list of words that follow an empty space 
-        String word = getRandomElement(bigrams.get("")); 
-        sentence += word + " "; 
+        int sentenceCounter =0;
+        while(sentenceCounter < numSentences){
+            //gets a starter word by getting random word from list of words that follow an empty space 
+            String firstWord = getRandomElement(bigrams.get("")); 
+            sentence += firstWord + " "; 
+            //above does the first word of every sentence
 
-        Set<String> keySet = bigrams.keySet(); 
-        List<String> keys = new ArrayList<String>(keySet); //list of all keys 
-
-        while (!endsSentence(word)) {
-            word = getRandomElement(bigrams.get(word)); 
-            sentence += word + " "; 
+            Set<String> keySet = bigrams.keySet(); 
+            List<String> keys = new ArrayList<String>(keySet); //list of all keys 
+            String nextWord = "";//get followers of first word
+            while(endsSentence(nextWord) == false){
+                //get random word from the list of followers of firstWord
+                nextWord = getRandomElement(bigrams.get(firstWord));
+                sentence += nextWord + " ";
+                firstWord = nextWord; 
+                //above steps need to repeat until nextWord has punctuation
+            }
+            /*while (!endsSentence(firstWord)) {
+            String nextWord = getRandomElement(bigrams.get(firstWord)); 
+            sentence += nextWord + " "; 
+            nextWord = getRandomElement(bigrams.get(nextWord));
+            }*/
+            sentenceCounter ++;
+            
+            
         }
+        System.out.println(sentence);
+        //get a random value from the list of "" to be the first word of the sentence. add to string
+        //nextWord = bigrams.get(firstWord) -- gets value list of previos word
+        //now get a random value from nextWord's value list and add to string. 
 
-        System.out.println(sentence); 
-        
         // PrintStream p = new PrintStream(fileName);
         // p.print(sentence);
       
