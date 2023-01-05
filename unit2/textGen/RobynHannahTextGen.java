@@ -62,9 +62,8 @@ public class RobynHannahTextGen {
         Scanner scanner = new Scanner(f); 
         List<String> valueList = new ArrayList<>();
         while(scanner.hasNext()){
-            //dont' call next twice 
+            //don't call next twice 
             String currentKey = scanner.next();
-            
             // check if current Key is in dictionary 
             if(bigrams.containsKey(word) == false){//if key is not already in the list
                 bigrams.put(word,  new ArrayList<String>(Arrays.asList(currentKey)));
@@ -79,7 +78,12 @@ public class RobynHannahTextGen {
 
             }
 
-            word = currentKey;
+            if (endsSentence(currentKey) ) {
+                word = ""; 
+            }
+            else {
+                word = currentKey;
+            }
         }
         scanner.close();
         return bigrams;
