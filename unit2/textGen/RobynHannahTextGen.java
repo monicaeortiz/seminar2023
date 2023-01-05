@@ -7,7 +7,7 @@ public class RobynHannahTextGen {
         System.out.println(populateMap(f));
         Map<String, List<String>> bigrams = populateMap(f); 
         
-        sentenceBuilder(bigrams, "smallTest.txt", 4); 
+        sentenceBuilder(bigrams, "smallTest.txt", 10); 
 
     
     }
@@ -16,6 +16,8 @@ public class RobynHannahTextGen {
     public static void sentenceBuilder (Map<String, List<String>> bigrams, String fileName, int numSentences) throws FileNotFoundException {
         String sentence = "";
         int sentenceCounter =0;
+        String generatedFile = "hdGeneratedFile.txt";
+        PrintStream p = new PrintStream(new FileOutputStream(generatedFile, true));
         while(sentenceCounter < numSentences){
             //gets a starter word by getting random word from list of words that follow an empty space 
             String firstWord = getRandomElement(bigrams.get("")); 
@@ -41,20 +43,11 @@ public class RobynHannahTextGen {
             
             
         }
-        System.out.println(sentence);
+        p.print(sentence);
         //get a random value from the list of "" to be the first word of the sentence. add to string
         //nextWord = bigrams.get(firstWord) -- gets value list of previos word
         //now get a random value from nextWord's value list and add to string. 
-
-        // PrintStream p = new PrintStream(fileName);
-        // p.print(sentence);
-      
-        //build a string by using getRandomElement 
-        //make a printStream to print to a new file 
-        //pick a starter word by getting a random follower of empty space
-        //take the previous word and get its value list 
-        //pick a random value from the array list 
-        //repeat for number of 
+        p.close();
     }
     
     //method to fill bigram map from input file
@@ -71,14 +64,11 @@ public class RobynHannahTextGen {
         while(scanner.hasNext()){
             //dont' call next twice 
             String currentKey = scanner.next();
-
+            
             // check if current Key is in dictionary 
             if(bigrams.containsKey(word) == false){//if key is not already in the list
-
-
                 bigrams.put(word,  new ArrayList<String>(Arrays.asList(currentKey)));
             }
-                //bigrams.get(currentKey)
 
             else{//if key is in the list 
             //change the list first, then add the new list as the value
@@ -91,6 +81,7 @@ public class RobynHannahTextGen {
 
             word = currentKey;
         }
+        scanner.close();
         return bigrams;
     }
 
