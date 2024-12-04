@@ -1,0 +1,107 @@
+\documentclass[12pt,addpoints, answers]{exam}
+\usepackage[utf8]{inputenc}
+
+\usepackage[margin=0.75in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+
+\newcommand{\class}{Honors CS Seminar, 2022-23 (Ms. Zhu)}
+\newcommand{\term}{Problem Set 2: Sets + Maps}
+\newcommand{\examdate}{Due: Friday, December 2 at 3pm}
+\newcommand{\examnum}{}
+\newcommand{\timelimit}{}
+
+\pagestyle{head}
+\firstpageheader{}{}{}
+\runningheader{\class}{}{\examnum\ - Page \thepage\ of \numpages}
+\runningheadrule
+
+\usepackage{color}
+\usepackage{amsmath,amssymb}
+\usepackage{multicol}
+\usepackage[shortlabels]{enumitem}
+\usepackage{listings}
+\usepackage{courier}
+\usepackage{xparse}
+\lstset{basicstyle=\ttfamily,language=Java, showstringspaces=false}
+
+\definecolor{keyword}{rgb}{0.1, 0.1, 0.1}
+\lstset{language=Java,
+    basicstyle=\ttfamily,
+    keywordstyle=\bfseries\color{keyword}\ttfamily,
+    showstringspaces=false
+}
+
+\NewDocumentCommand{\code}{v}{%
+{\small\texttt{{#1}}}%
+}
+
+\begin{document}
+
+\newcommand{\tf}[1][{}]{ \fillin[#1][0.4in]
+}
+
+\noindent
+\begin{tabular*}{\textwidth}{l @{\extracolsep{\fill}} r @{\extracolsep{6pt}} l}
+\textbf{\class} & \textbf{Name:} & \makebox[2in]{\hrulefill}\\
+\textbf{\term} &&\\
+\textbf{\examnum} &&\\
+\textbf{\examdate} &&\\
+\textbf{Time Limit: \timelimit} && \textbf{Score: \hrulefill/\numpoints}\\
+\end{tabular*}\\
+\rule[2ex]{\textwidth}{2pt}
+
+% This exam contains \numpages\ pages (including this cover page) and \numquestions\ questions.\\
+% Total of points is \numpoints.
+
+% grade table, probably don't want to use this
+% \begin{center}
+% Grade Table (for teacher use only)\\
+% \addpoints
+% \gradetable[v][questions]
+% \end{center}
+
+% \noindent
+% \rule[2ex]{\textwidth}{2pt}
+
+The methods below should be in a class called \code{SetsAndMaps.java}, which can have a \code{main} method used for testing.
+
+\begin{questions}
+
+\question[3]
+\emph{maxLength()}: Takes a set of strings as a parameter and returns the length of the longest string in the set. If the parameter is an empty set, your method should return 0.
+
+\question[3]
+\emph{removeEvenLength()}: Accepts a set of strings and removes all strings with even length (i.e. that have an even number of characters) from the set. Note that this method should be \code{void} and modify the original set.
+
+\question[4]
+\emph{flip()}:
+
+Accepts a map from integers to strings as a parameter and returns a new map of strings to integers that is the ``flipped" version of the original - a new map that uses the values from the original as its keys and the keys from the original as its values. 
+
+Since a map's values need not be unique but its keys must be, you can choose any of the original keys as the value in the resulting map; i.e., if the original map has pairs \code{(k1, v)} and \code{(k2, v)}, the new map must contain either the pair \code{(v, k1)} or \code{(v, k2)}.
+
+e.g., If the original map is \code{{42=Scranton, 81=NYC, 17=Nashua, 31=Utica, 56=Nashua, 3=Scranton, 29=Nashua}}
+
+Your method could return the following new map:
+\code{{Scranton=3, NYC=81, Nashua=29, Utica=31}}
+
+\question[5]
+\emph{mostCommon()}:
+
+Accepts a map whose keys are strings and whose values are integers as a parameter and returns the integer value that occurs the most times in the map. If there is a tie, return the smaller integer value. If the map is empty, throw an exception.
+
+Let's say the map contains mappings from names (strings) to birthday dates (integers). Your method would return the most frequently occurring birthdate.
+
+e.g., map \code{m} contains the following:
+
+\code{{Pam=2, Jim=17, Dwight=6, Karen=6, Michael=6, Angela=6, Kevin=17}}
+
+One person was born on the 2nd (Pam), two people were born on the 17th (Kevin and Jim), and four people were born on the 6th (Dwight, Karen, Michael, and Angela). So calling \code{mostCommon(m)} should return 6 because four people were born on the 6th.
+
+If there is a tie (two or more common dates that occur the same number of times), return the first date among them. For example, if we added another two pairs of \code{{Kelly=17, Holly=17}} to the map above, there would now be a tie of four people born on the 17th (Jim, Kevin, Kelly, and Holly) and four people born on the 6th (Dwight, Karen, Michael, and Angela). So the call \code{mostCommon(m)} would now return 6 because 6 is the smaller of the most common dates.
+
+\question[1] \emph{Programming style and readability.}
+\end{questions}
+
+\end{document}
